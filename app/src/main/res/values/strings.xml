@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">CandyManager</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="principal.titulo">Principal</string>
+    <string name="principal.editarPessoa">Editar pessoa</string>
+    <string name="principal.clientes">Clientes</string>
+    <string name="principal.vendas">Vendas</string>
+    <string name="principal.relatorios">Relatórios</string>
+    <string name="principal.produtos">Produtos</string>
+    <string name="editarPessoa.titulo">Editar pessoa</string>
+    <string name="editarPessoa.nome">Nome</string>
+    <string name="editarPessoa.sobrenome">Sobrenome</string>
+    <string name="editarPessoa.telefone">Telefone</string>
+    <string name="editarPessoa.email">Email</string>
+    <string name="editarPessoa.salvar">Salvar</string>
+    <string name="listarPessoa.titulo">Listar pessoa</string>
+    <string name="editarPessoa.salvar.mensagem">Registro não salvou</string>
+    <string name="title_activity_produto">ProdutoActivity</string>
+</resources>
