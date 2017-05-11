@@ -11,13 +11,17 @@
     <string name="principal.vendas">Vendas</string>
     <string name="principal.relatorios">Relatórios</string>
     <string name="principal.produtos">Produtos</string>
-    <string name="editarPessoa.titulo">Editar pessoa</string>
-    <string name="editarPessoa.nome">Nome</string>
-    <string name="editarPessoa.sobrenome">Sobrenome</string>
-    <string name="editarPessoa.telefone">Telefone</string>
-    <string name="editarPessoa.email">Email</string>
-    <string name="editarPessoa.salvar">Salvar</string>
+    <string name="pessoa.titulo">Editar pessoa</string>
+    <string name="pessoa.nome">Nome</string>
+    <string name="pessoa.sobrenome">Sobrenome</string>
+    <string name="pessoa.telefone">Telefone</string>
+    <string name="pessoa.email">Email</string>
+    <string name="pessoa.salvar">Salvar</string>
     <string name="listarPessoa.titulo">Listar pessoa</string>
     <string name="editarPessoa.salvar.mensagem">Registro não salvou</string>
     <string name="title_activity_produto">ProdutoActivity</string>
+    <string name="produto.codigo">Código</string>
+    <string name="produto.descricao">Descrição</string>
+    <string name="produto.valor">Valor</string>
+    <string name="base.ativo">Ativo</string>
 </resources>

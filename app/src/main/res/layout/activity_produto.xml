@@ -1,100 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="br.senai.sc.tcc.candymanager.ProdutoActivity">
 
-    <com.getbase.floatingactionbutton.FloatingActionButton
-        android:id="@+id/pink_icon"
+    <TextView
+        android:id="@+id/tvCodigo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fab:fab_icon="@mipmap/plus_launcher"
-        fab:fab_colorNormal="@color/pink"
-        fab:fab_colorPressed="@color/pink_pressed"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginTop="@dimen/layout_margin_10dp"
+        android:text="@string/produto.codigo" />
+
+    <EditText
+        android:id="@+id/etCodigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvCodigo"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
     <TextView
+        android:id="@+id/tvDescricao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/pink_icon"
-        android:text="Text below button"
-        android:layout_centerHorizontal="true"
-        style="@style/menu_labels_style"
-        android:layout_marginBottom="48dp"/>
+        android:layout_below="@+id/etCodigo"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginTop="@dimen/layout_margin_20dp"
+        android:text="@string/produto.descricao" />
 
-    <com.getbase.floatingactionbutton.AddFloatingActionButton
-        android:id="@+id/semi_transparent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/pink_icon"
-        fab:fab_plusIconColor="@color/white"
-        fab:fab_colorNormal="@color/blue_semi_transparent"
-        fab:fab_colorPressed="@color/blue_semi_transparent_pressed"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"/>
-
-    <com.getbase.floatingactionbutton.FloatingActionButton
-        android:id="@+id/setter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/semi_transparent"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"/>
-
-    <com.getbase.floatingactionbutton.AddFloatingActionButton
-        android:id="@+id/normal_plus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        fab:fab_plusIconColor="@color/half_black"
-        fab:fab_colorNormal="@color/white"
-        fab:fab_colorPressed="@color/white_pressed"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"/>
-
-    <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/right_labels"
+    <EditText
+        android:id="@+id/etDescricao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@id/normal_plus"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        fab:fab_addButtonColorNormal="@color/white"
-        fab:fab_addButtonColorPressed="@color/white_pressed"
-        fab:fab_addButtonPlusIconColor="@color/half_black"
-        fab:fab_addButtonSize="mini"
-        fab:fab_labelStyle="@style/menu_labels_style"
-        fab:fab_labelsPosition="right">
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvDescricao"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_title="Label on the right"
-            fab:fab_colorPressed="@color/white_pressed"/>
+    <TextView
+        android:id="@+id/tvValor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etDescricao"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginTop="@dimen/layout_margin_20dp"
+        android:text="@string/produto.valor" />
 
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_size="mini"
-            fab:fab_title="Another one on the right"
-            fab:fab_colorPressed="@color/white_pressed"/>
+    <EditText
+        android:id="@+id/etValor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvValor"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:ems="10"
+        android:inputType="phone" />
 
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etValor"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:checked="true"
+        android:text="@string/base.ativo"
+        android:ems="10"/>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/multiple_actions"
+        android:id="@+id/multiple_actions_produto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -104,12 +91,12 @@
         fab:fab_addButtonColorPressed="@color/white_pressed"
         fab:fab_addButtonPlusIconColor="@color/half_black"
         fab:fab_labelStyle="@style/menu_labels_style"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp">
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginEnd="@dimen/fab_margin">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_a"
+            android:id="@+id/action_a_produto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
@@ -117,110 +104,13 @@
             fab:fab_colorPressed="@color/white_pressed"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_b"
+            android:id="@+id/btSalvarProduto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
-            fab:fab_title="Action with a very long name that won\'t fit on the screen"
-            fab:fab_colorPressed="@color/white_pressed"/>
+            fab:fab_title="@string/pessoa.salvar"
+            fab:fab_colorPressed="@color/white_pressed" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
-
-    <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/multiple_actions_down"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        fab:fab_addButtonColorNormal="@color/white"
-        fab:fab_addButtonColorPressed="@color/white_pressed"
-        fab:fab_addButtonSize="mini"
-        fab:fab_addButtonPlusIconColor="@color/half_black"
-        fab:fab_expandDirection="down"
-        fab:fab_labelStyle="@style/menu_labels_style"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp">
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_colorPressed="@color/white_pressed"
-            fab:fab_size="mini"/>
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/button_remove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_colorPressed="@color/white_pressed"
-            fab:fab_title="Click to remove"/>
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/button_gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_colorPressed="@color/white_pressed"/>
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_enable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_title="Set bottom menu enabled/disabled"
-            fab:fab_colorPressed="@color/white_pressed"/>
-
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>
-
-    <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/multiple_actions_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/multiple_actions_down"
-        android:layout_toStartOf="@+id/multiple_actions_down"
-        android:layout_alignParentTop="true"
-        fab:fab_addButtonColorNormal="@color/white"
-        fab:fab_addButtonColorPressed="@color/white_pressed"
-        fab:fab_addButtonSize="mini"
-        fab:fab_addButtonPlusIconColor="@color/half_black"
-        fab:fab_addButtonStrokeVisible="false"
-        fab:fab_expandDirection="left"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp">
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_colorPressed="@color/white_pressed"/>
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_colorPressed="@color/white_pressed"
-            fab:fab_size="mini"/>
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_colorPressed="@color/white_pressed"
-            fab:fab_size="mini"/>
-
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>
-
-    <com.getbase.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/setter_drawable"
-        android:layout_above="@id/setter"
-        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
-

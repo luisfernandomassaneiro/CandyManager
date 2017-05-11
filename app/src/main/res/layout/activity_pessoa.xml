@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,7 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_10dp"
-        android:text="@string/editarPessoa.nome" />
+        android:text="@string/pessoa.nome" />
 
     <EditText
         android:id="@+id/etNome"
@@ -35,7 +36,7 @@
         android:layout_below="@+id/etNome"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_20dp"
-        android:text="@string/editarPessoa.sobrenome" />
+        android:text="@string/pessoa.sobrenome" />
 
     <EditText
         android:id="@+id/etSobrenome"
@@ -56,7 +57,7 @@
         android:layout_below="@+id/etSobrenome"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_20dp"
-        android:text="@string/editarPessoa.telefone" />
+        android:text="@string/pessoa.telefone" />
 
     <EditText
         android:id="@+id/etTelefone"
@@ -77,7 +78,7 @@
         android:layout_below="@+id/etTelefone"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_20dp"
-        android:text="@string/editarPessoa.email" />
+        android:text="@string/pessoa.email" />
 
     <EditText
         android:id="@+id/etEmail"
@@ -91,16 +92,48 @@
         android:ems="10"
         android:inputType="textEmailAddress" />
 
-    <Button
-        android:id="@+id/btSalvar"
+    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/etEmail"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginRight="@dimen/layout_margin_10dp"
-        android:layout_marginBottom="@dimen/layout_margin_10dp"
-        android:text="@string/editarPessoa.salvar" />
+        android:checked="true"
+        android:text="@string/base.ativo"
+        android:ems="10"/>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/multiple_actions_pessoa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        fab:fab_addButtonColorNormal="@color/white"
+        fab:fab_addButtonColorPressed="@color/white_pressed"
+        fab:fab_addButtonPlusIconColor="@color/half_black"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginEnd="@dimen/fab_margin">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_a_pessoa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_title="Action A"
+            fab:fab_colorPressed="@color/white_pressed"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btSalvarPessoa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_title="@string/pessoa.salvar"
+            fab:fab_colorPressed="@color/white_pressed"
+            />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </RelativeLayout>
