@@ -18,7 +18,7 @@
     <string name="pessoa.email">Email</string>
     <string name="pessoa.salvar">Salvar</string>
     <string name="listarPessoa.titulo">Listar pessoa</string>
-    <string name="editarPessoa.salvar.mensagem">Registro não salvou</string>
+    <string name="editarPessoa.salvar.mensagem">Registro salvo com sucesso!</string>
     <string name="title_activity_produto">ProdutoActivity</string>
     <string name="produto.codigo">Código</string>
     <string name="produto.descricao">Descrição</string>
