@@ -68,9 +68,10 @@
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginRight="@dimen/layout_margin_10dp"
         android:ems="10"
-        android:inputType="phone" />
+        android:inputType="numberDecimal" />
 
     <CheckBox
+        android:id="@+id/cbProdutoAtivo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etValor"

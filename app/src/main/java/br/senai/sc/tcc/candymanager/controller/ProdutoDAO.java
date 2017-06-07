@@ -6,34 +6,33 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import br.senai.sc.tcc.candymanager.model.PessoaModel;
+import br.senai.sc.tcc.candymanager.model.ProdutoModel;
 
 /**
  * Created by MASSANEIRO on 24/05/2017.
  */
 
-public class PessoaDAO extends BaseDAO{
-    private String scriptSQLCreate = "CREATE TABLE TB_PESSOA (_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "PES_NOME VARCHAR(50), PES_TELEFONE VARCHAR(20), PES_EMAIL VARCHAR(50), ATIVO INT);";
-    private String scriptSQLDelete = "DROP TABLE IF EXISTS " + TB_PESSOA;
-    private static final String TB_PESSOA = "TB_PESSOA";
-    private static final String PES_NOME = "PES_NOME";
-    private static final String PES_TELEFONE = "PES_TELEFONE";
-    private static final String PES_EMAIL = "PES_EMAIL";
+public class ProdutoDAO extends BaseDAO{
+    private String scriptSQLCreate = "CREATE TABLE TB_PRODUTO (_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "PRO_CODIGO VARCHAR(50), PRO_DESCRICAO VARCHAR(20), PRO_VALOR VARCHAR(50), ATIVO INT);";
+    private String scriptSQLDelete = "DROP TABLE IF EXISTS " + TB_PRODUTO;
+    private static final String TB_PRODUTO = "TB_PRODUTO";
+    private static final String PRO_CODIGO = "PRO_CODIGO";
+    private static final String PRO_DESCRICAO = "PRO_DESCRICAO";
+    private static final String PRO_VALOR = "PRO_VALOR";
 
     private SQLiteHelper dbHelper;
     private SQLiteDatabase db;
-    private List<PessoaModel> listaPessoas;
+    private List<ProdutoModel> listaProdutos;
 
-    private String[] getColunasTabPessoa(){
-        String[] PESSOA_COLUNAS_TAB_PESSOA = new String[] {_ID, PES_NOME, PES_TELEFONE, PES_EMAIL, ATIVO};
-        return PESSOA_COLUNAS_TAB_PESSOA;
+    private String[] getColunasTabProduto(){
+        String[] PRODUTO_COLUNAS_TAB_PRODUTO = new String[] {_ID, PRO_CODIGO, PRO_DESCRICAO, PRO_VALOR, ATIVO};
+        return PRODUTO_COLUNAS_TAB_PRODUTO;
     }
 
-    public PessoaDAO(Context ctx){
+    public ProdutoDAO(Context ctx){
         try {
             dbHelper = new SQLiteHelper(ctx, SQLiteHelper.NOME_BD, SQLiteHelper.VERSAO_BD,
                     scriptSQLCreate, scriptSQLDelete);
@@ -53,24 +52,24 @@ public class PessoaDAO extends BaseDAO{
         }
     }
 
-    public List<PessoaModel> listPessoas(){
+    public List<ProdutoModel> listProdutos(){
         Cursor cursor = null;
-        listaPessoas.clear();
+        listaProdutos.clear();
 
         try {
-            cursor = db.query(TB_PESSOA, getColunasTabPessoa(), null, null, null, null,
-                    PES_NOME + " DESC ", null);
+            cursor = db.query(TB_PRODUTO, getColunasTabProduto(), null, null, null, null,
+                    PRO_CODIGO + " DESC ", null);
             if (cursor.getCount() > 0) {
                 while(cursor.moveToNext()){
-                    PessoaModel pessoaLinha = new PessoaModel();
+                    ProdutoModel produtoLinha = new ProdutoModel();
 
-                    pessoaLinha.setId(cursor.getInt(cursor.getColumnIndex(_ID)));
-                    pessoaLinha.setNome(cursor.getString(cursor.getColumnIndex(PES_NOME)));
-                    pessoaLinha.setTelefone(cursor.getString(cursor.getColumnIndex(PES_TELEFONE)));
-                    pessoaLinha.setEmail(cursor.getString(cursor.getColumnIndex(PES_EMAIL)));
-                    pessoaLinha.setAtivo(cursor.getInt(cursor.getColumnIndex(ATIVO)));
+                    produtoLinha.setId(cursor.getInt(cursor.getColumnIndex(_ID)));
+                    produtoLinha.setCodigo(cursor.getString(cursor.getColumnIndex(PRO_CODIGO)));
+                    produtoLinha.setDescricao(cursor.getString(cursor.getColumnIndex(PRO_DESCRICAO)));
+                    produtoLinha.setValor(cursor.getDouble(cursor.getColumnIndex(PRO_VALOR)));
+                    produtoLinha.setAtivo(cursor.getInt(cursor.getColumnIndex(ATIVO)));
 
-                    listaPessoas.add(pessoaLinha);
+                    listaProdutos.add(produtoLinha);
                 }
             }
         } catch (Exception e) {
@@ -83,28 +82,28 @@ public class PessoaDAO extends BaseDAO{
                 }
             }
         }
-        return listaPessoas;
+        return listaProdutos;
     }
 
-    public ContentValues contentPessoa(PessoaModel pessoa){
+    public ContentValues contentProduto(ProdutoModel produto){
         ContentValues values = new ContentValues();
 
-        values.put(_ID, pessoa.getId());
-        values.put(PES_NOME, pessoa.getNome());
-        values.put(PES_TELEFONE, pessoa.getTelefone());
-        values.put(PES_EMAIL, pessoa.getEmail());
-        values.put(ATIVO, pessoa.getAtivo());
+        values.put(_ID, produto.getId());
+        values.put(PRO_CODIGO, produto.getCodigo());
+        values.put(PRO_DESCRICAO, produto.getDescricao());
+        values.put(PRO_VALOR, produto.getValor());
+        values.put(ATIVO, produto.getAtivo());
 
         return values;
     }
 
     //Insert
-    public long insertPessoa(PessoaModel novaPessoa){
+    public long insertProduto(ProdutoModel novaProduto){
         long id = 0;
         try {
             open();
-            ContentValues values = contentPessoa(novaPessoa);
-            id = db.insert(TB_PESSOA, null, values);
+            ContentValues values = contentProduto(novaProduto);
+            id = db.insert(TB_PRODUTO, null, values);
 
         } catch (Exception e) {
             Log.e("Erro: ", e.getMessage());
@@ -115,7 +114,7 @@ public class PessoaDAO extends BaseDAO{
     }
 
     //Excluir
-    public boolean excluirPessoa(String _ID){
+    public boolean excluirProduto(String _ID){
 
         boolean resultadoExclusao =  false;
 
@@ -123,7 +122,7 @@ public class PessoaDAO extends BaseDAO{
             String where = _ID + "=?";
             String[] args = new String[] {_ID};
 
-            int num = db.delete(TB_PESSOA, where, args);
+            int num = db.delete(TB_PRODUTO, where, args);
 
             if (num == 1) {
                 resultadoExclusao = true;
@@ -135,16 +134,16 @@ public class PessoaDAO extends BaseDAO{
     }
 
     //Método aletar vendedor
-    public boolean alterarPessoa(PessoaModel pessoa){
+    public boolean alterarProduto(ProdutoModel produto){
         boolean resultadoAlteracao = false;
 
         try {
             String where = _ID+"=?"; //Definir por campo será feito a alteração
 
             //Seta os argumentos com info do registro a ser alterado
-            String[] args = new String[]{String.valueOf(pessoa.getId())};
+            String[] args = new String[]{String.valueOf(produto.getId())};
 
-            int num = db.update(TB_PESSOA, contentPessoa(pessoa), where, args);
+            int num = db.update(TB_PRODUTO, contentProduto(produto), where, args);
 
             //Verificar se o vendedor foi alteração
             if (num == 1) {
@@ -158,15 +157,15 @@ public class PessoaDAO extends BaseDAO{
     }
 /*
     //Busca individual - vendedor especifico
-    public PessoaModel buscaIndividualVendedor(String NOME){
+    public ProdutoModel buscaIndividualVendedor(String NOME){
 
         Cursor cursor = null;
-        PessoaModel vendedorLinha = new PessoaModel();
+        ProdutoModel vendedorLinha = new ProdutoModel();
         String where = "NOME=?";
         String[] args = new String[]{NOME};
 
         try {
-            cursor = db.query(TB_PESSOA, getColunasTabPessoa(), where, args, null, null, null);
+            cursor = db.query(TB_PRODUTO, getColunasTabProduto(), where, args, null, null, null);
 
             if (cursor.getCount() > 0 ) {
                 while (cursor.moveToNext()){

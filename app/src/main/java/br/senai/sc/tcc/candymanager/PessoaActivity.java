@@ -3,7 +3,7 @@ package br.senai.sc.tcc.candymanager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -15,6 +15,7 @@ import br.senai.sc.tcc.candymanager.model.PessoaModel;
 public class PessoaActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText etNome, etTelefone, etEmail;
+    CheckBox cbPessoaAtiva;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class PessoaActivity extends AppCompatActivity implements View.OnClickLis
         etNome = (EditText) findViewById(R.id.etNome);
         etTelefone = (EditText) findViewById(R.id.etTelefone);
         etEmail =  (EditText) findViewById(R.id.etEmail);
+        cbPessoaAtiva = (CheckBox) findViewById(R.id.cbPessoaAtiva);
     }
 
     @Override
@@ -41,8 +43,9 @@ public class PessoaActivity extends AppCompatActivity implements View.OnClickLis
                 pessoa.setNome(etNome.getText().toString());
                 pessoa.setTelefone(etTelefone.getText().toString());
                 pessoa.setEmail(etEmail.getText().toString());
+                pessoa.setAtivo(cbPessoaAtiva.isChecked() ? 1 : 0);
                 dao.insertPessoa(pessoa);
-                Toast.makeText(this, R.string.editarPessoa_salvar_mensagem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.geral_salvoComSucesso, Toast.LENGTH_SHORT).show();
                 break;
         }
     }
