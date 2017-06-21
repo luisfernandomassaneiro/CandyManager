@@ -7,7 +7,9 @@ package br.senai.sc.tcc.candymanager.model;
 public class ProdutoModel extends BaseModel{
     private String codigo;
     private String descricao;
-    private Double valor;
+    private Double valorCompra;
+    private Double valorVenda;
+    private Integer quantidadeAtual;
 
     public String getCodigo() {
         return codigo;
@@ -25,11 +27,27 @@ public class ProdutoModel extends BaseModel{
         this.descricao = descricao;
     }
 
-    public Double getValor() {
-        return valor;
+    public Double getValorCompra() {
+        return valorCompra;
     }
 
-    public void setValor(Double valor) {
-        this.valor = valor;
+    public void setValorCompra(Double valorCompra) {
+        this.valorCompra = valorCompra;
+    }
+
+    public Double getValorVenda() {
+        return valorVenda;
+    }
+
+    public void setValorVenda(Double valorVenda) {
+        this.valorVenda = valorVenda;
+    }
+
+    public Integer getQuantidadeAtual() {
+        return quantidadeAtual;
+    }
+
+    public void setQuantidadeAtual(Integer quantidadeAtual) {
+        this.quantidadeAtual = quantidadeAtual;
     }
 }

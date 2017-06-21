@@ -34,4 +34,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(scriptDelete);
         onCreate(db);
     }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        if(!db.isReadOnly()) {
+            db.execSQL("PRAGMA foreign_keys=ON;");
+        }
+    }
 }

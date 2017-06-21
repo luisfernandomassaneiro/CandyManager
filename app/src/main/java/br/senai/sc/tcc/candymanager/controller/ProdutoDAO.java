@@ -66,7 +66,7 @@ public class ProdutoDAO extends BaseDAO{
                     produtoLinha.setId(cursor.getInt(cursor.getColumnIndex(_ID)));
                     produtoLinha.setCodigo(cursor.getString(cursor.getColumnIndex(PRO_CODIGO)));
                     produtoLinha.setDescricao(cursor.getString(cursor.getColumnIndex(PRO_DESCRICAO)));
-                    produtoLinha.setValor(cursor.getDouble(cursor.getColumnIndex(PRO_VALOR)));
+                    produtoLinha.setValorCompra(cursor.getDouble(cursor.getColumnIndex(PRO_VALOR)));
                     produtoLinha.setAtivo(cursor.getInt(cursor.getColumnIndex(ATIVO)));
 
                     listaProdutos.add(produtoLinha);
@@ -91,7 +91,7 @@ public class ProdutoDAO extends BaseDAO{
         values.put(_ID, produto.getId());
         values.put(PRO_CODIGO, produto.getCodigo());
         values.put(PRO_DESCRICAO, produto.getDescricao());
-        values.put(PRO_VALOR, produto.getValor());
+        values.put(PRO_VALOR, produto.getValorCompra());
         values.put(ATIVO, produto.getAtivo());
 
         return values;

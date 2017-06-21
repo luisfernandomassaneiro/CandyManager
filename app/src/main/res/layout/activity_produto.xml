@@ -50,31 +50,52 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/tvValor"
+        android:id="@+id/tvValorCompra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etDescricao"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_20dp"
-        android:text="@string/produto.valor" />
+        android:text="@string/produto.valorCompra" />
 
     <EditText
-        android:id="@+id/etValor"
+        android:id="@+id/etValorCompra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvValor"
+        android:layout_below="@+id/tvValorCompra"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginRight="@dimen/layout_margin_10dp"
         android:ems="10"
         android:inputType="numberDecimal" />
 
+    <TextView
+        android:id="@+id/tvValorVenda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etValorCompra"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginTop="@dimen/layout_margin_20dp"
+        android:text="@string/produto.valorCompra" />
+
+    <EditText
+        android:id="@+id/etValorVenda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvValorVenda"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:ems="10"
+        android:inputType="numberDecimal" /
+    >
     <CheckBox
         android:id="@+id/cbProdutoAtivo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etValor"
+        android:layout_below="@+id/etValorVenda"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginRight="@dimen/layout_margin_10dp"
         android:checked="true"

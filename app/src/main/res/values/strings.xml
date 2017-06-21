@@ -22,6 +22,7 @@
     <string name="title_activity_produto">ProdutoActivity</string>
     <string name="produto.codigo">Código</string>
     <string name="produto.descricao">Descrição</string>
-    <string name="produto.valor">Valor</string>
+    <string name="produto.valorCompra">Valor de compra</string>
+    <string name="produto.valorVenda">Valor de venda</string>
     <string name="base.ativo">Ativo</string>
 </resources>
