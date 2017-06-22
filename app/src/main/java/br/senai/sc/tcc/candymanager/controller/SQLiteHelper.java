@@ -11,27 +11,20 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SQLiteHelper extends SQLiteOpenHelper {
     public static final String NOME_BD = "CANDYMANAGER.db";
     public static final int VERSAO_BD = 1;
-    private String scriptCreate;
-    private String scriptDelete;
 
-    public SQLiteHelper(Context context, String nome_bd, int versao_bd,
-                        String scriptCreate, String scriptDelete) {
+    public SQLiteHelper(Context context, String nome_bd, int versao_bd) {
 
         super(context, nome_bd, null, versao_bd);
-
-        this.scriptCreate = scriptCreate;
-        this.scriptDelete = scriptDelete;
-
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(scriptCreate);
+        db.execSQL(MetadadosHelper.getCreatesTables());
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(scriptDelete);
+        db.execSQL(MetadadosHelper.getDropTables());
         onCreate(db);
     }
 

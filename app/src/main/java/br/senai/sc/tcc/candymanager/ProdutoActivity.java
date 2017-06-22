@@ -31,7 +31,7 @@ public class ProdutoActivity extends AppCompatActivity implements View.OnClickLi
         etCodigo = (EditText) findViewById(R.id.etCodigo);
         etDescricao = (EditText) findViewById(R.id.etDescricao);
         etValorCompra =  (EditText) findViewById(R.id.etValorCompra);
-        etValorVenda = (EditText) findViewById(R.id.etValorVenda;
+        etValorVenda = (EditText) findViewById(R.id.etValorVenda);
         cbProdutoAtivo = (CheckBox) findViewById(R.id.cbProdutoAtivo);
     }
 

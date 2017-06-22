@@ -29,6 +29,10 @@ public class MetadadosHelper implements BaseColumns {
             sb.append(")");
             return sb.toString();
         }
+
+        public static String getDropTable() {
+            return "DROP TABLE IF EXISTS " + TB_PESSOA;
+        }
     }
 
     public static class TabelaProduto implements BaseColumns {
@@ -60,6 +64,10 @@ public class MetadadosHelper implements BaseColumns {
             sb.append(PRO_CODIGO).append(", ").append(PRO_DESCRICAO).append(", ").append(PRO_QTDEATUAL).append(", ").append(PRO_VALORCOMPRA).append(", ").append(PRO_VALORVENDA);
             return sb.toString();
         }
+
+        public static String getDropTable() {
+            return "DROP TABLE IF EXISTS " + TB_PRODUTO;
+        }
     }
     public static class TabelaMovimentoEstoque implements BaseColumns {
         public static String TB_MOVIMENTO_ESTOQUE = "TB_MOVIMENTO_ESTOQUE";
@@ -81,10 +89,14 @@ public class MetadadosHelper implements BaseColumns {
             sb.append(")");
             return sb.toString();
         }
+
+        public static String getDropTable() {
+            return "DROP TABLE IF EXISTS " + TB_MOVIMENTO_ESTOQUE;
+        }
     }
 
     public static class TabelaPedido implements BaseColumns {
-        public static String TB_PEDIGO = "TB_PEDIGO";
+        public static String TB_PEDIDO = "TB_PEDIDO";
         public static String PED_DATA = "PED_DATA";
         public static String PED_VALORPAGO = "PED_VALORPAGO";
         public static String PED_VALORTOTAL = "PED_VALORTOTAL";
@@ -93,7 +105,7 @@ public class MetadadosHelper implements BaseColumns {
 
         public static String getCreateEntry(){
             StringBuilder sb = new StringBuilder();
-            sb.append("CREATE TABLE ").append(TB_PEDIGO).append(" ( ");
+            sb.append("CREATE TABLE ").append(TB_PEDIDO).append(" ( ");
             sb.append(TabelaPedido._ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT, ");
             sb.append(PED_DATA).append(" TIMESTAMP NOT NULL, ");
             sb.append(PED_VALORPAGO).append(" NUMERIC(18,2), ");
@@ -105,5 +117,59 @@ public class MetadadosHelper implements BaseColumns {
             sb.append(")");
             return sb.toString();
         }
+
+        public static String getDropTable() {
+            return "DROP TABLE IF EXISTS " + TB_PEDIDO;
+        }
+    }
+
+    public static class TabelaPedidoItem implements BaseColumns {
+        public static String TB_PEDIDO_ITEM = "TB_PEDIDO_ITEM";
+        public static String PIT_QNTDE = "PIT_QNTDE";
+        public static String PIT_VALORCOMPRA = "PIT_VALORCOMPRA";
+        public static String PIT_VALORVENDA = "PIT_VALORVENDA";
+        public static String PIT_PEDID = "PIT_PEDID";
+        public static String PIT_PROID = "PIT_PROID";
+
+        public static String getCreateEntry(){
+            StringBuilder sb = new StringBuilder();
+            sb.append("CREATE TABLE ").append(TB_PEDIDO_ITEM).append(" ( ");
+            sb.append(TabelaPedidoItem._ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT, ");
+            sb.append(PIT_QNTDE).append(" INTEGER NOT NULL, ");
+            sb.append(PIT_VALORCOMPRA).append(" NUMERIC(18,2), ");
+            sb.append(PIT_VALORVENDA).append(" NUMERIC(18,2), ");
+            sb.append(PIT_PEDID).append(" INTEGER NOT NULL, ");
+            sb.append(PIT_PROID).append(" INTEGER NOT NULL");
+            sb.append(", FOREIGN KEY (").append(PIT_PEDID).append(") REFERENCES ").append(TabelaPedido.TB_PEDIDO).append("(")
+                    .append(TabelaPedido._ID).append(" ), ");
+            sb.append(", FOREIGN KEY (").append(PIT_PROID).append(") REFERENCES ").append(TabelaProduto.TB_PRODUTO).append("(")
+                    .append(TabelaProduto._ID).append(" ) ");
+            sb.append(")");
+            return sb.toString();
+        }
+
+        public static String getDropTable() {
+            return "DROP TABLE IF EXISTS " + TB_PEDIDO_ITEM;
+        }
+    }
+
+    public static String getCreatesTables() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(TabelaPessoa.getCreateEntry()).append("; ");
+        sb.append(TabelaProduto.getCreateEntry()).append("; ");
+        sb.append(TabelaMovimentoEstoque.getCreateEntry()).append("; ");
+        sb.append(TabelaPedido.getCreateEntry()).append("; ");
+        sb.append(TabelaPedidoItem.getCreateEntry()).append("; ");
+        return sb.toString();
+    }
+
+    public static String getDropTables() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(TabelaPessoa.getDropTable()).append("; ");
+        sb.append(TabelaProduto.getDropTable()).append("; ");
+        sb.append(TabelaMovimentoEstoque.getDropTable()).append("; ");
+        sb.append(TabelaPedido.getDropTable()).append("; ");
+        sb.append(TabelaPedidoItem.getDropTable()).append("; ");
+        return sb.toString();
     }
 }

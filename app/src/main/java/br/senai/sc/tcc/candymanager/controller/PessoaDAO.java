@@ -16,13 +16,10 @@ import br.senai.sc.tcc.candymanager.model.PessoaModel;
  */
 
 public class PessoaDAO extends BaseDAO{
-    private String scriptSQLCreate = "CREATE TABLE TB_PESSOA (_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "PES_NOME VARCHAR(50), PES_TELEFONE VARCHAR(20), PES_EMAIL VARCHAR(50), ATIVO INT);";
-    private String scriptSQLDelete = "DROP TABLE IF EXISTS " + TB_PESSOA;
-    private static final String TB_PESSOA = "TB_PESSOA";
-    private static final String PES_NOME = "PES_NOME";
-    private static final String PES_TELEFONE = "PES_TELEFONE";
-    private static final String PES_EMAIL = "PES_EMAIL";
+    private static final String TB_PESSOA = MetadadosHelper.TabelaPessoa.TB_PESSOA;
+    private static final String PES_NOME = MetadadosHelper.TabelaPessoa.PES_NOME;
+    private static final String PES_TELEFONE = MetadadosHelper.TabelaPessoa.PES_TELEFONE;
+    private static final String PES_EMAIL = MetadadosHelper.TabelaPessoa.PES_EMAIL;
 
     private SQLiteHelper dbHelper;
     private SQLiteDatabase db;
@@ -35,8 +32,7 @@ public class PessoaDAO extends BaseDAO{
 
     public PessoaDAO(Context ctx){
         try {
-            dbHelper = new SQLiteHelper(ctx, SQLiteHelper.NOME_BD, SQLiteHelper.VERSAO_BD,
-                    scriptSQLCreate, scriptSQLDelete);
+            dbHelper = new SQLiteHelper(ctx, SQLiteHelper.NOME_BD, SQLiteHelper.VERSAO_BD);
 
         } catch (Exception e) {
             Log.e("Erro: ", e.getMessage());

@@ -24,5 +24,9 @@
     <string name="produto.descricao">Descrição</string>
     <string name="produto.valorCompra">Valor de compra</string>
     <string name="produto.valorVenda">Valor de venda</string>
+    <string name="movimentoEstoque.produto">Produto</string>
+    <string name="movimentoEstoque.quantidade">Quantidade</string>
+    <string name="movimentoEstoque.entrada">Entrada</string>
+    <string name="movimentoEstoque.saida">Saída</string>
     <string name="base.ativo">Ativo</string>
 </resources>
