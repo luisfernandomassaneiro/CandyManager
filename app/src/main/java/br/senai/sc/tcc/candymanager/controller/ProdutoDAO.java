@@ -6,9 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import br.senai.sc.tcc.candymanager.model.ProdutoModel;
+import br.senai.sc.tcc.candymanager.model.Produto;
 
 /**
  * Created by MASSANEIRO on 24/05/2017.
@@ -24,7 +25,7 @@ public class ProdutoDAO extends BaseDAO{
 
     private SQLiteHelper dbHelper;
     private SQLiteDatabase db;
-    private List<ProdutoModel> listaProdutos;
+    private List<Produto> listaProdutos = new ArrayList<>();
 
     private String[] getColunasTabProduto(){
         String[] PRODUTO_COLUNAS_TAB_PRODUTO = new String[] {_ID, PRO_CODIGO, PRO_DESCRICAO, PRO_VALORCOMPRA, PRO_VALORVENDA, PRO_QTDEATUAL, ATIVO};
@@ -50,16 +51,19 @@ public class ProdutoDAO extends BaseDAO{
         }
     }
 
-    public List<ProdutoModel> listProdutos(){
+    public List<Produto> listProdutos(){
         Cursor cursor = null;
         listaProdutos.clear();
 
         try {
-            cursor = db.query(TB_PRODUTO, getColunasTabProduto(), null, null, null, null,
-                    PRO_CODIGO + " DESC ", null);
+            open();
+            /*cursor = db.query(TB_PRODUTO, getColunasTabProduto(), null, null, null, null,
+                    PRO_CODIGO + " DESC ", null);*/
+
+            cursor = db.rawQuery("SELECT _ID, PRO_CODIGO, PRO_DESCRICAO, PRO_VALORCOMPRA, PRO_VALORVENDA, PRO_QTDEATUAL, ATIVO FROM TB_PRODUTO ORDER BY PRO_DESCRICAO", null);
             if (cursor.getCount() > 0) {
                 while(cursor.moveToNext()){
-                    ProdutoModel produtoLinha = new ProdutoModel();
+                    Produto produtoLinha = new Produto();
 
                     produtoLinha.setId(cursor.getInt(cursor.getColumnIndex(_ID)));
                     produtoLinha.setCodigo(cursor.getString(cursor.getColumnIndex(PRO_CODIGO)));
@@ -80,24 +84,67 @@ public class ProdutoDAO extends BaseDAO{
                     cursor.close();
                 }
             }
+            close();
         }
         return listaProdutos;
     }
 
-    public ContentValues contentProduto(ProdutoModel produto){
+    public String[] listarProdutos(){
+        Cursor cursor = null;
+        listaProdutos.clear();
+
+        try {
+            open();
+            cursor = db.query(TB_PRODUTO, getColunasTabProduto(), null, null, null, null,
+                    PRO_CODIGO + " DESC ", null);
+            if (cursor.getCount() > 0) {
+                String[] str = new String[cursor.getCount()];
+                int i  = 0;
+                while(cursor.moveToNext()){
+                    str[i] = cursor.getString(cursor.getColumnIndex(PRO_DESCRICAO));
+                    i++;
+                    /*Produto produtoLinha = new Produto();
+
+                    produtoLinha.setId(cursor.getInt(cursor.getColumnIndex(_ID)));
+                    produtoLinha.setCodigo(cursor.getString(cursor.getColumnIndex(PRO_CODIGO)));
+                    produtoLinha.setDescricao(cursor.getString(cursor.getColumnIndex(PRO_DESCRICAO)));
+                    produtoLinha.setValorCompra(cursor.getDouble(cursor.getColumnIndex(PRO_VALORCOMPRA)));
+                    produtoLinha.setValorVenda(cursor.getDouble(cursor.getColumnIndex(PRO_VALORVENDA)));
+                    produtoLinha.setAtivo(cursor.getInt(cursor.getColumnIndex(ATIVO)));
+
+                    listaProdutos.add(produtoLinha);*/
+                }
+                return str;
+            }
+        } catch (Exception e) {
+            Log.e("Erro: ", e.getMessage());
+        }
+        finally{
+            if (cursor != null) {
+                if (!cursor.isClosed()) {
+                    cursor.close();
+                }
+            }
+            close();
+        }
+        return new String[] {};
+    }
+
+    public ContentValues contentProduto(Produto produto){
         ContentValues values = new ContentValues();
 
         values.put(_ID, produto.getId());
         values.put(PRO_CODIGO, produto.getCodigo());
         values.put(PRO_DESCRICAO, produto.getDescricao());
         values.put(PRO_VALORCOMPRA, produto.getValorCompra());
+        values.put(PRO_VALORVENDA, produto.getValorVenda());
         values.put(ATIVO, produto.getAtivo());
 
         return values;
     }
 
     //Insert
-    public long insertProduto(ProdutoModel novaProduto){
+    public long insertProduto(Produto novaProduto){
         long id = 0;
         try {
             open();
@@ -133,7 +180,7 @@ public class ProdutoDAO extends BaseDAO{
     }
 
     //Método aletar vendedor
-    public boolean alterarProduto(ProdutoModel produto){
+    public boolean alterarProduto(Produto produto){
         boolean resultadoAlteracao = false;
 
         try {
@@ -156,10 +203,10 @@ public class ProdutoDAO extends BaseDAO{
     }
 /*
     //Busca individual - vendedor especifico
-    public ProdutoModel buscaIndividualVendedor(String NOME){
+    public Produto buscaIndividualVendedor(String NOME){
 
         Cursor cursor = null;
-        ProdutoModel vendedorLinha = new ProdutoModel();
+        Produto vendedorLinha = new Produto();
         String where = "NOME=?";
         String[] args = new String[]{NOME};
 

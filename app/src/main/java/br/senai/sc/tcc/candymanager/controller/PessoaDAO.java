@@ -6,10 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import br.senai.sc.tcc.candymanager.model.PessoaModel;
+import br.senai.sc.tcc.candymanager.model.Pessoa;
 
 /**
  * Created by MASSANEIRO on 24/05/2017.
@@ -23,7 +22,7 @@ public class PessoaDAO extends BaseDAO{
 
     private SQLiteHelper dbHelper;
     private SQLiteDatabase db;
-    private List<PessoaModel> listaPessoas;
+    private List<Pessoa> listaPessoas;
 
     private String[] getColunasTabPessoa(){
         String[] PESSOA_COLUNAS_TAB_PESSOA = new String[] {_ID, PES_NOME, PES_TELEFONE, PES_EMAIL, ATIVO};
@@ -49,7 +48,7 @@ public class PessoaDAO extends BaseDAO{
         }
     }
 
-    public List<PessoaModel> listPessoas(){
+    public List<Pessoa> listPessoas(){
         Cursor cursor = null;
         listaPessoas.clear();
 
@@ -58,7 +57,7 @@ public class PessoaDAO extends BaseDAO{
                     PES_NOME + " DESC ", null);
             if (cursor.getCount() > 0) {
                 while(cursor.moveToNext()){
-                    PessoaModel pessoaLinha = new PessoaModel();
+                    Pessoa pessoaLinha = new Pessoa();
 
                     pessoaLinha.setId(cursor.getInt(cursor.getColumnIndex(_ID)));
                     pessoaLinha.setNome(cursor.getString(cursor.getColumnIndex(PES_NOME)));
@@ -82,7 +81,7 @@ public class PessoaDAO extends BaseDAO{
         return listaPessoas;
     }
 
-    public ContentValues contentPessoa(PessoaModel pessoa){
+    public ContentValues contentPessoa(Pessoa pessoa){
         ContentValues values = new ContentValues();
 
         values.put(_ID, pessoa.getId());
@@ -95,7 +94,7 @@ public class PessoaDAO extends BaseDAO{
     }
 
     //Insert
-    public long insertPessoa(PessoaModel novaPessoa){
+    public long insertPessoa(Pessoa novaPessoa){
         long id = 0;
         try {
             open();
@@ -131,7 +130,7 @@ public class PessoaDAO extends BaseDAO{
     }
 
     //Método aletar vendedor
-    public boolean alterarPessoa(PessoaModel pessoa){
+    public boolean alterarPessoa(Pessoa pessoa){
         boolean resultadoAlteracao = false;
 
         try {
@@ -154,10 +153,10 @@ public class PessoaDAO extends BaseDAO{
     }
 /*
     //Busca individual - vendedor especifico
-    public PessoaModel buscaIndividualVendedor(String NOME){
+    public Pessoa buscaIndividualVendedor(String NOME){
 
         Cursor cursor = null;
-        PessoaModel vendedorLinha = new PessoaModel();
+        Pessoa vendedorLinha = new Pessoa();
         String where = "NOME=?";
         String[] args = new String[]{NOME};
 

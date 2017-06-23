@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import br.senai.sc.tcc.candymanager.controller.PessoaDAO;
-import br.senai.sc.tcc.candymanager.model.PessoaModel;
+import br.senai.sc.tcc.candymanager.model.Pessoa;
 
 public class PessoaActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,7 +39,7 @@ public class PessoaActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()){
             case R.id.btSalvarPessoa:
                 PessoaDAO dao = new PessoaDAO(this);
-                PessoaModel pessoa = new PessoaModel();
+                Pessoa pessoa = new Pessoa();
                 pessoa.setNome(etNome.getText().toString());
                 pessoa.setTelefone(etTelefone.getText().toString());
                 pessoa.setEmail(etEmail.getText().toString());

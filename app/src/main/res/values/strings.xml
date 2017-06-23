@@ -10,6 +10,7 @@
     <string name="principal.clientes">Clientes</string>
     <string name="principal.vendas">Vendas</string>
     <string name="principal.relatorios">Relatórios</string>
+    <string name="principal.estoque">Estoque</string>
     <string name="principal.produtos">Produtos</string>
     <string name="pessoa.titulo">Editar pessoa</string>
     <string name="pessoa.nome">Nome</string>

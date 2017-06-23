@@ -20,9 +20,10 @@ public class MetadadosHelper implements BaseColumns {
         public static String getCreateEntry(){
             StringBuilder sb = new StringBuilder();
             sb.append("CREATE TABLE ").append(TB_PESSOA).append(" ( ");
-            sb.append(TabelaPessoa._ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT, ");
+            sb.append(TabelaPessoa._ID).append(" INTEGER PRIMARY KEY , ");
             sb.append(PES_NOME).append(" VARCHAR(50) NOT NULL, ");
             sb.append(PES_TELEFONE).append(" VARCHAR(20), ");
+            sb.append(PES_EMAIL).append(" VARCHAR(50), ");
             sb.append(ATIVO).append(" INT ");
             /*sb.append(", FOREIGN KEY (").append(COLUMN_LINHA).append(") REFERENCES ").append(TLinhas.TABLE_NAME).append("(")
                     .append(TLinhas._ID).append(") ON DELETE CASCADE");*/
@@ -46,7 +47,7 @@ public class MetadadosHelper implements BaseColumns {
         public static String getCreateEntry(){
             StringBuilder sb = new StringBuilder();
             sb.append("CREATE TABLE ").append(TB_PRODUTO).append(" ( ");
-            sb.append(TabelaProduto._ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT, ");
+            sb.append(TabelaProduto._ID).append(" INTEGER PRIMARY KEY , ");
             sb.append(PRO_DESCRICAO).append(" VARCHAR(50) NOT NULL, ");
             sb.append(PRO_CODIGO).append(" VARCHAR(20), ");
             sb.append(PRO_QTDEATUAL).append(" INTEGER, ");
@@ -69,7 +70,7 @@ public class MetadadosHelper implements BaseColumns {
             return "DROP TABLE IF EXISTS " + TB_PRODUTO;
         }
     }
-    public static class TabelaMovimentoEstoque implements BaseColumns {
+public static class TabelaMovimentoEstoque implements BaseColumns {
         public static String TB_MOVIMENTO_ESTOQUE = "TB_MOVIMENTO_ESTOQUE";
         public static String MOV_DATA = "MOV_DATA";
         public static String MOV_QTNDE = "MOV_QTNDE";
@@ -79,7 +80,7 @@ public class MetadadosHelper implements BaseColumns {
         public static String getCreateEntry(){
             StringBuilder sb = new StringBuilder();
             sb.append("CREATE TABLE ").append(TB_MOVIMENTO_ESTOQUE).append(" ( ");
-            sb.append(TabelaMovimentoEstoque._ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT, ");
+            sb.append(TabelaMovimentoEstoque._ID).append(" INTEGER PRIMARY KEY , ");
             sb.append(MOV_DATA).append(" TIMESTAMP NOT NULL, ");
             sb.append(MOV_QTNDE).append(" INTEGER NOT NULL, ");
             sb.append(MOV_TIPO).append(" VARCHAR(10) NOT NULL, ");
@@ -100,16 +101,18 @@ public class MetadadosHelper implements BaseColumns {
         public static String PED_DATA = "PED_DATA";
         public static String PED_VALORPAGO = "PED_VALORPAGO";
         public static String PED_VALORTOTAL = "PED_VALORTOTAL";
+        public static String PED_VALORLUCRO = "PED_VALORLUCRO";
         public static String PED_FINALIZADO = "PED_FINALIZADO";
         public static String PED_CLIID = "PED_CLIID";
 
         public static String getCreateEntry(){
             StringBuilder sb = new StringBuilder();
             sb.append("CREATE TABLE ").append(TB_PEDIDO).append(" ( ");
-            sb.append(TabelaPedido._ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT, ");
+            sb.append(TabelaPedido._ID).append(" INTEGER PRIMARY KEY , ");
             sb.append(PED_DATA).append(" TIMESTAMP NOT NULL, ");
             sb.append(PED_VALORPAGO).append(" NUMERIC(18,2), ");
             sb.append(PED_VALORTOTAL).append(" NUMERIC(18,2), ");
+            sb.append(PED_VALORLUCRO).append(" NUMERIC(18,2), ");
             sb.append(PED_FINALIZADO).append(" INT, ");
             sb.append(PED_CLIID).append(" INTEGER NOT NULL");
             sb.append(", FOREIGN KEY (").append(PED_CLIID).append(") REFERENCES ").append(TabelaPessoa.TB_PESSOA).append("(")
@@ -134,15 +137,15 @@ public class MetadadosHelper implements BaseColumns {
         public static String getCreateEntry(){
             StringBuilder sb = new StringBuilder();
             sb.append("CREATE TABLE ").append(TB_PEDIDO_ITEM).append(" ( ");
-            sb.append(TabelaPedidoItem._ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT, ");
+            sb.append(TabelaPedidoItem._ID).append(" INTEGER PRIMARY KEY , ");
             sb.append(PIT_QNTDE).append(" INTEGER NOT NULL, ");
             sb.append(PIT_VALORCOMPRA).append(" NUMERIC(18,2), ");
             sb.append(PIT_VALORVENDA).append(" NUMERIC(18,2), ");
             sb.append(PIT_PEDID).append(" INTEGER NOT NULL, ");
-            sb.append(PIT_PROID).append(" INTEGER NOT NULL");
-            sb.append(", FOREIGN KEY (").append(PIT_PEDID).append(") REFERENCES ").append(TabelaPedido.TB_PEDIDO).append("(")
+            sb.append(PIT_PROID).append(" INTEGER NOT NULL, ");
+            sb.append(" FOREIGN KEY (").append(PIT_PEDID).append(") REFERENCES ").append(TabelaPedido.TB_PEDIDO).append("(")
                     .append(TabelaPedido._ID).append(" ), ");
-            sb.append(", FOREIGN KEY (").append(PIT_PROID).append(") REFERENCES ").append(TabelaProduto.TB_PRODUTO).append("(")
+            sb.append(" FOREIGN KEY (").append(PIT_PROID).append(") REFERENCES ").append(TabelaProduto.TB_PRODUTO).append("(")
                     .append(TabelaProduto._ID).append(" ) ");
             sb.append(")");
             return sb.toString();

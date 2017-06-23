@@ -4,7 +4,7 @@ package br.senai.sc.tcc.candymanager.model;
  * Created by MASSANEIRO on 24/05/2017.
  */
 
-public class ProdutoModel extends BaseModel{
+public class Produto extends BaseModel{
     private String codigo;
     private String descricao;
     private Double valorCompra;
@@ -49,5 +49,10 @@ public class ProdutoModel extends BaseModel{
 
     public void setQuantidadeAtual(Integer quantidadeAtual) {
         this.quantidadeAtual = quantidadeAtual;
+    }
+
+    @Override
+    public String toString() {
+        return descricao;
     }
 }

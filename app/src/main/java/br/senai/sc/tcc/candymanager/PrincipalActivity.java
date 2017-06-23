@@ -37,7 +37,7 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
                 iniciarActivity(ProdutoActivity.class);
                 break;
             case R.id.btRelatorios:
-                iniciarActivity(MainActivity.class);
+                iniciarActivity(MovimentoEstoqueActivity.class);
                 break;
         }
     }
