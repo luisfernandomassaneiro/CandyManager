@@ -9,7 +9,7 @@ public class Produto extends BaseModel{
     private String descricao;
     private Double valorCompra;
     private Double valorVenda;
-    private Integer quantidadeAtual;
+    private Integer quantidadeAtual = 0;
 
     public String getCodigo() {
         return codigo;
@@ -47,8 +47,8 @@ public class Produto extends BaseModel{
         return quantidadeAtual;
     }
 
-    public void setQuantidadeAtual(Integer quantidadeAtual) {
-        this.quantidadeAtual = quantidadeAtual;
+    public void setQuantidadeAtual(Integer quantidadeParaInserir) {
+        this.quantidadeAtual = this.quantidadeAtual + quantidadeParaInserir;
     }
 
     @Override

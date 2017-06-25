@@ -81,7 +81,7 @@ public static class TabelaMovimentoEstoque implements BaseColumns {
             StringBuilder sb = new StringBuilder();
             sb.append("CREATE TABLE ").append(TB_MOVIMENTO_ESTOQUE).append(" ( ");
             sb.append(TabelaMovimentoEstoque._ID).append(" INTEGER PRIMARY KEY , ");
-            sb.append(MOV_DATA).append(" TIMESTAMP NOT NULL, ");
+            sb.append(MOV_DATA).append(" INTEGER NOT NULL, ");
             sb.append(MOV_QTNDE).append(" INTEGER NOT NULL, ");
             sb.append(MOV_TIPO).append(" VARCHAR(10) NOT NULL, ");
             sb.append(MOV_PROID).append(" INTEGER NOT NULL ");

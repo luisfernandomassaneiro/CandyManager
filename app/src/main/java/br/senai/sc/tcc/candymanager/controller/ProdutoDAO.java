@@ -57,10 +57,10 @@ public class ProdutoDAO extends BaseDAO{
 
         try {
             open();
-            /*cursor = db.query(TB_PRODUTO, getColunasTabProduto(), null, null, null, null,
-                    PRO_CODIGO + " DESC ", null);*/
+            cursor = db.query(TB_PRODUTO, getColunasTabProduto(), null, null, null, null,
+                    PRO_DESCRICAO, null);
 
-            cursor = db.rawQuery("SELECT _ID, PRO_CODIGO, PRO_DESCRICAO, PRO_VALORCOMPRA, PRO_VALORVENDA, PRO_QTDEATUAL, ATIVO FROM TB_PRODUTO ORDER BY PRO_DESCRICAO", null);
+            //cursor = db.rawQuery("SELECT _ID, PRO_CODIGO, PRO_DESCRICAO, PRO_VALORCOMPRA, PRO_VALORVENDA, PRO_QTDEATUAL, ATIVO FROM TB_PRODUTO ORDER BY PRO_DESCRICAO", null);
             if (cursor.getCount() > 0) {
                 while(cursor.moveToNext()){
                     Produto produtoLinha = new Produto();
@@ -70,6 +70,7 @@ public class ProdutoDAO extends BaseDAO{
                     produtoLinha.setDescricao(cursor.getString(cursor.getColumnIndex(PRO_DESCRICAO)));
                     produtoLinha.setValorCompra(cursor.getDouble(cursor.getColumnIndex(PRO_VALORCOMPRA)));
                     produtoLinha.setValorVenda(cursor.getDouble(cursor.getColumnIndex(PRO_VALORVENDA)));
+                    produtoLinha.setQuantidadeAtual(cursor.getInt(cursor.getColumnIndex(PRO_QTDEATUAL)));
                     produtoLinha.setAtivo(cursor.getInt(cursor.getColumnIndex(ATIVO)));
 
                     listaProdutos.add(produtoLinha);
@@ -138,6 +139,7 @@ public class ProdutoDAO extends BaseDAO{
         values.put(PRO_DESCRICAO, produto.getDescricao());
         values.put(PRO_VALORCOMPRA, produto.getValorCompra());
         values.put(PRO_VALORVENDA, produto.getValorVenda());
+        values.put(PRO_QTDEATUAL, produto.getQuantidadeAtual());
         values.put(ATIVO, produto.getAtivo());
 
         return values;
@@ -184,6 +186,7 @@ public class ProdutoDAO extends BaseDAO{
         boolean resultadoAlteracao = false;
 
         try {
+            open();
             String where = _ID+"=?"; //Definir por campo será feito a alteração
 
             //Seta os argumentos com info do registro a ser alterado
@@ -198,6 +201,8 @@ public class ProdutoDAO extends BaseDAO{
 
         } catch (Exception e) {
             Log.e("Erro: ", e.toString());
+        }finally {
+            close();
         }
         return resultadoAlteracao;
     }
