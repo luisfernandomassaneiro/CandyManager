@@ -31,7 +31,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/acPedidoCliente"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_10dp"
@@ -68,33 +67,12 @@
         android:ems="10"
         android:inputType="number" />
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvPedidoItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etPedidoQuantidade"
-        android:stretchColumns="1">
-        <TableRow>
-            <TextView
-                android:text="@string/pedido.produto"
-                android:padding="3dip" />
-            <TextView
-                android:text="@string/pedido.quantidade"
-                android:gravity="right"
-                android:padding="3dip" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:text="@string/pedido.produto"
-                android:padding="3dip" />
-            <TextView
-                android:text="@string/pedido.cliente"
-                android:gravity="right"
-                android:padding="3dip" />
-        </TableRow>
-
-    </TableLayout>
+        />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/multiple_actions_produto"
@@ -111,12 +89,21 @@
         android:layout_marginRight="@dimen/fab_margin"
         android:layout_marginEnd="@dimen/fab_margin">
 
+
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btSalvarMovimentoEstoque"
+            android:id="@+id/btManterPedidoAberto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
-            fab:fab_title="@string/cliente.salvar"
+            fab:fab_title="@string/pedido.manterAberto"
+            fab:fab_colorPressed="@color/white_pressed" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btFinalizarPedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_title="@string/pedido.finalizar"
             fab:fab_colorPressed="@color/white_pressed" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>

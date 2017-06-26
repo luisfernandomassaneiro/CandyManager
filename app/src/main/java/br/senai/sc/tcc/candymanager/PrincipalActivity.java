@@ -31,7 +31,7 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
                 iniciarActivity(ClienteActivity.class);
                 break;
             case R.id.btVendas:
-                iniciarActivity(ListarPessoaActivity.class);
+                iniciarActivity(PedidoActivity.class);
                 break;
             case R.id.btProdutos:
                 iniciarActivity(ProdutoActivity.class);

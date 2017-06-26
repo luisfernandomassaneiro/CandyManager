@@ -32,5 +32,7 @@
     <string name="pedido.cliente">Cliente</string>
     <string name="pedido.produto">Produto</string>
     <string name="pedido.quantidade">Quantidade</string>
+    <string name="pedido.manterAberto">Manter em aberto</string>
+    <string name="pedido.finalizar">Finalizar</string>
     <string name="base.ativo">Ativo</string>
 </resources>
