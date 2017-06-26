@@ -19,7 +19,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(MetadadosHelper.TabelaPessoa.getCreateEntry());
+        db.execSQL(MetadadosHelper.TabelaCliente.getCreateEntry());
         db.execSQL(MetadadosHelper.TabelaProduto.getCreateEntry());
         db.execSQL(MetadadosHelper.TabelaMovimentoEstoque.getCreateEntry());
         db.execSQL(MetadadosHelper.TabelaPedido.getCreateEntry());

@@ -8,7 +8,7 @@ import java.util.List;
  */
 
 public class Pedido extends BaseModel {
-    private Pessoa pessoa;
+    private Cliente cliente;
     private List<PedidoItem> itens;
     private Date data = new Date();
     private Double valorTotal;
@@ -17,12 +17,12 @@ public class Pedido extends BaseModel {
     private String observacao;
     private boolean pedidoFinalizado = false;
 
-    public Pessoa getPessoa() {
-        return pessoa;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public List<PedidoItem> getItens() {

@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
  * Created by MASSANEIRO on 24/05/2017.
  */
 
-public class Pessoa extends BaseModel{
+public class Cliente extends BaseModel{
     private String nome;
     private String telefone;
     private String email;

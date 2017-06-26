@@ -16,11 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PessoaActivity" />
+        <activity android:name=".ClienteActivity" />
         <activity android:name=".ListarPessoaActivity" />
         <activity android:name=".ProdutoActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".MovimentoEstoqueActivity"></activity>
+        <activity android:name=".MovimentoEstoqueActivity" />
+        <activity android:name=".PedidoActivity"></activity>
     </application>
 
 </manifest>

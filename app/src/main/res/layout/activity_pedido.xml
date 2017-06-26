@@ -4,72 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.senai.sc.tcc.candymanager.MovimentoEstoqueActivity">
+    tools:context="br.senai.sc.tcc.candymanager.PedidoActivity">
 
     <TextView
-        android:id="@+id/tvMovimentoEstoqueProduto"
+        android:id="@+id/tvPedidoCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_10dp"
-        android:text="@string/movimentoEstoque.produto" />
+        android:text="@string/pedido.cliente" />
 
     <AutoCompleteTextView
-        android:id="@+id/acMovimentoEstoqueProduto"
+        android:id="@+id/acPedidoCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvMovimentoEstoqueProduto"
+        android:layout_below="@+id/tvPedidoCliente"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_20dp"
         android:ems="10"
-        />]
-
+        />
 
     <TextView
-        android:id="@+id/tvMovimentoEstoqueQuantidade"
+        android:id="@+id/tvPedidoProduto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/acMovimentoEstoqueProduto"
+        android:layout_below="@id/acPedidoCliente"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginTop="@dimen/layout_margin_10dp"
+        android:text="@string/pedido.produto" />
+
+    <AutoCompleteTextView
+        android:id="@+id/acPedidoProduto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPedidoProduto"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_20dp"
-        android:text="@string/movimentoEstoque.quantidade" />
+        android:ems="10"
+        />
+
+    <TextView
+        android:id="@+id/tvPedidoQuantidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/acPedidoProduto"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginTop="@dimen/layout_margin_20dp"
+        android:text="@string/pedido.quantidade" />
 
     <EditText
-        android:id="@+id/etMovimentoEstoqueQuantidade"
+        android:id="@+id/etPedidoQuantidade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvMovimentoEstoqueQuantidade"
+        android:layout_below="@+id/tvPedidoQuantidade"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginRight="@dimen/layout_margin_10dp"
         android:ems="10"
         android:inputType="number" />
 
-    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etMovimentoEstoqueQuantidade"
-        android:layout_marginLeft="@dimen/layout_margin_10dp"
-        android:layout_marginRight="@dimen/layout_margin_10dp"
-        android:orientation="horizontal">
+        android:layout_below="@+id/etPedidoQuantidade"
+        android:stretchColumns="1">
+        <TableRow>
+            <TextView
+                android:text="@string/pedido.produto"
+                android:padding="3dip" />
+            <TextView
+                android:text="@string/pedido.quantidade"
+                android:gravity="right"
+                android:padding="3dip" />
+        </TableRow>
 
-        <RadioButton android:id="@+id/rbEntrada"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/layout_margin_10dp"
-            android:text="@string/movimentoEstoque.entrada"
-            android:onClick="onRadioButtonClicked"
-            android:checked="true"/>
-        <RadioButton android:id="@+id/rbSaida"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/layout_margin_10dp"
-            android:text="@string/movimentoEstoque.saida"
-            android:onClick="onRadioButtonClicked"/>
-    </RadioGroup>
+        <TableRow>
+
+            <TextView
+                android:text="@string/pedido.produto"
+                android:padding="3dip" />
+            <TextView
+                android:text="@string/pedido.cliente"
+                android:gravity="right"
+                android:padding="3dip" />
+        </TableRow>
+
+    </TableLayout>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/multiple_actions_produto"

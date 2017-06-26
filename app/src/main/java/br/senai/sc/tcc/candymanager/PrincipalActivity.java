@@ -28,7 +28,7 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btClientes:
-                iniciarActivity(PessoaActivity.class);
+                iniciarActivity(ClienteActivity.class);
                 break;
             case R.id.btVendas:
                 iniciarActivity(ListarPessoaActivity.class);

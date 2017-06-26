@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.senai.sc.tcc.candymanager.PessoaActivity">
+    tools:context="br.senai.sc.tcc.candymanager.ClienteActivity">
 
     <TextView
         android:id="@+id/tvNome"
@@ -15,7 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_10dp"
-        android:text="@string/pessoa.nome" />
+        android:text="@string/cliente.nome" />
 
     <EditText
         android:id="@+id/etNome"
@@ -36,7 +36,7 @@
         android:layout_below="@+id/etNome"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_20dp"
-        android:text="@string/pessoa.sobrenome" />
+        android:text="@string/cliente.sobrenome" />
 
     <EditText
         android:id="@+id/etSobrenome"
@@ -57,7 +57,7 @@
         android:layout_below="@+id/etSobrenome"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_20dp"
-        android:text="@string/pessoa.telefone" />
+        android:text="@string/cliente.telefone" />
 
     <EditText
         android:id="@+id/etTelefone"
@@ -78,7 +78,7 @@
         android:layout_below="@+id/etTelefone"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_20dp"
-        android:text="@string/pessoa.email" />
+        android:text="@string/cliente.email" />
 
     <EditText
         android:id="@+id/etEmail"
@@ -127,11 +127,11 @@
             fab:fab_colorPressed="@color/white_pressed"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btSalvarPessoa"
+            android:id="@+id/btSalvarCliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
-            fab:fab_title="@string/pessoa.salvar"
+            fab:fab_title="@string/cliente.salvar"
             fab:fab_colorPressed="@color/white_pressed"
             />
 

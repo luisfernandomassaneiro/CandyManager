@@ -6,19 +6,19 @@
 
     <string name="action_settings">Settings</string>
     <string name="principal.titulo">Principal</string>
-    <string name="principal.editarPessoa">Editar pessoa</string>
+    <string name="principal.editarPessoa">Editar cliente</string>
     <string name="principal.clientes">Clientes</string>
     <string name="principal.vendas">Vendas</string>
     <string name="principal.relatorios">Relatórios</string>
     <string name="principal.estoque">Estoque</string>
     <string name="principal.produtos">Produtos</string>
-    <string name="pessoa.titulo">Editar pessoa</string>
-    <string name="pessoa.nome">Nome</string>
-    <string name="pessoa.sobrenome">Sobrenome</string>
-    <string name="pessoa.telefone">Telefone</string>
-    <string name="pessoa.email">Email</string>
-    <string name="pessoa.salvar">Salvar</string>
-    <string name="listarPessoa.titulo">Listar pessoa</string>
+    <string name="cliente.titulo">Editar cliente</string>
+    <string name="cliente.nome">Nome</string>
+    <string name="cliente.sobrenome">Sobrenome</string>
+    <string name="cliente.telefone">Telefone</string>
+    <string name="cliente.email">Email</string>
+    <string name="cliente.salvar">Salvar</string>
+    <string name="listarPessoa.titulo">Listar cliente</string>
     <string name="geral.salvoComSucesso">Registro salvo com sucesso!</string>
     <string name="title_activity_produto">ProdutoActivity</string>
     <string name="produto.codigo">Código</string>
@@ -29,5 +29,8 @@
     <string name="movimentoEstoque.quantidade">Quantidade</string>
     <string name="movimentoEstoque.entrada">Entrada</string>
     <string name="movimentoEstoque.saida">Saída</string>
+    <string name="pedido.cliente">Cliente</string>
+    <string name="pedido.produto">Produto</string>
+    <string name="pedido.quantidade">Quantidade</string>
     <string name="base.ativo">Ativo</string>
 </resources>

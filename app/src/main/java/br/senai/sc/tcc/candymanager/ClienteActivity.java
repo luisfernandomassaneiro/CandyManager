@@ -9,42 +9,42 @@ import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
-import br.senai.sc.tcc.candymanager.controller.PessoaDAO;
-import br.senai.sc.tcc.candymanager.model.Pessoa;
+import br.senai.sc.tcc.candymanager.controller.ClienteDAO;
+import br.senai.sc.tcc.candymanager.model.Cliente;
 
-public class PessoaActivity extends AppCompatActivity implements View.OnClickListener {
+public class ClienteActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText etNome, etTelefone, etEmail;
-    CheckBox cbPessoaAtiva;
+    CheckBox cbClienteAtivo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pessoa);
+        setContentView(R.layout.activity_cliente);
         inicializar();
     }
 
     private void inicializar(){
-        FloatingActionButton btSalvar = (FloatingActionButton) findViewById(R.id.btSalvarPessoa);
+        FloatingActionButton btSalvar = (FloatingActionButton) findViewById(R.id.btSalvarCliente);
         btSalvar.setOnClickListener(this);
 
         etNome = (EditText) findViewById(R.id.etNome);
         etTelefone = (EditText) findViewById(R.id.etTelefone);
         etEmail =  (EditText) findViewById(R.id.etEmail);
-        cbPessoaAtiva = (CheckBox) findViewById(R.id.cbPessoaAtiva);
+        cbClienteAtivo = (CheckBox) findViewById(R.id.cbPessoaAtiva);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btSalvarPessoa:
-                PessoaDAO dao = new PessoaDAO(this);
-                Pessoa pessoa = new Pessoa();
-                pessoa.setNome(etNome.getText().toString());
-                pessoa.setTelefone(etTelefone.getText().toString());
-                pessoa.setEmail(etEmail.getText().toString());
-                pessoa.setAtivo(cbPessoaAtiva.isChecked() ? 1 : 0);
-                dao.insertPessoa(pessoa);
+            case R.id.btSalvarCliente:
+                ClienteDAO dao = new ClienteDAO(this);
+                Cliente cliente = new Cliente();
+                cliente.setNome(etNome.getText().toString());
+                cliente.setTelefone(etTelefone.getText().toString());
+                cliente.setEmail(etEmail.getText().toString());
+                cliente.setAtivo(cbClienteAtivo.isChecked() ? 1 : 0);
+                dao.insertCliente(cliente);
                 Toast.makeText(this, R.string.geral_salvoComSucesso, Toast.LENGTH_SHORT).show();
                 break;
         }

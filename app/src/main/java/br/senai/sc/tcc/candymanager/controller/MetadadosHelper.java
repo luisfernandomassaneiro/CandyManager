@@ -11,19 +11,19 @@ public class MetadadosHelper implements BaseColumns {
 
     private MetadadosHelper(){}
 
-    public static class TabelaPessoa implements BaseColumns {
-        public static String TB_PESSOA = "TB_PESSOA";
-        public static String PES_NOME = "PES_NOME";
-        public static String PES_TELEFONE = "PES_TELEFONE";
-        public static String PES_EMAIL = "PES_EMAIL";
+    public static class TabelaCliente implements BaseColumns {
+        public static String TB_CLIENTE = "TB_CLIENTE";
+        public static String CLI_NOME = "CLI_NOME";
+        public static String CLI_TELEFONE = "CLI_TELEFONE";
+        public static String CLI_EMAIL = "CLI_EMAIL";
 
         public static String getCreateEntry(){
             StringBuilder sb = new StringBuilder();
-            sb.append("CREATE TABLE ").append(TB_PESSOA).append(" ( ");
-            sb.append(TabelaPessoa._ID).append(" INTEGER PRIMARY KEY , ");
-            sb.append(PES_NOME).append(" VARCHAR(50) NOT NULL, ");
-            sb.append(PES_TELEFONE).append(" VARCHAR(20), ");
-            sb.append(PES_EMAIL).append(" VARCHAR(50), ");
+            sb.append("CREATE TABLE ").append(TB_CLIENTE).append(" ( ");
+            sb.append(TabelaCliente._ID).append(" INTEGER PRIMARY KEY , ");
+            sb.append(CLI_NOME).append(" VARCHAR(50) NOT NULL, ");
+            sb.append(CLI_TELEFONE).append(" VARCHAR(20), ");
+            sb.append(CLI_EMAIL).append(" VARCHAR(50), ");
             sb.append(ATIVO).append(" INT ");
             /*sb.append(", FOREIGN KEY (").append(COLUMN_LINHA).append(") REFERENCES ").append(TLinhas.TABLE_NAME).append("(")
                     .append(TLinhas._ID).append(") ON DELETE CASCADE");*/
@@ -32,7 +32,7 @@ public class MetadadosHelper implements BaseColumns {
         }
 
         public static String getDropTable() {
-            return "DROP TABLE IF EXISTS " + TB_PESSOA;
+            return "DROP TABLE IF EXISTS " + TB_CLIENTE;
         }
     }
 
@@ -115,8 +115,8 @@ public static class TabelaMovimentoEstoque implements BaseColumns {
             sb.append(PED_VALORLUCRO).append(" NUMERIC(18,2), ");
             sb.append(PED_FINALIZADO).append(" INT, ");
             sb.append(PED_CLIID).append(" INTEGER NOT NULL");
-            sb.append(", FOREIGN KEY (").append(PED_CLIID).append(") REFERENCES ").append(TabelaPessoa.TB_PESSOA).append("(")
-                    .append(TabelaPessoa._ID).append(" ) ");
+            sb.append(", FOREIGN KEY (").append(PED_CLIID).append(") REFERENCES ").append(TabelaCliente.TB_CLIENTE).append("(")
+                    .append(TabelaCliente._ID).append(" ) ");
             sb.append(")");
             return sb.toString();
         }
@@ -158,7 +158,7 @@ public static class TabelaMovimentoEstoque implements BaseColumns {
 
     public static String getCreatesTables() {
         StringBuilder sb = new StringBuilder();
-        sb.append(TabelaPessoa.getCreateEntry()).append("; ");
+        sb.append(TabelaCliente.getCreateEntry()).append("; ");
         sb.append(TabelaProduto.getCreateEntry()).append("; ");
         sb.append(TabelaMovimentoEstoque.getCreateEntry()).append("; ");
         sb.append(TabelaPedido.getCreateEntry()).append("; ");
@@ -168,7 +168,7 @@ public static class TabelaMovimentoEstoque implements BaseColumns {
 
     public static String getDropTables() {
         StringBuilder sb = new StringBuilder();
-        sb.append(TabelaPessoa.getDropTable()).append("; ");
+        sb.append(TabelaCliente.getDropTable()).append("; ");
         sb.append(TabelaProduto.getDropTable()).append("; ");
         sb.append(TabelaMovimentoEstoque.getDropTable()).append("; ");
         sb.append(TabelaPedido.getDropTable()).append("; ");

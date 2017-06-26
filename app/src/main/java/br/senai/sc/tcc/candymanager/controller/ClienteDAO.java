@@ -8,28 +8,28 @@ import android.util.Log;
 
 import java.util.List;
 
-import br.senai.sc.tcc.candymanager.model.Pessoa;
+import br.senai.sc.tcc.candymanager.model.Cliente;
 
 /**
  * Created by MASSANEIRO on 24/05/2017.
  */
 
-public class PessoaDAO extends BaseDAO{
-    private static final String TB_PESSOA = MetadadosHelper.TabelaPessoa.TB_PESSOA;
-    private static final String PES_NOME = MetadadosHelper.TabelaPessoa.PES_NOME;
-    private static final String PES_TELEFONE = MetadadosHelper.TabelaPessoa.PES_TELEFONE;
-    private static final String PES_EMAIL = MetadadosHelper.TabelaPessoa.PES_EMAIL;
+public class ClienteDAO extends BaseDAO{
+    private static final String TB_CLIENTE = MetadadosHelper.TabelaCliente.TB_CLIENTE;
+    private static final String CLI_NOME = MetadadosHelper.TabelaCliente.CLI_NOME;
+    private static final String CLI_TELEFONE = MetadadosHelper.TabelaCliente.CLI_TELEFONE;
+    private static final String CLI_EMAIL = MetadadosHelper.TabelaCliente.CLI_EMAIL;
 
     private SQLiteHelper dbHelper;
     private SQLiteDatabase db;
-    private List<Pessoa> listaPessoas;
+    private List<Cliente> listaClientes;
 
-    private String[] getColunasTabPessoa(){
-        String[] PESSOA_COLUNAS_TAB_PESSOA = new String[] {_ID, PES_NOME, PES_TELEFONE, PES_EMAIL, ATIVO};
-        return PESSOA_COLUNAS_TAB_PESSOA;
+    private String[] getColunasTabCliente(){
+        String[] COLUNAS_TAB_CLIENTE = new String[] {_ID, CLI_NOME, CLI_TELEFONE, CLI_EMAIL, ATIVO};
+        return COLUNAS_TAB_CLIENTE;
     }
 
-    public PessoaDAO(Context ctx){
+    public ClienteDAO(Context ctx){
         try {
             dbHelper = new SQLiteHelper(ctx, SQLiteHelper.NOME_BD, SQLiteHelper.VERSAO_BD);
 
@@ -48,24 +48,24 @@ public class PessoaDAO extends BaseDAO{
         }
     }
 
-    public List<Pessoa> listPessoas(){
+    public List<Cliente> listClientes(){
         Cursor cursor = null;
-        listaPessoas.clear();
+        listaClientes.clear();
 
         try {
-            cursor = db.query(TB_PESSOA, getColunasTabPessoa(), null, null, null, null,
-                    PES_NOME + " DESC ", null);
+            cursor = db.query(TB_CLIENTE, getColunasTabCliente(), null, null, null, null,
+                    CLI_NOME + " DESC ", null);
             if (cursor.getCount() > 0) {
                 while(cursor.moveToNext()){
-                    Pessoa pessoaLinha = new Pessoa();
+                    Cliente clienteLinha = new Cliente();
 
-                    pessoaLinha.setId(cursor.getInt(cursor.getColumnIndex(_ID)));
-                    pessoaLinha.setNome(cursor.getString(cursor.getColumnIndex(PES_NOME)));
-                    pessoaLinha.setTelefone(cursor.getString(cursor.getColumnIndex(PES_TELEFONE)));
-                    pessoaLinha.setEmail(cursor.getString(cursor.getColumnIndex(PES_EMAIL)));
-                    pessoaLinha.setAtivo(cursor.getInt(cursor.getColumnIndex(ATIVO)));
+                    clienteLinha.setId(cursor.getInt(cursor.getColumnIndex(_ID)));
+                    clienteLinha.setNome(cursor.getString(cursor.getColumnIndex(CLI_NOME)));
+                    clienteLinha.setTelefone(cursor.getString(cursor.getColumnIndex(CLI_TELEFONE)));
+                    clienteLinha.setEmail(cursor.getString(cursor.getColumnIndex(CLI_EMAIL)));
+                    clienteLinha.setAtivo(cursor.getInt(cursor.getColumnIndex(ATIVO)));
 
-                    listaPessoas.add(pessoaLinha);
+                    listaClientes.add(clienteLinha);
                 }
             }
         } catch (Exception e) {
@@ -78,28 +78,28 @@ public class PessoaDAO extends BaseDAO{
                 }
             }
         }
-        return listaPessoas;
+        return listaClientes;
     }
 
-    public ContentValues contentPessoa(Pessoa pessoa){
+    public ContentValues contentCliente(Cliente cliente){
         ContentValues values = new ContentValues();
 
-        values.put(_ID, pessoa.getId());
-        values.put(PES_NOME, pessoa.getNome());
-        values.put(PES_TELEFONE, pessoa.getTelefone());
-        values.put(PES_EMAIL, pessoa.getEmail());
-        values.put(ATIVO, pessoa.getAtivo());
+        values.put(_ID, cliente.getId());
+        values.put(CLI_NOME, cliente.getNome());
+        values.put(CLI_TELEFONE, cliente.getTelefone());
+        values.put(CLI_EMAIL, cliente.getEmail());
+        values.put(ATIVO, cliente.getAtivo());
 
         return values;
     }
 
     //Insert
-    public long insertPessoa(Pessoa novaPessoa){
+    public long insertCliente(Cliente novoCliente){
         long id = 0;
         try {
             open();
-            ContentValues values = contentPessoa(novaPessoa);
-            id = db.insert(TB_PESSOA, null, values);
+            ContentValues values = contentCliente(novoCliente);
+            id = db.insert(TB_CLIENTE, null, values);
 
         } catch (Exception e) {
             Log.e("Erro: ", e.getMessage());
@@ -118,7 +118,7 @@ public class PessoaDAO extends BaseDAO{
             String where = _ID + "=?";
             String[] args = new String[] {_ID};
 
-            int num = db.delete(TB_PESSOA, where, args);
+            int num = db.delete(TB_CLIENTE, where, args);
 
             if (num == 1) {
                 resultadoExclusao = true;
@@ -130,16 +130,16 @@ public class PessoaDAO extends BaseDAO{
     }
 
     //Método aletar vendedor
-    public boolean alterarPessoa(Pessoa pessoa){
+    public boolean alterarCliente(Cliente cliente){
         boolean resultadoAlteracao = false;
 
         try {
             String where = _ID+"=?"; //Definir por campo será feito a alteração
 
             //Seta os argumentos com info do registro a ser alterado
-            String[] args = new String[]{String.valueOf(pessoa.getId())};
+            String[] args = new String[]{String.valueOf(cliente.getId())};
 
-            int num = db.update(TB_PESSOA, contentPessoa(pessoa), where, args);
+            int num = db.update(TB_CLIENTE, contentCliente(cliente), where, args);
 
             //Verificar se o vendedor foi alteração
             if (num == 1) {
@@ -153,15 +153,15 @@ public class PessoaDAO extends BaseDAO{
     }
 /*
     //Busca individual - vendedor especifico
-    public Pessoa buscaIndividualVendedor(String NOME){
+    public Cliente buscaIndividualVendedor(String NOME){
 
         Cursor cursor = null;
-        Pessoa vendedorLinha = new Pessoa();
+        Cliente vendedorLinha = new Cliente();
         String where = "NOME=?";
         String[] args = new String[]{NOME};
 
         try {
-            cursor = db.query(TB_PESSOA, getColunasTabPessoa(), where, args, null, null, null);
+            cursor = db.query(TB_CLIENTE, getColunasTabCliente(), where, args, null, null, null);
 
             if (cursor.getCount() > 0 ) {
                 while (cursor.moveToNext()){
