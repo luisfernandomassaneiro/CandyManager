@@ -5,11 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.senai.sc.tcc.candymanager.adapters.PedidoItemAdapter;
+import br.senai.sc.tcc.candymanager.controller.ClienteDAO;
+import br.senai.sc.tcc.candymanager.controller.ProdutoDAO;
+import br.senai.sc.tcc.candymanager.model.Cliente;
 import br.senai.sc.tcc.candymanager.model.Pedido;
 import br.senai.sc.tcc.candymanager.model.PedidoItem;
 import br.senai.sc.tcc.candymanager.model.Produto;
@@ -21,7 +27,11 @@ import br.senai.sc.tcc.candymanager.model.Produto;
 public class PedidoActivity extends AppCompatActivity implements View.OnClickListener {
 
     Pedido pedidoAtual;
+    Cliente clienteSelecionado;
+    Produto produtoSelecionado;
     private List<PedidoItem> lPedidoItem;
+    private List<Cliente> lClientes;
+    private List<Produto> lProdutos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +49,29 @@ public class PedidoActivity extends AppCompatActivity implements View.OnClickLis
 
         recyclerView.setLayoutManager(layout);
 
+        ArrayAdapter<Cliente> adapterCliente = new ArrayAdapter<Cliente>(this,
+                android.R.layout.simple_dropdown_item_1line, getClientes());
+        AutoCompleteTextView textViewCliente = (AutoCompleteTextView)
+                findViewById(R.id.acPedidoCliente);
+        textViewCliente.setThreshold(1);
+        textViewCliente.setAdapter(adapterCliente);
+        textViewCliente.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long rowId) {
+                clienteSelecionado = (Cliente) parent.getItemAtPosition(position);
+            }
+        });
 
+        ArrayAdapter<Produto> adapterProduto = new ArrayAdapter<Produto>(this,
+                android.R.layout.simple_dropdown_item_1line, getProdutos());
+        AutoCompleteTextView textViewProduto = (AutoCompleteTextView)
+                findViewById(R.id.acPedidoProduto);
+        textViewProduto.setThreshold(1);
+        textViewProduto.setAdapter(adapterProduto);
+        textViewProduto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long rowId) {
+                produtoSelecionado = (Produto) parent.getItemAtPosition(position);
+            }
+        });
     }
 
     @Override
@@ -64,5 +96,31 @@ public class PedidoActivity extends AppCompatActivity implements View.OnClickLis
 
     public void atualizaListaPedidoItem() {
 
+    }
+
+    public List<Produto> getProdutos() {
+        if(lProdutos == null || lProdutos.size() == 0) {
+            ProdutoDAO dao = new ProdutoDAO(this);
+            setProdutos(dao.listProdutos());
+        }
+
+        return lProdutos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.lProdutos = produtos;
+    }
+
+    public List<Cliente> getClientes() {
+        if(lClientes == null || lClientes.size() == 0) {
+            ClienteDAO dao = new ClienteDAO(this);
+            setClientes(dao.listClientes());
+        }
+
+        return lClientes;
+    }
+
+    public void setClientes(List<Cliente> lClientes) {
+        this.lClientes = lClientes;
     }
 }

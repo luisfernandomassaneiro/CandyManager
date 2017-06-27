@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.senai.sc.tcc.candymanager.model.Cliente;
@@ -22,7 +23,7 @@ public class ClienteDAO extends BaseDAO{
 
     private SQLiteHelper dbHelper;
     private SQLiteDatabase db;
-    private List<Cliente> listaClientes;
+    private List<Cliente> listaClientes = new ArrayList<>();
 
     private String[] getColunasTabCliente(){
         String[] COLUNAS_TAB_CLIENTE = new String[] {_ID, CLI_NOME, CLI_TELEFONE, CLI_EMAIL, ATIVO};
@@ -53,8 +54,10 @@ public class ClienteDAO extends BaseDAO{
         listaClientes.clear();
 
         try {
-            cursor = db.query(TB_CLIENTE, getColunasTabCliente(), null, null, null, null,
-                    CLI_NOME + " DESC ", null);
+            open();
+            String[] args = new String[] {"1"};
+            cursor = db.query(TB_CLIENTE, getColunasTabCliente(), "ATIVO=?", args, null, null,
+                    CLI_NOME, null);
             if (cursor.getCount() > 0) {
                 while(cursor.moveToNext()){
                     Cliente clienteLinha = new Cliente();
@@ -77,6 +80,7 @@ public class ClienteDAO extends BaseDAO{
                     cursor.close();
                 }
             }
+            close();
         }
         return listaClientes;
     }

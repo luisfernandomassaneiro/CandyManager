@@ -1,5 +1,6 @@
 package br.senai.sc.tcc.candymanager.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,13 +10,13 @@ import java.util.List;
 
 public class Pedido extends BaseModel {
     private Cliente cliente;
-    private List<PedidoItem> itens;
+    private List<PedidoItem> lPedidoItem;
     private Date data = new Date();
     private Double valorTotal;
     private Double valorPago;
     private Double valorLucro;
     private String observacao;
-    private boolean pedidoFinalizado = false;
+    private Integer pedidoFinalizado = 0;
 
     public Cliente getCliente() {
         return cliente;
@@ -25,12 +26,19 @@ public class Pedido extends BaseModel {
         this.cliente = cliente;
     }
 
-    public List<PedidoItem> getItens() {
-        return itens;
+    public List<PedidoItem> getlPedidoItem() {
+        return lPedidoItem;
     }
 
-    public void setItens(List<PedidoItem> itens) {
-        this.itens = itens;
+    public void addPedidoItem(PedidoItem pedidoItem) {
+        if(this.lPedidoItem == null)
+            this.lPedidoItem = new ArrayList<>();
+
+        getlPedidoItem().add(pedidoItem);
+    }
+
+    public void setlPedidoItem(List<PedidoItem> lPedidoItem) {
+        this.lPedidoItem = lPedidoItem;
     }
 
     public Date getData() {
@@ -65,19 +73,19 @@ public class Pedido extends BaseModel {
         this.observacao = observacao;
     }
 
-    public boolean isPedidoFinalizado() {
-        return pedidoFinalizado;
-    }
-
-    public void setPedidoFinalizado(boolean pedidoFinalizado) {
-        this.pedidoFinalizado = pedidoFinalizado;
-    }
-
     public Double getValorLucro() {
         return valorLucro;
     }
 
     public void setValorLucro(Double valorLucro) {
         this.valorLucro = valorLucro;
+    }
+
+    public Integer getPedidoFinalizado() {
+        return pedidoFinalizado;
+    }
+
+    public void setPedidoFinalizado(Integer pedidoFinalizado) {
+        this.pedidoFinalizado = pedidoFinalizado;
     }
 }

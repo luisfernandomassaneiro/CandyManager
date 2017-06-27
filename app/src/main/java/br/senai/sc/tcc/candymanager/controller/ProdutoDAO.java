@@ -57,7 +57,8 @@ public class ProdutoDAO extends BaseDAO{
 
         try {
             open();
-            cursor = db.query(TB_PRODUTO, getColunasTabProduto(), null, null, null, null,
+            String[] args = new String[] {"1"};
+            cursor = db.query(TB_PRODUTO, getColunasTabProduto(), "ATIVO=?", args, null, null,
                     PRO_DESCRICAO, null);
 
             //cursor = db.rawQuery("SELECT _ID, PRO_CODIGO, PRO_DESCRICAO, PRO_VALORCOMPRA, PRO_VALORVENDA, PRO_QTDEATUAL, ATIVO FROM TB_PRODUTO ORDER BY PRO_DESCRICAO", null);

@@ -109,7 +109,7 @@ public static class TabelaMovimentoEstoque implements BaseColumns {
             StringBuilder sb = new StringBuilder();
             sb.append("CREATE TABLE ").append(TB_PEDIDO).append(" ( ");
             sb.append(TabelaPedido._ID).append(" INTEGER PRIMARY KEY , ");
-            sb.append(PED_DATA).append(" TIMESTAMP NOT NULL, ");
+            sb.append(PED_DATA).append(" INTEGER NOT NULL, ");
             sb.append(PED_VALORPAGO).append(" NUMERIC(18,2), ");
             sb.append(PED_VALORTOTAL).append(" NUMERIC(18,2), ");
             sb.append(PED_VALORLUCRO).append(" NUMERIC(18,2), ");

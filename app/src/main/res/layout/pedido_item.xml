@@ -2,19 +2,20 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
+android:layout_marginLeft="@dimen/layout_margin_10dp"
+    android:layout_marginRight="@dimen/layout_margin_10dp"
 android:id="@+id/pedidoTabela"
 android:stretchColumns="1">
     <TableRow >
         <TextView
             android:text="@string/pedido.produto"
             android:gravity="left"
-            android:width="@dimen/width_300dp"
             android:padding="4dip"
             />
         <TextView
+
             android:text="@string/pedido.quantidade"
             android:gravity="right"
-            android:layout_marginRight="@dimen/layout_margin_10dp"
             android:padding="4dip" />
     </TableRow>
     <TableRow>
@@ -27,8 +28,7 @@ android:stretchColumns="1">
             android:id="@+id/pedidoTabela_quantidade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/layout_margin_10dp"
-            android:gravity="center"
+            android:gravity="right"
             />
     </TableRow>
 </TableLayout>
