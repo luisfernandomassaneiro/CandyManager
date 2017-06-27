@@ -9,6 +9,7 @@ import android.util.Log;
 import java.util.Date;
 import java.util.List;
 
+import br.senai.sc.tcc.candymanager.enums.TipoMovimentacao;
 import br.senai.sc.tcc.candymanager.model.Cliente;
 import br.senai.sc.tcc.candymanager.model.Pedido;
 import br.senai.sc.tcc.candymanager.model.PedidoItem;
@@ -32,7 +33,7 @@ public class PedidoDAO extends BaseDAO{
     private List<Pedido> listaPedidos;
 
     private String[] getColunasTabPedido(){
-        String[] COLUNAS_TAB_PEDIDO = new String[] {_ID, PED_CLIID, PED_DATA, PED_FINALIZADO, PED_VALORLUCRO, PED_VALORPAGO, PED_VALORTOTAL, ATIVO};
+        String[] COLUNAS_TAB_PEDIDO = new String[] {_ID, PED_CLIID, PED_DATA, PED_FINALIZADO, PED_VALORLUCRO, PED_VALORPAGO, PED_VALORTOTAL};
         return COLUNAS_TAB_PEDIDO;
     }
 
@@ -64,7 +65,6 @@ public class PedidoDAO extends BaseDAO{
         values.put(PED_FINALIZADO, pedido.getPedidoFinalizado());
         values.put(PED_VALORPAGO, pedido.getValorPago());
         values.put(PED_VALORLUCRO, pedido.getValorLucro());
-        values.put(ATIVO, pedido.getAtivo());
 
         return values;
     }
@@ -110,6 +110,7 @@ public class PedidoDAO extends BaseDAO{
         boolean resultadoAlteracao = false;
 
         try {
+            open();
             String where = _ID+"=?"; //Definir por campo será feito a alteração
 
             //Seta os argumentos com info do registro a ser alterado
@@ -124,6 +125,8 @@ public class PedidoDAO extends BaseDAO{
 
         } catch (Exception e) {
             Log.e("Erro: ", e.toString());
+        } finally {
+            close();
         }
         return resultadoAlteracao;
     }
@@ -163,7 +166,6 @@ public class PedidoDAO extends BaseDAO{
 
     public Pedido recuperaPedidoCliente(Integer clienteID) {
         Cursor cursor = null;
-        listaPedidos.clear();
         Pedido pedido = null;
 
         try {

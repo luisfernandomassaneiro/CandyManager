@@ -21,9 +21,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvPedidoCliente"
-        android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_20dp"
-        android:ems="10"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
         />
 
     <TextView
@@ -41,9 +43,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvPedidoProduto"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
-        android:layout_marginTop="@dimen/layout_margin_20dp"
-        android:ems="10"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
         />
 
     <TextView
@@ -64,13 +67,16 @@
         android:layout_below="@+id/tvPedidoQuantidade"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginRight="@dimen/layout_margin_10dp"
-        android:ems="10"
         android:inputType="number" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvPedidoItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/etPedidoQuantidade"
         />
 
@@ -89,6 +95,13 @@
         android:layout_marginRight="@dimen/fab_margin"
         android:layout_marginEnd="@dimen/fab_margin">
 
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btAdicionarProdutoLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_title="@string/pedido.adicionarProduto"
+            fab:fab_colorPressed="@color/white_pressed" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/btManterPedidoAberto"

@@ -33,6 +33,11 @@
     <string name="pedido.produto">Produto</string>
     <string name="pedido.quantidade">Quantidade</string>
     <string name="pedido.manterAberto">Manter em aberto</string>
+    <string name="pedido.adicionarProduto">Adicionar produto</string>
     <string name="pedido.finalizar">Finalizar</string>
+    <string name="pedido.clienteProdutoQuantidadeObrigatorio">Para adicionar um produto, é obrigatório informar o cliente, produto e a quantidade desejada</string>
+    <string name="pedido.pedidoNaoSelecionado">É necessário criar um pedido antes de manter aberto ou finalizar um pedido</string>
+    <string name="pedido.manterAbertoMsg">Pedido foi mantido em aberto</string>
+    <string name="pedido.finalizadoComSucesso">Pedido finalizado com sucesso</string>
     <string name="base.ativo">Ativo</string>
 </resources>

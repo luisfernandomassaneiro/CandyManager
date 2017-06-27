@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.senai.sc.tcc.candymanager.R;
@@ -20,7 +21,7 @@ import br.senai.sc.tcc.candymanager.viewHolders.PedidoItemViewHolder;
 public class PedidoItemAdapter extends RecyclerView.Adapter {
 
     private Context context;
-    private List<PedidoItem> lPedidoItem;
+    private List<PedidoItem> lPedidoItem = new ArrayList<>();
 
     public PedidoItemAdapter(List<PedidoItem> lPedidoItem, Context context) {
         this.lPedidoItem = lPedidoItem;

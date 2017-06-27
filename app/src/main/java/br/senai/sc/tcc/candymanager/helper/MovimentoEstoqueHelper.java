@@ -1,5 +1,7 @@
 package br.senai.sc.tcc.candymanager.helper;
 
+import android.content.Context;
+
 import br.senai.sc.tcc.candymanager.MovimentoEstoqueActivity;
 import br.senai.sc.tcc.candymanager.controller.MovimentoEstoqueDAO;
 import br.senai.sc.tcc.candymanager.controller.ProdutoDAO;
@@ -11,13 +13,23 @@ import br.senai.sc.tcc.candymanager.model.Produto;
  */
 
 public class MovimentoEstoqueHelper {
-    public void atualizaEstoque(MovimentoEstoqueActivity movimentoEstoqueActivity, MovimentoEstoque movimentoEstoque) {
-        MovimentoEstoqueDAO estoqueDAO = new MovimentoEstoqueDAO(movimentoEstoqueActivity);
+
+    public static MovimentoEstoqueHelper INSTANCE = null;
+
+    public static MovimentoEstoqueHelper getInstance() {
+        if(INSTANCE == null)
+            INSTANCE = new MovimentoEstoqueHelper();
+
+        return INSTANCE;
+    }
+
+    public void atualizaEstoque(Context context, MovimentoEstoque movimentoEstoque) {
+        MovimentoEstoqueDAO estoqueDAO = new MovimentoEstoqueDAO(context);
         estoqueDAO.insertMovimentoEstoque(movimentoEstoque);
 
         Produto produtoSelecionado = movimentoEstoque.getProduto();
-        produtoSelecionado.setQuantidadeAtual(movimentoEstoque.getQuantidade());
-        ProdutoDAO produtoDAO = new ProdutoDAO(movimentoEstoqueActivity);
+        produtoSelecionado.setQuantidadeAtual(movimentoEstoque.getQuantidade(), movimentoEstoque.getTipoMovimentacao());
+        ProdutoDAO produtoDAO = new ProdutoDAO(context);
         produtoDAO.alterarProduto(produtoSelecionado);
     }
 }

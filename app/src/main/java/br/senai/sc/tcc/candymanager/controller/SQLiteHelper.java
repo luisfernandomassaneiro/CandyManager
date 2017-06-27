@@ -24,6 +24,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(MetadadosHelper.TabelaMovimentoEstoque.getCreateEntry());
         db.execSQL(MetadadosHelper.TabelaPedido.getCreateEntry());
         db.execSQL(MetadadosHelper.TabelaPedidoItem.getCreateEntry());
+        MetadadosHelper.getCreatesTables();
     }
 
     @Override

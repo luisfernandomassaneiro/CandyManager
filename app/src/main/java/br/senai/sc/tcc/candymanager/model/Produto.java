@@ -1,5 +1,7 @@
 package br.senai.sc.tcc.candymanager.model;
 
+import br.senai.sc.tcc.candymanager.enums.TipoMovimentacao;
+
 /**
  * Created by MASSANEIRO on 24/05/2017.
  */
@@ -47,8 +49,16 @@ public class Produto extends BaseModel{
         return quantidadeAtual;
     }
 
-    public void setQuantidadeAtual(Integer quantidadeParaInserir) {
-        this.quantidadeAtual = this.quantidadeAtual + quantidadeParaInserir;
+    public void setQuantidadeAtual(Integer quantidade) {
+        this.quantidadeAtual = this.quantidadeAtual + quantidade;
+    }
+
+    public void setQuantidadeAtual(Integer quantidade, TipoMovimentacao tipoMovimentacao) {
+        if(TipoMovimentacao.ENTRADA.equals(tipoMovimentacao))
+            this.quantidadeAtual = this.quantidadeAtual + quantidade;
+
+        if(TipoMovimentacao.SAIDA.equals(tipoMovimentacao))
+            this.quantidadeAtual = this.quantidadeAtual - quantidade;
     }
 
     @Override
