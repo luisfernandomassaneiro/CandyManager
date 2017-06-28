@@ -67,6 +67,7 @@
         android:layout_below="@+id/tvPedidoQuantidade"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:ems="10"
         android:inputType="number" />
 
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -82,7 +83,6 @@
                 android:padding="4dip"
                 />
             <TextView
-
                 android:text="@string/pedido.quantidade"
                 android:gravity="right"
                 android:padding="4dip" />
@@ -121,6 +121,7 @@
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
             fab:fab_title="@string/pedido.adicionarProduto"
+            fab:fab_icon="@drawable/ic_add_black_24dp"
             fab:fab_colorPressed="@color/white_pressed" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -129,6 +130,7 @@
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
             fab:fab_title="@string/pedido.manterAberto"
+            fab:fab_icon="@drawable/ic_lock_open_black_24dp"
             fab:fab_colorPressed="@color/white_pressed" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -137,6 +139,7 @@
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
             fab:fab_title="@string/pedido.finalizar"
+            fab:fab_icon="@drawable/ic_check_black"
             fab:fab_colorPressed="@color/white_pressed" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>

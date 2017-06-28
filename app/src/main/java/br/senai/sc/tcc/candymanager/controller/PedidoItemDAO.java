@@ -103,6 +103,7 @@ public class PedidoItemDAO extends BaseDAO{
         boolean resultadoAlteracao = false;
 
         try {
+            open();
             String where = _ID+"=?"; //Definir por campo será feito a alteração
 
             //Seta os argumentos com info do registro a ser alterado
@@ -117,6 +118,8 @@ public class PedidoItemDAO extends BaseDAO{
 
         } catch (Exception e) {
             Log.e("Erro: ", e.toString());
+        } finally {
+            close();
         }
         return resultadoAlteracao;
     }

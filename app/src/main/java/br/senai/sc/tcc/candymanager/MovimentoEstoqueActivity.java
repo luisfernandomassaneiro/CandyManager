@@ -97,6 +97,7 @@ public class MovimentoEstoqueActivity extends AppCompatActivity implements View.
                 movimentoEstoque.setTipoMovimentacao(ehEntrada ? TipoMovimentacao.ENTRADA : TipoMovimentacao.SAIDA);
                 helper.atualizaEstoque(this, movimentoEstoque);
                 Toast.makeText(this, R.string.geral_salvoComSucesso, Toast.LENGTH_SHORT).show();
+                finish();
                 break;
         }
     }

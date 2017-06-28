@@ -46,6 +46,7 @@ public class ClienteActivity extends AppCompatActivity implements View.OnClickLi
                 cliente.setAtivo(cbClienteAtivo.isChecked() ? 1 : 0);
                 dao.insertCliente(cliente);
                 Toast.makeText(this, R.string.geral_salvoComSucesso, Toast.LENGTH_SHORT).show();
+                finish();
                 break;
         }
     }

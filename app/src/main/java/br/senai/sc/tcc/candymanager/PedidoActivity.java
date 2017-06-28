@@ -123,9 +123,11 @@ public class PedidoActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public void limpar() {
+        finish();
         produtoSelecionado = null;
         pedidoAtual = null;
         clienteSelecionado = null;
+        onRestart();
     }
 
     private void manterPedidoAberto() {
@@ -159,24 +161,48 @@ public class PedidoActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
+        Integer quantidade = Integer.valueOf(etQuantidade.getText().toString());
+        if(produtoSelecionado.getQuantidadeAtual() < quantidade) {
+            Toast.makeText(this, R.string.pedido_indisponivelEstoque, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         PedidoItemDAO dao = new PedidoItemDAO(this);
-        PedidoItem pedidoItem = new PedidoItem();
-        pedidoItem.setProduto(produtoSelecionado);
-        pedidoItem.setQuantidade(Integer.valueOf(etQuantidade.getText().toString()));
-        pedidoItem.setPedido(pedidoAtual);
-        pedidoItem.setValorCompra(produtoSelecionado.getValorCompra());
-        pedidoItem.setValorVenda(produtoSelecionado.getValorVenda());
-        long pedidoItemInseridoID = dao.insertPedidoItem(pedidoItem);
-        pedidoItem.setId((int) pedidoItemInseridoID);
-        pedidoAtual.addPedidoItem(pedidoItem);
+        PedidoItem pedidoItem = verificaProdutoNaLista();
+        if(pedidoItem == null) {
+            pedidoItem = new PedidoItem();
+            pedidoItem.setProduto(produtoSelecionado);
+            pedidoItem.setQuantidade(quantidade);
+            pedidoItem.setPedido(pedidoAtual);
+            pedidoItem.setValorCompra(produtoSelecionado.getValorCompra());
+            pedidoItem.setValorVenda(produtoSelecionado.getValorVenda());
+            long pedidoItemInseridoID = dao.insertPedidoItem(pedidoItem);
+            pedidoItem.setId((int) pedidoItemInseridoID);
+            pedidoAtual.addPedidoItem(pedidoItem);
+        } else {
+            pedidoItem.setQuantidade(pedidoItem.getQuantidade() + quantidade);
+            dao.alterarPedidoItem(pedidoItem);
+        }
 
         MovimentoEstoque movimentoEstoque = new MovimentoEstoque();
         movimentoEstoque.setProduto(produtoSelecionado);
         movimentoEstoque.setTipoMovimentacao(TipoMovimentacao.SAIDA);
-        movimentoEstoque.setQuantidade(Integer.valueOf(etQuantidade.getText().toString()));
+        movimentoEstoque.setQuantidade(quantidade);
         MovimentoEstoqueHelper.getInstance().atualizaEstoque(this, movimentoEstoque);
 
         atualizaLista();
+    }
+
+    private PedidoItem verificaProdutoNaLista() {
+        if(produtoSelecionado == null || pedidoAtual == null || pedidoAtual.getlPedidoItem() == null || pedidoAtual.getlPedidoItem().size() == 0)
+            return null;
+
+        for(PedidoItem umPedidoItem: pedidoAtual.getlPedidoItem()) {
+            if(umPedidoItem.getProduto().getId().equals(produtoSelecionado.getId()))
+                return umPedidoItem;
+        }
+
+        return null;
     }
 
     public void atualizaLista() {
@@ -184,14 +210,6 @@ public class PedidoActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public List<PedidoItem> getlPedidoItem() {
-        /*PedidoItem pedidoItem = new PedidoItem();
-        Produto p = new Produto();
-        p.setDescricao("Teste");
-        pedidoItem.setProduto(p);
-        pedidoItem.setQuantidade(10);
-        lPedidoItem = new ArrayList<>();
-        lPedidoItem.add(pedidoItem);*/
-
         if(pedidoAtual == null || pedidoAtual.getlPedidoItem() == null)
             return lPedidoItem;
 

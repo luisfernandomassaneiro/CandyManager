@@ -36,21 +36,6 @@
         android:text="@string/principal.produtos" />
 
     <Button
-        android:id="@+id/btVendas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:background="@color/colorAzul"
-        android:textColor="@color/colorPreto"
-        android:drawableTop="@mipmap/carrinho_launcher"
-        android:layout_below="@id/btProdutos"
-        android:layout_marginLeft="@dimen/layout_margin_10dp"
-        android:layout_marginRight="@dimen/layout_margin_10dp"
-        android:layout_marginTop="@dimen/layout_margin_10dp"
-        android:text="@string/principal.vendas" />
-
-    <Button
         android:id="@+id/btRelatorios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,10 +44,27 @@
         android:background="@color/colorVermelho"
         android:textColor="@color/colorPreto"
         android:drawableTop="@mipmap/relatorios_launcher"
-        android:layout_below="@id/btVendas"
+        android:layout_below="@id/btProdutos"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginRight="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_10dp"
         android:text="@string/principal.estoque" />
+
+    <Button
+        android:id="@+id/btVendas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/colorAzul"
+        android:textColor="@color/colorPreto"
+        android:drawableTop="@mipmap/carrinho_launcher"
+        android:layout_below="@id/btRelatorios"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:layout_marginTop="@dimen/layout_margin_10dp"
+        android:text="@string/principal.vendas" />
+
+
 
 </RelativeLayout>

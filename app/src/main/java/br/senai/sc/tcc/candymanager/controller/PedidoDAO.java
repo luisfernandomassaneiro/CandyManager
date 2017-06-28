@@ -172,10 +172,10 @@ public class PedidoDAO extends BaseDAO{
             open();
             StringBuilder sql = new StringBuilder();
             sql.append("SELECT ");
-            sql.append(" PED._ID, PED.PED_VALORPAGO, PED.PED_VALORTOTAL, PED_VALORLUCRO, PED.PED_FINALIZADO, PED.PED_DATA, ");
-            sql.append(" CLI._ID, CLI.CLI_NOME, CLI.CLI_TELEFONE, CLI_EMAIL, ");
-            sql.append(" PRO._ID, PRO.PRO_CODIGO, PRO.PRO_DESCRICAO, PRO.PRO_QTDEATUAL, PRO.PRO_VALORCOMPRA, PRO.PRO_VALORVENDA, ");
-            sql.append(" PIT._ID, PIT.PIT_QNTDE, PIT.PIT_VALORCOMPRA, PIT.PIT_VALORVENDA ");
+            sql.append(" PED._ID as 'PEDIDO_ID', PED.PED_VALORPAGO, PED.PED_VALORTOTAL, PED_VALORLUCRO, PED.PED_FINALIZADO, PED.PED_DATA, ");
+            sql.append(" CLI._ID as 'CLIENTE_ID', CLI.CLI_NOME, CLI.CLI_TELEFONE, CLI_EMAIL, ");
+            sql.append(" PRO._ID as 'PRODUTO_ID', PRO.PRO_CODIGO, PRO.PRO_DESCRICAO, PRO.PRO_QTDEATUAL, PRO.PRO_VALORCOMPRA, PRO.PRO_VALORVENDA, ");
+            sql.append(" PIT._ID as 'PEDIDO_ITEM_ID', PIT.PIT_QNTDE, PIT.PIT_VALORCOMPRA, PIT.PIT_VALORVENDA ");
             sql.append(" FROM TB_PEDIDO PED ");
             sql.append(" INNER JOIN TB_CLIENTE CLI ON (CLI._ID = PED.PED_CLIID)");
             sql.append(" INNER JOIN TB_PEDIDO_ITEM PIT ON (PED._ID = PIT.PIT_PEDID)");
@@ -193,37 +193,37 @@ public class PedidoDAO extends BaseDAO{
                 while(cursor.moveToNext()){
                     if(cliente == null) {
                         cliente = new Cliente();
-                        cliente.setId(cursor.getInt(cursor.getColumnIndex("CLI._ID")));
-                        cliente.setNome(cursor.getString(cursor.getColumnIndex("CLI.CLI_NOME")));
-                        cliente.setTelefone(cursor.getString(cursor.getColumnIndex("CLI.CLI_TELEFONE")));
-                        cliente.setEmail(cursor.getString(cursor.getColumnIndex("CLI.CLI_EMAIL")));
+                        cliente.setId(cursor.getInt(cursor.getColumnIndex("CLIENTE_ID")));
+                        cliente.setNome(cursor.getString(cursor.getColumnIndex("CLI_NOME")));
+                        cliente.setTelefone(cursor.getString(cursor.getColumnIndex("CLI_TELEFONE")));
+                        cliente.setEmail(cursor.getString(cursor.getColumnIndex("CLI_EMAIL")));
                     }
 
                     if(pedido == null) {
                         pedido = new Pedido();
-                        pedido.setId(cursor.getInt(cursor.getColumnIndex("PED.PED_ID")));
+                        pedido.setId(cursor.getInt(cursor.getColumnIndex("PEDIDO_ID")));
                         pedido.setCliente(cliente);
-                        pedido.setData(new Date(cursor.getInt(cursor.getColumnIndex("PED.PED_DATA"))));
-                        pedido.setPedidoFinalizado(cursor.getInt(cursor.getColumnIndex("PED.PED_FINALIZADO")));
-                        pedido.setValorLucro(cursor.getDouble(cursor.getColumnIndex("PED.PED_VALORLUCRO")));
-                        pedido.setValorPago(cursor.getDouble(cursor.getColumnIndex("PED.PED_VALORPAGO")));
-                        pedido.setValorTotal(cursor.getDouble(cursor.getColumnIndex("PED.PED_VALORTOTAL")));
+                        pedido.setData(new Date(cursor.getInt(cursor.getColumnIndex("PED_DATA"))));
+                        pedido.setPedidoFinalizado(cursor.getInt(cursor.getColumnIndex("PED_FINALIZADO")));
+                        pedido.setValorLucro(cursor.getDouble(cursor.getColumnIndex("PED_VALORLUCRO")));
+                        pedido.setValorPago(cursor.getDouble(cursor.getColumnIndex("PED_VALORPAGO")));
+                        pedido.setValorTotal(cursor.getDouble(cursor.getColumnIndex("PED_VALORTOTAL")));
                     }
 
                     produto = new Produto();
-                    produto.setId(cursor.getInt(cursor.getColumnIndex("PRO._ID")));
-                    produto.setCodigo(cursor.getString(cursor.getColumnIndex("PRO.PRO_CODIGO")));
-                    produto.setDescricao(cursor.getString(cursor.getColumnIndex("PRO.PRO_DESCRICAO")));
-                    produto.setQuantidadeAtual(cursor.getInt(cursor.getColumnIndex("PRO.PRO_QTDEATUAL")));
-                    produto.setValorCompra(cursor.getDouble(cursor.getColumnIndex("PRO.PRO_VALORCOMPRA")));
-                    produto.setValorVenda(cursor.getDouble(cursor.getColumnIndex("PRO.PRO_VALORVENDA")));
+                    produto.setId(cursor.getInt(cursor.getColumnIndex("PRODUTO_ID")));
+                    produto.setCodigo(cursor.getString(cursor.getColumnIndex("PRO_CODIGO")));
+                    produto.setDescricao(cursor.getString(cursor.getColumnIndex("PRO_DESCRICAO")));
+                    produto.setQuantidadeAtual(cursor.getInt(cursor.getColumnIndex("PRO_QTDEATUAL")));
+                    produto.setValorCompra(cursor.getDouble(cursor.getColumnIndex("PRO_VALORCOMPRA")));
+                    produto.setValorVenda(cursor.getDouble(cursor.getColumnIndex("PRO_VALORVENDA")));
 
                     pedidoItem = new PedidoItem();
-                    pedidoItem.setId(cursor.getInt(cursor.getColumnIndex("PIT._ID")));
+                    pedidoItem.setId(cursor.getInt(cursor.getColumnIndex("PEDIDO_ITEM_ID")));
                     pedidoItem.setProduto(produto);
-                    pedidoItem.setValorCompra(cursor.getDouble(cursor.getColumnIndex("PIT.PIT_VALORCOMPRA")));
-                    pedidoItem.setValorVenda(cursor.getDouble(cursor.getColumnIndex("PIT.PIT_VALORVENDA")));
-                    pedidoItem.setQuantidade(cursor.getInt(cursor.getColumnIndex("PIT.PIT_QNTDE")));
+                    pedidoItem.setValorCompra(cursor.getDouble(cursor.getColumnIndex("PIT_VALORCOMPRA")));
+                    pedidoItem.setValorVenda(cursor.getDouble(cursor.getColumnIndex("PIT_VALORVENDA")));
+                    pedidoItem.setQuantidade(cursor.getInt(cursor.getColumnIndex("PIT_QNTDE")));
 
                     pedido.addPedidoItem(pedidoItem);
                 }

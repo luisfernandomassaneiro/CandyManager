@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
-        android:layout_marginTop="@dimen/layout_margin_10dp"
+        android:layout_marginTop="@dimen/layout_margin_20dp"
         android:text="@string/movimentoEstoque.produto" />
 
     <AutoCompleteTextView
@@ -22,9 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvMovimentoEstoqueProduto"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
-        android:layout_marginTop="@dimen/layout_margin_20dp"
-        android:ems="10"
-        />]
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        />
 
 
     <TextView
@@ -54,6 +55,8 @@
         android:layout_below="@+id/etMovimentoEstoqueQuantidade"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:orientation="horizontal">
 
         <RadioButton android:id="@+id/rbEntrada"
@@ -62,12 +65,15 @@
             android:layout_marginLeft="@dimen/layout_margin_10dp"
             android:text="@string/movimentoEstoque.entrada"
             android:onClick="onRadioButtonClicked"
+            android:layout_gravity="left"
             android:checked="true"/>
+
         <RadioButton android:id="@+id/rbSaida"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/layout_margin_10dp"
             android:text="@string/movimentoEstoque.saida"
+            android:layout_gravity="right"
             android:onClick="onRadioButtonClicked"/>
     </RadioGroup>
 
@@ -91,8 +97,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
+            fab:fab_icon="@drawable/ic_save_black_24dp"
             fab:fab_title="@string/cliente.salvar"
-            fab:fab_colorPressed="@color/white_pressed" />
+            fab:fab_colorPressed="@color/white_pressed" /> />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
