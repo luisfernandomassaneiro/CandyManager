@@ -25,7 +25,7 @@ import br.senai.sc.tcc.candymanager.model.Produto;
 public class MovimentoEstoqueActivity extends AppCompatActivity implements View.OnClickListener {
 
     private List<Produto> produtos = new ArrayList<>();
-    boolean ehEntrada;
+    boolean ehEntrada = true;
     EditText etQuantidade;
     AutoCompleteTextView textView;
     Produto produtoSelecionado;

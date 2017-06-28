@@ -26,7 +26,7 @@ public class PedidoItemDAO extends BaseDAO{
     private List<PedidoItem> listaPedidoItemItens;
 
     private String[] getColunasTabPedidoItem(){
-        String[] COLUNAS_TAB_PEDIDO_ITEM = new String[] {_ID, PIT_PEDID, PIT_PROID, PIT_QNTDE, PIT_VALORCOMPRA, PIT_VALORVENDA, ATIVO};
+        String[] COLUNAS_TAB_PEDIDO_ITEM = new String[] {_ID, PIT_PEDID, PIT_PROID, PIT_QNTDE, PIT_VALORCOMPRA, PIT_VALORVENDA};
         return COLUNAS_TAB_PEDIDO_ITEM;
     }
 
@@ -58,7 +58,6 @@ public class PedidoItemDAO extends BaseDAO{
         values.put(PIT_QNTDE, pedidoItem.getQuantidade());
         values.put(PIT_VALORVENDA, pedidoItem.getValorVenda());
         values.put(PIT_VALORCOMPRA, pedidoItem.getValorCompra());
-        values.put(ATIVO, pedidoItem.getAtivo());
 
         return values;
     }

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.senai.sc.tcc.candymanager.R;
+import br.senai.sc.tcc.candymanager.model.Pedido;
 import br.senai.sc.tcc.candymanager.model.PedidoItem;
 import br.senai.sc.tcc.candymanager.viewHolders.PedidoItemViewHolder;
 
@@ -52,5 +53,10 @@ public class PedidoItemAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return lPedidoItem.size();
+    }
+
+    public void atualizaLista(List<PedidoItem> lPedidoItem) {
+        this.lPedidoItem = lPedidoItem;
+        notifyDataSetChanged();
     }
 }

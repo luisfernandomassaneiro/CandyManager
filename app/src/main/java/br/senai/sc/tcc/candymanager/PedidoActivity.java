@@ -176,7 +176,11 @@ public class PedidoActivity extends AppCompatActivity implements View.OnClickLis
         movimentoEstoque.setQuantidade(Integer.valueOf(etQuantidade.getText().toString()));
         MovimentoEstoqueHelper.getInstance().atualizaEstoque(this, movimentoEstoque);
 
-        pedidoItemAdapter.notifyDataSetChanged();
+        atualizaLista();
+    }
+
+    public void atualizaLista() {
+        pedidoItemAdapter.atualizaLista(getlPedidoItem());
     }
 
     public List<PedidoItem> getlPedidoItem() {
@@ -188,7 +192,7 @@ public class PedidoActivity extends AppCompatActivity implements View.OnClickLis
         lPedidoItem = new ArrayList<>();
         lPedidoItem.add(pedidoItem);*/
 
-        if(pedidoAtual == null)
+        if(pedidoAtual == null || pedidoAtual.getlPedidoItem() == null)
             return lPedidoItem;
 
         return pedidoAtual.getlPedidoItem();
@@ -205,6 +209,7 @@ public class PedidoActivity extends AppCompatActivity implements View.OnClickLis
                 long idPedidoInserido = dao.insertPedido(pedidoAtual);
                 pedidoAtual.setId(Integer.valueOf((int) idPedidoInserido));
             }
+            atualizaLista();
         }
     }
 

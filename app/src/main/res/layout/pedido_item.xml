@@ -4,18 +4,6 @@ android:layout_width="wrap_content"
 android:layout_height="wrap_content"
 android:id="@+id/pedidoTabela"
 android:stretchColumns="1">
-    <TableRow >
-        <TextView
-            android:text="@string/pedido.produto"
-            android:gravity="left"
-            android:padding="4dip"
-            />
-        <TextView
-
-            android:text="@string/pedido.quantidade"
-            android:gravity="right"
-            android:padding="4dip" />
-    </TableRow>
     <TableRow>
         <TextView
             android:id="@+id/pedidoTabela_descricaoProduto"
