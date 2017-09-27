@@ -21,7 +21,8 @@
         <activity android:name=".ProdutoActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".MovimentoEstoqueActivity" />
-        <activity android:name=".PedidoActivity"></activity>
+        <activity android:name=".PedidoActivity" />
+        <activity android:name=".PesquisaClienteActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.senai.sc.tcc.candymanager.MovimentoEstoqueActivity">
+
+    <TextView
+        android:id="@+id/tvPesquisaClienteNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginTop="@dimen/layout_margin_20dp"
+        android:text="@string/cliente.nome" />
+
+    <EditText
+        android:id="@+id/etPesquisaClienteNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvPesquisaClienteNome"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tlPesquisaCliente"
+        android:layout_below="@+id/etPesquisaClienteNome"
+        android:stretchColumns="1">
+        <TableRow >
+            <TextView
+                android:text="@string/cliente.nome"
+                android:gravity="left"
+                android:padding="4dip"
+                />
+            <TextView
+                android:text="@string/cliente.email"
+                android:gravity="center"
+                android:padding="4dip"
+                />
+            <TextView
+                android:text="@string/cliente.telefone"
+                android:gravity="right"
+                android:padding="4dip" />
+        </TableRow>
+    </TableLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvClientes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tlPesquisaCliente"
+        />
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/multiple_actions_produto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        fab:fab_addButtonColorNormal="@color/white"
+        fab:fab_addButtonColorPressed="@color/white_pressed"
+        fab:fab_addButtonPlusIconColor="@color/half_black"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginEnd="@dimen/fab_margin">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btPesquisarClientes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_icon="@drawable/ic_search_black_24dp"
+            fab:fab_title="@string/cliente.salvar"
+            fab:fab_colorPressed="@color/white_pressed" /> />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+</RelativeLayout>
