@@ -155,29 +155,30 @@ public class ClienteDAO extends BaseDAO{
         }
         return resultadoAlteracao;
     }
-/*
-    //Busca individual - vendedor especifico
-    public Cliente buscaIndividualVendedor(String NOME){
 
+    public List<Cliente> listClientesPeloNome(String nome){
         Cursor cursor = null;
-        Cliente vendedorLinha = new Cliente();
-        String where = "NOME=?";
-        String[] args = new String[]{NOME};
+        listaClientes.clear();
 
         try {
-            cursor = db.query(TB_CLIENTE, getColunasTabCliente(), where, args, null, null, null);
+            open();
+            String[] args = new String[] {nome};
+            cursor = db.query(TB_CLIENTE, getColunasTabCliente(), "NOME LIKE ?", args, null, null, CLI_NOME, null);
+            if (cursor.getCount() > 0) {
+                while(cursor.moveToNext()){
+                    Cliente clienteLinha = new Cliente();
 
-            if (cursor.getCount() > 0 ) {
-                while (cursor.moveToNext()){
-                    vendedorLinha.set_ID(cursor.getInt(cursor.getColumnIndex("_ID")));
-                    vendedorLinha.setNOME(cursor.getString(cursor.getColumnIndex("NOME")));
-                    vendedorLinha.setTIPO(cursor.getString(cursor.getColumnIndex("TIPO")));
-                    vendedorLinha.setATIVO(cursor.getString(cursor.getColumnIndex("ATIVO")));
-                    Log.i("Erro: ", vendedorLinha.getNOME());
+                    clienteLinha.setId(cursor.getInt(cursor.getColumnIndex(_ID)));
+                    clienteLinha.setNome(cursor.getString(cursor.getColumnIndex(CLI_NOME)));
+                    clienteLinha.setTelefone(cursor.getString(cursor.getColumnIndex(CLI_TELEFONE)));
+                    clienteLinha.setEmail(cursor.getString(cursor.getColumnIndex(CLI_EMAIL)));
+                    clienteLinha.setAtivo(cursor.getInt(cursor.getColumnIndex(ATIVO)));
+
+                    listaClientes.add(clienteLinha);
                 }
             }
         } catch (Exception e) {
-            Log.e("Erro: ", e.toString());
+            Log.e("Erro: ", e.getMessage());
         }
         finally{
             if (cursor != null) {
@@ -185,7 +186,8 @@ public class ClienteDAO extends BaseDAO{
                     cursor.close();
                 }
             }
+            close();
         }
-        return vendedorLinha;
-    }*/
+        return listaClientes;
+    }
 }
