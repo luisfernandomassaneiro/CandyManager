@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.senai.sc.tcc.candymanager.adapters.PedidoItemAdapter;
@@ -22,7 +23,7 @@ public class PesquisaClienteActivity extends AppCompatActivity implements View.O
     RecyclerView recyclerView;
     PesquisaClienteAdapter pesquisaClienteAdapter;
     RecyclerView.LayoutManager layout;
-    private List<Cliente> lClientes;
+    private List<Cliente> lClientes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class PesquisaClienteActivity extends AppCompatActivity implements View.O
         btPesquisar.setOnClickListener(this);
 
         etNomeCliente = (EditText) findViewById(R.id.etPesquisaClienteNome);
+        inicializaRecyclerView();
     }
 
     @Override
@@ -55,7 +57,7 @@ public class PesquisaClienteActivity extends AppCompatActivity implements View.O
     }
 
     private void inicializaRecyclerView() {
-        recyclerView = (RecyclerView) findViewById(R.id.rvPedidoItem);
+        recyclerView = (RecyclerView) findViewById(R.id.rvClientes);
         pesquisaClienteAdapter = new PesquisaClienteAdapter(getlClientes(), this);
         recyclerView.setAdapter(pesquisaClienteAdapter);
         layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

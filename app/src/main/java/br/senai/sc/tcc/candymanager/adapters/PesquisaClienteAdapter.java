@@ -33,7 +33,7 @@ public class PesquisaClienteAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.pedido_item, parent, false);
+                .inflate(R.layout.pesquisa_cliente, parent, false);
 
         PesquisaClienteViewHolder holder = new PesquisaClienteViewHolder(view);
 
