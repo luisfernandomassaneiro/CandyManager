@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +24,17 @@ public class PesquisaClienteAdapter extends RecyclerView.Adapter {
 
     private Context context;
     private List<Cliente> lClientes = new ArrayList<>();
+    private OnItemClickListener listener;
 
-    public PesquisaClienteAdapter(List<Cliente> lClientes, Context context) {
+    public interface OnItemClickListener {
+        void onItemClick(Cliente cliente);
+    }
+
+
+    public PesquisaClienteAdapter(List<Cliente> lClientes, Context context, OnItemClickListener listener) {
         this.lClientes = lClientes;
         this.context = context;
+        this.listener = listener;
     }
 
     @Override

@@ -17,7 +17,6 @@
     <string name="cliente.sobrenome">Sobrenome</string>
     <string name="cliente.telefone">Telefone</string>
     <string name="cliente.email">Email</string>
-    <string name="cliente.salvar">Salvar</string>
     <string name="listarPessoa.titulo">Listar cliente</string>
     <string name="geral.salvoComSucesso">Registro salvo com sucesso!</string>
     <string name="title_activity_produto">ProdutoActivity</string>
@@ -41,4 +40,6 @@
     <string name="pedido.manterAbertoMsg">Pedido foi mantido em aberto</string>
     <string name="pedido.finalizadoComSucesso">Pedido finalizado com sucesso</string>
     <string name="base.ativo">Ativo</string>
+    <string name="geral.salvar">Salvar</string>
+    <string name="geral.pesquisar">Pesquisar</string>
 </resources>
