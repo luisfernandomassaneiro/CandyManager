@@ -6,10 +6,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TableRow;
 import android.widget.Toast;
 
@@ -19,15 +24,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.senai.sc.tcc.candymanager.adapters.PesquisaClienteAdapter;
+import br.senai.sc.tcc.candymanager.adapters.PesquisaClienteAdapterGlatz;
 import br.senai.sc.tcc.candymanager.controller.ClienteDAO;
 import br.senai.sc.tcc.candymanager.model.Cliente;
 
-public class PesquisaClienteActivity extends AppCompatActivity implements View.OnClickListener{
+public class PesquisaClienteActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     EditText etNomeCliente;
-    RecyclerView recyclerView;
-    PesquisaClienteAdapter pesquisaClienteAdapter;
-    RecyclerView.LayoutManager layout;
+    ListView lvClientes;
+    PesquisaClienteAdapterGlatz pesquisaClienteAdapter;
     private List<Cliente> lClientes = new ArrayList<>();
 
     @Override
@@ -37,14 +42,23 @@ public class PesquisaClienteActivity extends AppCompatActivity implements View.O
         inicializar();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_activity_pesquisa,menu);
+        return true;
+    }
+
     private void inicializar() {
         FloatingActionButton btPesquisar = (FloatingActionButton) findViewById(R.id.btPesquisarClientes);
         btPesquisar.setOnClickListener(this);
 
         etNomeCliente = (EditText) findViewById(R.id.etPesquisaClienteNome);
-        inicializaRecyclerView();
-
-
+        pesquisaClienteAdapter = new PesquisaClienteAdapterGlatz(this ,getlClientes());
+        lvClientes = (ListView) findViewById(R.id.lvClientes);
+        lvClientes.setAdapter(pesquisaClienteAdapter);
+        lvClientes.setOnItemClickListener(this);
+        lvClientes.setOnItemLongClickListener(this);
     }
 
     @Override
@@ -59,21 +73,23 @@ public class PesquisaClienteActivity extends AppCompatActivity implements View.O
                     setlClientes(dao.listClientes());
 
                 pesquisaClienteAdapter.atualizaLista(getlClientes());
+                Toast.makeText(this, "passou aqui",Toast.LENGTH_LONG).show();
                 break;
         }
     }
 
-    private void inicializaRecyclerView() {
-        recyclerView = (RecyclerView) findViewById(R.id.rvClientes);
-        pesquisaClienteAdapter = new PesquisaClienteAdapter(getlClientes(), this, new PesquisaClienteAdapter.OnItemClickListener() {
-            @Override public void onItemClick(Cliente cliente) {
-                Toast.makeText(getApplicationContext(), "Item Clicked", Toast.LENGTH_LONG).show();
-            }
-        });
-        recyclerView.setAdapter(pesquisaClienteAdapter);
-        layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        boolean retorno = true;
 
-        recyclerView.setLayoutManager(layout);
+        switch (item.getItemId()){
+            case R.id.teste:
+                Toast.makeText(this, "Testandoooo",Toast.LENGTH_LONG).show();
+                default:
+                    retorno = false;
+        }
+        return retorno;
     }
 
     public List<Cliente> getlClientes() {
@@ -99,5 +115,24 @@ public class PesquisaClienteActivity extends AppCompatActivity implements View.O
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()){
+            case R.id.lvClientes:
+                Cliente cliente = (Cliente) parent.getAdapter().getItem(position);
+                Toast.makeText(this, cliente.getNome(),Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()){
+            case R.id.lvClientes:
+                Cliente cliente = (Cliente) parent.getAdapter().getItem(position);
+                Toast.makeText(this, cliente.getNome() +  "outras opcoes",Toast.LENGTH_LONG).show();
+        }
+        return true;
     }
 }

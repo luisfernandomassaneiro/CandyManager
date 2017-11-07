@@ -52,16 +52,11 @@
         </TableRow>
     </TableLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvClientes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/layout_margin_10dp"
-        android:layout_marginRight="@dimen/layout_margin_10dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tlPesquisaCliente"
-        />
+    <ListView
+        android:id="@+id/lvClientes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tlPesquisaCliente"/>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/multiple_actions_produto"
