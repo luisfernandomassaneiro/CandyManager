@@ -42,4 +42,5 @@
     <string name="base.ativo">Ativo</string>
     <string name="geral.salvar">Salvar</string>
     <string name="geral.pesquisar">Pesquisar</string>
+    <string name="menu.configuracoes">Configurações</string>
 </resources>

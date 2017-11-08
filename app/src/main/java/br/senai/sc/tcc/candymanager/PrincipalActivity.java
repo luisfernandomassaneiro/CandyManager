@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.Serializable;
+
 public class PrincipalActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
@@ -29,24 +33,34 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btClientes:
-                iniciarActivity(ClienteActivity.class);
+                iniciarActivity(new Intent(this, ClienteActivity.class));
                 break;
             case R.id.btVendas:
-                iniciarActivity(PedidoActivity.class);
+                iniciarActivity(new Intent(this, PedidoActivity.class));
                 break;
             case R.id.btProdutos:
-                iniciarActivity(ProdutoActivity.class);
+                iniciarActivity(new Intent(this, ProdutoActivity.class));
                 break;
             case R.id.btRelatorios:
-                iniciarActivity(MovimentoEstoqueActivity.class);
+                iniciarActivity(new Intent(this, MovimentoEstoqueActivity.class));
                 break;
             case R.id.btPesquisaClientes:
-                iniciarActivity(PesquisaClienteActivity.class);
+                iniciarActivity(new Intent(this, PesquisaClienteActivity.class));
                 break;
         }
     }
 
-    private void iniciarActivity(Class activity){
-        startActivity(new Intent(this, activity));
+    public void iniciarActivity(Intent intent){
+        startActivity(intent);
+    }
+
+    public void iniciarActivityPassandoParametros(Serializable objeto , String alias, Class activity) {
+        Intent intent = new Intent(this, activity);
+        if(objeto != null && StringUtils.isNotBlank(alias)) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(alias, objeto);
+            intent.putExtras(bundle);
+        }
+        iniciarActivity(intent);
     }
 }

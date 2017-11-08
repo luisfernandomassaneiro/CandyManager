@@ -8,17 +8,15 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import br.senai.sc.tcc.candymanager.model.Cliente;
-
 /**
  * Created by MASSANEIRO on 07/11/2017.
  */
 
-public class PesquisaClienteAdapterGlatz<Cliente> extends ArrayAdapter<br.senai.sc.tcc.candymanager.model.Cliente> {
+public class PesquisaAdapter<T> extends ArrayAdapter<T> {
 
-    private List<br.senai.sc.tcc.candymanager.model.Cliente> itens;
+    private List<T> itens;
 
-    public PesquisaClienteAdapterGlatz(Context context, List<br.senai.sc.tcc.candymanager.model.Cliente> itens) {
+    public PesquisaAdapter(Context context, List<T> itens) {
         super(context, android.R.layout.simple_list_item_1, android.R.id.text1, itens);
         this.itens = itens;
     }
@@ -38,19 +36,19 @@ public class PesquisaClienteAdapterGlatz<Cliente> extends ArrayAdapter<br.senai.
         }
 
 
-        br.senai.sc.tcc.candymanager.model.Cliente cliente = getItem(position);
-        holder.getText1().setText(cliente.getNome());
+        T t = getItem(position);
+        holder.getText1().setText(t.toString());
 
         return view;
     }
 
-    public void atualizaLista(List<br.senai.sc.tcc.candymanager.model.Cliente> lClientes) {
+    public void atualizaLista(List<T> itens) {
         getItens().clear();
-        getItens().addAll(lClientes);
+        getItens().addAll(itens);
         notifyDataSetChanged();
     }
 
-    public List<br.senai.sc.tcc.candymanager.model.Cliente> getItens() {
+    public List<T> getItens() {
         return itens;
     }
 

@@ -1,21 +1,14 @@
 package br.senai.sc.tcc.candymanager;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -23,16 +16,15 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.senai.sc.tcc.candymanager.adapters.PesquisaClienteAdapter;
-import br.senai.sc.tcc.candymanager.adapters.PesquisaClienteAdapterGlatz;
+import br.senai.sc.tcc.candymanager.adapters.PesquisaAdapter;
 import br.senai.sc.tcc.candymanager.controller.ClienteDAO;
 import br.senai.sc.tcc.candymanager.model.Cliente;
 
-public class PesquisaClienteActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
+public class PesquisaClienteActivity extends PrincipalActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     EditText etNomeCliente;
     ListView lvClientes;
-    PesquisaClienteAdapterGlatz pesquisaClienteAdapter;
+    PesquisaAdapter pesquisaClienteAdapter;
     private List<Cliente> lClientes = new ArrayList<>();
 
     @Override
@@ -54,7 +46,7 @@ public class PesquisaClienteActivity extends AppCompatActivity implements View.O
         btPesquisar.setOnClickListener(this);
 
         etNomeCliente = (EditText) findViewById(R.id.etPesquisaClienteNome);
-        pesquisaClienteAdapter = new PesquisaClienteAdapterGlatz(this ,getlClientes());
+        pesquisaClienteAdapter = new PesquisaAdapter(this ,getlClientes());
         lvClientes = (ListView) findViewById(R.id.lvClientes);
         lvClientes.setAdapter(pesquisaClienteAdapter);
         lvClientes.setOnItemClickListener(this);
@@ -84,7 +76,7 @@ public class PesquisaClienteActivity extends AppCompatActivity implements View.O
         boolean retorno = true;
 
         switch (item.getItemId()){
-            case R.id.teste:
+            case R.id.configuracoes:
                 Toast.makeText(this, "Testandoooo",Toast.LENGTH_LONG).show();
                 default:
                     retorno = false;
@@ -122,6 +114,7 @@ public class PesquisaClienteActivity extends AppCompatActivity implements View.O
         switch (parent.getId()){
             case R.id.lvClientes:
                 Cliente cliente = (Cliente) parent.getAdapter().getItem(position);
+                iniciarActivityPassandoParametros(cliente, "cliente", ClienteActivity.class);
                 Toast.makeText(this, cliente.getNome(),Toast.LENGTH_LONG).show();
         }
     }

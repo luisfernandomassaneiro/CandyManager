@@ -5,8 +5,8 @@
     tools:context="com.fernandoglatz.wakebylocation.view.Main2Activity">
 
     <item
-        android:id="@+id/teste"
+        android:id="@+id/configuracoes"
         android:orderInCategory="100"
-        android:title="Teste"
+        android:title="@string/menu.configuracoes"
         app:showAsAction="never"/>
 </menu>
