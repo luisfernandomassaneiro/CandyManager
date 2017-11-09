@@ -156,6 +156,25 @@ public static class TabelaMovimentoEstoque implements BaseColumns {
         }
     }
 
+    public static class TabelaConfiguracao implements BaseColumns {
+        public static String TB_CONFIGURACAO = "TB_CONFIGURACAO";
+        public static String CON_ENTRAPESQUISA = "CON_ENTRAPESQUISA";
+
+        public static String getCreateEntry(){
+            StringBuilder sb = new StringBuilder();
+            sb.append("CREATE TABLE ").append(TB_CONFIGURACAO).append(" ( ");
+            sb.append(TabelaCliente._ID).append(" INTEGER PRIMARY KEY , ");
+            sb.append(CON_ENTRAPESQUISA).append(" INT, ");
+            sb.append(ATIVO).append(" INT ");
+            sb.append(")");
+            return sb.toString();
+        }
+
+        public static String getDropTable() {
+            return "DROP TABLE IF EXISTS " + TB_CONFIGURACAO;
+        }
+    }
+
     public static String getCreatesTables() {
         StringBuilder sb = new StringBuilder();
         sb.append(TabelaCliente.getCreateEntry()).append("; ");
@@ -163,6 +182,7 @@ public static class TabelaMovimentoEstoque implements BaseColumns {
         sb.append(TabelaMovimentoEstoque.getCreateEntry()).append("; ");
         sb.append(TabelaPedido.getCreateEntry()).append("; ");
         sb.append(TabelaPedidoItem.getCreateEntry()).append("; ");
+        sb.append(TabelaConfiguracao.getCreateEntry()).append("; ");
         return sb.toString();
     }
 
@@ -173,6 +193,7 @@ public static class TabelaMovimentoEstoque implements BaseColumns {
         sb.append(TabelaMovimentoEstoque.getDropTable()).append("; ");
         sb.append(TabelaPedido.getDropTable()).append("; ");
         sb.append(TabelaPedidoItem.getDropTable()).append("; ");
+        sb.append(TabelaConfiguracao.getDropTable()).append("; ");
         return sb.toString();
     }
 }
