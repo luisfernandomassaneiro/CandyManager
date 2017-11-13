@@ -1,5 +1,6 @@
 package br.senai.sc.tcc.candymanager;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,12 +17,26 @@ public class ClienteActivity extends AppCompatActivity implements View.OnClickLi
 
     EditText etNome, etTelefone, etEmail;
     CheckBox cbClienteAtivo;
+    Cliente cliente = new Cliente();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cliente);
         inicializar();
+        editar();
+    }
+
+    private void editar() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        cliente = (Cliente) bundle.get("cliente");
+        if(cliente != null) {
+            etNome.setText(cliente.getNome());
+            etTelefone.setText(cliente.getTelefone());
+            etEmail.setText(cliente.getEmail());
+            cbClienteAtivo.setChecked(cliente.isAtivo());
+        }
     }
 
     private void inicializar(){
@@ -39,12 +54,12 @@ public class ClienteActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.btSalvarCliente:
                 ClienteDAO dao = new ClienteDAO(this);
-                Cliente cliente = new Cliente();
+
                 cliente.setNome(etNome.getText().toString());
                 cliente.setTelefone(etTelefone.getText().toString());
                 cliente.setEmail(etEmail.getText().toString());
                 cliente.setAtivo(cbClienteAtivo.isChecked() ? 1 : 0);
-                dao.insertCliente(cliente);
+                dao.gravarCliente(cliente);
                 Toast.makeText(this, R.string.geral_salvoComSucesso, Toast.LENGTH_SHORT).show();
                 finish();
                 break;

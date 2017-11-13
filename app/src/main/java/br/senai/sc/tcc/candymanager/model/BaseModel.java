@@ -2,11 +2,13 @@ package br.senai.sc.tcc.candymanager.model;
 
 import android.provider.BaseColumns;
 
+import java.io.Serializable;
+
 /**
  * Created by MASSANEIRO on 24/05/2017.
  */
 
-public class BaseModel implements BaseColumns {
+public class BaseModel implements BaseColumns, Serializable {
     private Integer id;
     private int ativo = 1;
 
@@ -24,5 +26,9 @@ public class BaseModel implements BaseColumns {
 
     public void setAtivo(int ativo) {
         this.ativo = ativo;
+    }
+
+    public boolean isAtivo() {
+        return this.ativo == 1;
     }
 }

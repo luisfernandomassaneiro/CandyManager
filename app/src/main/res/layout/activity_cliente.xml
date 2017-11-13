@@ -30,31 +30,10 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/tvSobrenome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etNome"
-        android:layout_marginLeft="@dimen/layout_margin_10dp"
-        android:layout_marginTop="@dimen/layout_margin_20dp"
-        android:text="@string/cliente.sobrenome" />
-
-    <EditText
-        android:id="@+id/etSobrenome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvSobrenome"
-        android:layout_marginLeft="@dimen/layout_margin_10dp"
-        android:layout_marginRight="@dimen/layout_margin_10dp"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
-    <TextView
         android:id="@+id/tvTelefone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etSobrenome"
+        android:layout_below="@+id/etNome"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_20dp"
         android:text="@string/cliente.telefone" />

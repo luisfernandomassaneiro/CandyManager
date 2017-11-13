@@ -97,6 +97,15 @@ public class ClienteDAO extends BaseDAO{
         return values;
     }
 
+    public void gravarCliente(Cliente cliente) {
+        if(cliente != null) {
+            if(cliente.getId() == null)
+                insertCliente(cliente);
+            else if(cliente.getId() != null)
+                alterarCliente(cliente);
+        }
+    }
+
     //Insert
     public long insertCliente(Cliente novoCliente){
         long id = 0;
@@ -189,5 +198,40 @@ public class ClienteDAO extends BaseDAO{
             close();
         }
         return listaClientes;
+    }
+
+    public Cliente findById(Long clienteID) {
+        Cliente cliente = null;
+        if (clienteID != null) {
+            Cursor cursor = null;
+
+            try {
+                open();
+                String[] args = new String[]{clienteID.toString()};
+                cursor = db.query(TB_CLIENTE, getColunasTabCliente(), "ID=?", args, null, null, CLI_NOME, null);
+                if (cursor.getCount() > 0) {
+                    if (cursor.moveToNext()) {
+                        cliente = new Cliente();
+
+                        cliente.setId(cursor.getInt(cursor.getColumnIndex(_ID)));
+                        cliente.setNome(cursor.getString(cursor.getColumnIndex(CLI_NOME)));
+                        cliente.setTelefone(cursor.getString(cursor.getColumnIndex(CLI_TELEFONE)));
+                        cliente.setEmail(cursor.getString(cursor.getColumnIndex(CLI_EMAIL)));
+                        cliente.setAtivo(cursor.getInt(cursor.getColumnIndex(ATIVO)));
+
+                    }
+                }
+            } catch (Exception e) {
+                Log.e("Erro: ", e.getMessage());
+            } finally {
+                if (cursor != null) {
+                    if (!cursor.isClosed()) {
+                        cursor.close();
+                    }
+                }
+                close();
+            }
+        }
+        return cliente;
     }
 }
