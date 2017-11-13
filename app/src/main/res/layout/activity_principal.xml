@@ -65,19 +65,4 @@
         android:layout_marginTop="@dimen/layout_margin_10dp"
         android:text="@string/principal.vendas" />
 
-    <Button
-        android:id="@+id/btPesquisaClientes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:background="@color/colorAmarelo"
-        android:textColor="@color/colorPreto"
-        android:drawableTop="@mipmap/cliente_launcher"
-        android:layout_marginLeft="@dimen/layout_margin_10dp"
-        android:layout_marginRight="@dimen/layout_margin_10dp"
-        android:layout_marginTop="@dimen/layout_margin_10dp"
-        android:layout_below="@id/btVendas"
-        android:text="@string/principal.clientes" />
-
 </RelativeLayout>

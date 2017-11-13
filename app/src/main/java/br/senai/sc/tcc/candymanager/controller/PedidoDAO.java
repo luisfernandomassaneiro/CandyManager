@@ -3,13 +3,12 @@ package br.senai.sc.tcc.candymanager.controller;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.Date;
 import java.util.List;
 
-import br.senai.sc.tcc.candymanager.enums.TipoMovimentacao;
+import br.senai.sc.tcc.candymanager.model.BaseModel;
 import br.senai.sc.tcc.candymanager.model.Cliente;
 import br.senai.sc.tcc.candymanager.model.Pedido;
 import br.senai.sc.tcc.candymanager.model.PedidoItem;
@@ -28,37 +27,30 @@ public class PedidoDAO extends BaseDAO{
     private static final String PED_VALORPAGO = MetadadosHelper.TabelaPedido.PED_VALORPAGO;
     private static final String PED_VALORTOTAL = MetadadosHelper.TabelaPedido.PED_VALORTOTAL;
 
-    private SQLiteHelper dbHelper;
-    private SQLiteDatabase db;
-    private List<Pedido> listaPedidos;
-
-    private String[] getColunasTabPedido(){
+    @Override
+    protected String[] getColunasTab() {
         String[] COLUNAS_TAB_PEDIDO = new String[] {_ID, PED_CLIID, PED_DATA, PED_FINALIZADO, PED_VALORLUCRO, PED_VALORPAGO, PED_VALORTOTAL};
         return COLUNAS_TAB_PEDIDO;
     }
 
     public PedidoDAO(Context ctx){
-        try {
-            dbHelper = new SQLiteHelper(ctx, SQLiteHelper.NOME_BD, SQLiteHelper.VERSAO_BD);
-
-        } catch (Exception e) {
-            Log.e("Erro: ", e.getMessage());
-        }
+        super(ctx);
     }
 
-    public void open() {
-        db = dbHelper.getWritableDatabase();
+    @Override
+    protected BaseModel getClassePopulada(Cursor cursor) {
+        return null;
     }
 
-    public void close(){
-        if (db != null) {
-            db.close();
-        }
+    @Override
+    protected String getTabela() {
+        return TB_PEDIDO;
     }
 
-    public ContentValues contentPedido(Pedido pedido){
+    @Override
+    protected ContentValues contentValues(BaseModel baseModel) {
         ContentValues values = new ContentValues();
-
+        Pedido pedido = (Pedido) baseModel;
         values.put(_ID, pedido.getId());
         values.put(PED_CLIID, pedido.getCliente().getId());
         values.put(PED_DATA, pedido.getData().getTime());
@@ -69,101 +61,10 @@ public class PedidoDAO extends BaseDAO{
         return values;
     }
 
-    //Insert
-    public long insertPedido(Pedido novoPedido){
-        long id = 0;
-        try {
-            open();
-            ContentValues values = contentPedido(novoPedido);
-            id = db.insert(TB_PEDIDO, null, values);
-
-        } catch (Exception e) {
-            Log.e("Erro: ", e.getMessage());
-        } finally {
-            close();
-        }
-        return id;
+    @Override
+    protected String getOrderBy() {
+        return null;
     }
-
-    //Excluir
-    public boolean excluirPessoa(String _ID){
-
-        boolean resultadoExclusao =  false;
-
-        try {
-            String where = _ID + "=?";
-            String[] args = new String[] {_ID};
-
-            int num = db.delete(TB_PEDIDO, where, args);
-
-            if (num == 1) {
-                resultadoExclusao = true;
-            }
-        } catch (Exception e) {
-            Log.e("Erro: ", e.getMessage());
-        }
-        return resultadoExclusao;
-    }
-
-    //Método aletar vendedor
-    public boolean alterarPedido(Pedido pedido){
-        boolean resultadoAlteracao = false;
-
-        try {
-            open();
-            String where = _ID+"=?"; //Definir por campo será feito a alteração
-
-            //Seta os argumentos com info do registro a ser alterado
-            String[] args = new String[]{String.valueOf(pedido.getId())};
-
-            int num = db.update(TB_PEDIDO, contentPedido(pedido), where, args);
-
-            //Verificar se o vendedor foi alteração
-            if (num == 1) {
-                resultadoAlteracao = true;
-            }
-
-        } catch (Exception e) {
-            Log.e("Erro: ", e.toString());
-        } finally {
-            close();
-        }
-        return resultadoAlteracao;
-    }
-/*
-    //Busca individual - vendedor especifico
-    public Pedido buscaIndividualVendedor(String NOME){
-
-        Cursor cursor = null;
-        Pedido vendedorLinha = new Pedido();
-        String where = "NOME=?";
-        String[] args = new String[]{NOME};
-
-        try {
-            cursor = db.query(TB_PEDIDO, getColunasTabPedido(), where, args, null, null, null);
-
-            if (cursor.getCount() > 0 ) {
-                while (cursor.moveToNext()){
-                    vendedorLinha.set_ID(cursor.getInt(cursor.getColumnIndex("_ID")));
-                    vendedorLinha.setNOME(cursor.getString(cursor.getColumnIndex("NOME")));
-                    vendedorLinha.setTIPO(cursor.getString(cursor.getColumnIndex("TIPO")));
-                    vendedorLinha.setATIVO(cursor.getString(cursor.getColumnIndex("ATIVO")));
-                    Log.i("Erro: ", vendedorLinha.getNOME());
-                }
-            }
-        } catch (Exception e) {
-            Log.e("Erro: ", e.toString());
-        }
-        finally{
-            if (cursor != null) {
-                if (!cursor.isClosed()) {
-                    cursor.close();
-                }
-            }
-        }
-        return vendedorLinha;
-    }*/
-
     public Pedido recuperaPedidoCliente(Integer clienteID) {
         Cursor cursor = null;
         Pedido pedido = null;
@@ -184,7 +85,7 @@ public class PedidoDAO extends BaseDAO{
             sql.append(" ORDER BY PRO.PRO_DESCRICAO ");
 
             String[] args = new String[]{"0", String.valueOf(clienteID)};
-            cursor = db.rawQuery(sql.toString(), args);
+            cursor = getBanco().rawQuery(sql.toString(), args);
 
             if (cursor.getCount() > 0) {
                 Cliente cliente = null;

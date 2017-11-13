@@ -13,7 +13,7 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import br.senai.sc.tcc.candymanager.controller.ClienteDAO;
 import br.senai.sc.tcc.candymanager.model.Cliente;
 
-public class ClienteActivity extends AppCompatActivity implements View.OnClickListener {
+public class ClienteActivity extends PrincipalActivity implements View.OnClickListener {
 
     EditText etNome, etTelefone, etEmail;
     CheckBox cbClienteAtivo;
@@ -54,15 +54,19 @@ public class ClienteActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.btSalvarCliente:
                 ClienteDAO dao = new ClienteDAO(this);
-
                 cliente.setNome(etNome.getText().toString());
                 cliente.setTelefone(etTelefone.getText().toString());
                 cliente.setEmail(etEmail.getText().toString());
                 cliente.setAtivo(cbClienteAtivo.isChecked() ? 1 : 0);
-                dao.gravarCliente(cliente);
+                dao.gravar(cliente);
                 Toast.makeText(this, R.string.geral_salvoComSucesso, Toast.LENGTH_SHORT).show();
                 finish();
                 break;
+
+            case R.id.btPesquisaClientes:
+                iniciarActivity(new Intent(this, PesquisaClienteActivity.class));
+                break;
+
         }
     }
 }

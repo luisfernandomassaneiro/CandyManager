@@ -62,10 +62,9 @@ public class PesquisaClienteActivity extends PrincipalActivity implements View.O
                 if(nome != null && !nome.isEmpty())
                     setlClientes(dao.listClientesPeloNome(nome));
                 else
-                    setlClientes(dao.listClientes());
+                    setlClientes(dao.listaAtivos());
 
                 pesquisaClienteAdapter.atualizaLista(getlClientes());
-                Toast.makeText(this, "passou aqui",Toast.LENGTH_LONG).show();
                 break;
         }
     }
@@ -92,30 +91,12 @@ public class PesquisaClienteActivity extends PrincipalActivity implements View.O
         this.lClientes = lClientes;
     }
 
-    public void showDialog() {
-
-        final Dialog dialog = new Dialog(getApplicationContext());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow();
-        dialog.setContentView(R.layout.activity_pesquisa_cliente);
-        dialog.setTitle("yor title");
-        dialog.setCancelable(false);
-
-
-        try {
-            dialog.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (parent.getId()){
             case R.id.lvClientes:
                 Cliente cliente = (Cliente) parent.getAdapter().getItem(position);
                 iniciarActivityPassandoParametros(cliente, "cliente", ClienteActivity.class);
-                Toast.makeText(this, cliente.getNome(),Toast.LENGTH_LONG).show();
         }
     }
 

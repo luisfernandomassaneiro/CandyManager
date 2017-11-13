@@ -3,12 +3,8 @@ package br.senai.sc.tcc.candymanager.controller;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import br.senai.sc.tcc.candymanager.model.BaseModel;
 import br.senai.sc.tcc.candymanager.model.MovimentoEstoque;
 
 /**
@@ -22,37 +18,30 @@ public class MovimentoEstoqueDAO extends BaseDAO{
     private static final String MOV_QTNDE = MetadadosHelper.TabelaMovimentoEstoque.MOV_QTNDE;
     private static final String MOV_TIPO = MetadadosHelper.TabelaMovimentoEstoque.MOV_TIPO;
 
-    private SQLiteHelper dbHelper;
-    private SQLiteDatabase db;
-    private List<MovimentoEstoque> listaMovimentoEstoque = new ArrayList<>();
-
-    private String[] getColunasTabMovimentoEstoque(){
+    @Override
+    protected String[] getColunasTab() {
         String[] MOVIMENTO_ESTOQUE_COLUNAS_TAB_MOVIMENTO_ESTOQUE = new String[] {_ID, MOV_DATA, MOV_PROID, MOV_QTNDE, MOV_TIPO};
         return MOVIMENTO_ESTOQUE_COLUNAS_TAB_MOVIMENTO_ESTOQUE;
     }
 
     public MovimentoEstoqueDAO(Context ctx){
-        try {
-            dbHelper = new SQLiteHelper(ctx, SQLiteHelper.NOME_BD, SQLiteHelper.VERSAO_BD);
-
-        } catch (Exception e) {
-            Log.e("Erro: ", e.getMessage());
-        }
+        super(ctx);
     }
 
-    public void open() {
-        db = dbHelper.getWritableDatabase();
+    @Override
+    protected BaseModel getClassePopulada(Cursor cursor) {
+        return null;
     }
 
-    public void close(){
-        if (db != null) {
-            db.close();
-        }
+    @Override
+    protected String getTabela() {
+        return TB_MOVIMENTO_ESTOQUE;
     }
 
-    public ContentValues contentMovimentoEstoque(MovimentoEstoque movimentoEstoque){
+    @Override
+    protected ContentValues contentValues(BaseModel baseModel) {
         ContentValues values = new ContentValues();
-
+        MovimentoEstoque movimentoEstoque = (MovimentoEstoque) baseModel;
         values.put(_ID, movimentoEstoque.getId());
         values.put(MOV_DATA, movimentoEstoque.getDataMovimento().getTime());
         values.put(MOV_PROID, movimentoEstoque.getProduto().getId());
@@ -62,20 +51,9 @@ public class MovimentoEstoqueDAO extends BaseDAO{
         return values;
     }
 
-    //Insert
-    public long insertMovimentoEstoque(MovimentoEstoque novaMovimentoEstoque){
-        long id = 0;
-        try {
-            open();
-            ContentValues values = contentMovimentoEstoque(novaMovimentoEstoque);
-            id = db.insert(TB_MOVIMENTO_ESTOQUE, null, values);
-
-        } catch (Exception e) {
-            Log.e("Erro: ", e.getMessage());
-        } finally {
-            close();
-        }
-        return id;
+    @Override
+    protected String getOrderBy() {
+        return MOV_DATA;
     }
 
 }
