@@ -25,11 +25,11 @@ public class MovimentoEstoqueHelper {
 
     public void atualizaEstoque(Context context, MovimentoEstoque movimentoEstoque) {
         MovimentoEstoqueDAO estoqueDAO = new MovimentoEstoqueDAO(context);
-        estoqueDAO.insertMovimentoEstoque(movimentoEstoque);
+        estoqueDAO.gravar(movimentoEstoque);
 
         Produto produtoSelecionado = movimentoEstoque.getProduto();
         produtoSelecionado.setQuantidadeAtual(movimentoEstoque.getQuantidade(), movimentoEstoque.getTipoMovimentacao());
         ProdutoDAO produtoDAO = new ProdutoDAO(context);
-        produtoDAO.alterarProduto(produtoSelecionado);
+        produtoDAO.gravar(produtoSelecionado);
     }
 }

@@ -137,7 +137,7 @@ public class PedidoActivity extends AppCompatActivity implements View.OnClickLis
         }
         PedidoDAO dao = new PedidoDAO(this);
         pedidoAtual.setPedidoFinalizado(0);
-        dao.alterarPedido(pedidoAtual);
+        dao.gravar(pedidoAtual);
         Toast.makeText(this, R.string.pedido_manterAbertoMsg, Toast.LENGTH_SHORT).show();
         limpar();
     }
@@ -150,7 +150,7 @@ public class PedidoActivity extends AppCompatActivity implements View.OnClickLis
 
         PedidoDAO dao = new PedidoDAO(this);
         pedidoAtual.setPedidoFinalizado(1);
-        dao.alterarPedido(pedidoAtual);
+        dao.gravar(pedidoAtual);
         Toast.makeText(this, R.string.pedido_finalizadoComSucesso, Toast.LENGTH_SHORT).show();
         limpar();
     }
@@ -176,12 +176,12 @@ public class PedidoActivity extends AppCompatActivity implements View.OnClickLis
             pedidoItem.setPedido(pedidoAtual);
             pedidoItem.setValorCompra(produtoSelecionado.getValorCompra());
             pedidoItem.setValorVenda(produtoSelecionado.getValorVenda());
-            long pedidoItemInseridoID = dao.insertPedidoItem(pedidoItem);
+            long pedidoItemInseridoID = dao.gravar(pedidoItem);
             pedidoItem.setId((int) pedidoItemInseridoID);
             pedidoAtual.addPedidoItem(pedidoItem);
         } else {
             pedidoItem.setQuantidade(pedidoItem.getQuantidade() + quantidade);
-            dao.alterarPedidoItem(pedidoItem);
+            dao.gravar(pedidoItem);
         }
 
         MovimentoEstoque movimentoEstoque = new MovimentoEstoque();
@@ -224,7 +224,7 @@ public class PedidoActivity extends AppCompatActivity implements View.OnClickLis
                 pedidoAtual = new Pedido();
                 pedidoAtual.setCliente(clienteSelecionado);
                 pedidoAtual.setPedidoFinalizado(0);
-                long idPedidoInserido = dao.insertPedido(pedidoAtual);
+                long idPedidoInserido = dao.gravar(pedidoAtual);
                 pedidoAtual.setId(Integer.valueOf((int) idPedidoInserido));
             }
             atualizaLista();
@@ -234,7 +234,7 @@ public class PedidoActivity extends AppCompatActivity implements View.OnClickLis
     public List<Produto> getProdutos() {
         if(lProdutos == null || lProdutos.size() == 0) {
             ProdutoDAO dao = new ProdutoDAO(this);
-            setProdutos(dao.listProdutos());
+            setProdutos(dao.listaAtivos());
         }
 
         return lProdutos;
@@ -247,7 +247,7 @@ public class PedidoActivity extends AppCompatActivity implements View.OnClickLis
     public List<Cliente> getClientes() {
         if(lClientes == null || lClientes.size() == 0) {
             ClienteDAO dao = new ClienteDAO(this);
-            setClientes(dao.listClientes());
+            setClientes(dao.listaAtivos());
         }
 
         return lClientes;

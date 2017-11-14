@@ -46,7 +46,7 @@ public class ProdutoActivity extends AppCompatActivity implements View.OnClickLi
                 produto.setValorCompra(Double.valueOf(etValorCompra.getText().toString()));
                 produto.setValorVenda(Double.valueOf(etValorVenda.getText().toString()));
                 produto.setAtivo(cbProdutoAtivo.isChecked() ? 1 : 0);
-                dao.insertProduto(produto);
+                dao.insert(produto);
                 Toast.makeText(this, R.string.geral_salvoComSucesso, Toast.LENGTH_SHORT).show();
                 finish();
                 break;

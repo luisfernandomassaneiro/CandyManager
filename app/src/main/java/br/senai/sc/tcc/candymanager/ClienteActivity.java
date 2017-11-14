@@ -30,18 +30,23 @@ public class ClienteActivity extends PrincipalActivity implements View.OnClickLi
     private void editar() {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        cliente = (Cliente) bundle.get("cliente");
-        if(cliente != null) {
-            etNome.setText(cliente.getNome());
-            etTelefone.setText(cliente.getTelefone());
-            etEmail.setText(cliente.getEmail());
-            cbClienteAtivo.setChecked(cliente.isAtivo());
+        if(bundle != null) {
+            cliente = (Cliente) bundle.get("cliente");
+            if (cliente != null) {
+                etNome.setText(cliente.getNome());
+                etTelefone.setText(cliente.getTelefone());
+                etEmail.setText(cliente.getEmail());
+                cbClienteAtivo.setChecked(cliente.isAtivo());
+            }
         }
     }
 
     private void inicializar(){
         FloatingActionButton btSalvar = (FloatingActionButton) findViewById(R.id.btSalvarCliente);
         btSalvar.setOnClickListener(this);
+
+        FloatingActionButton btPesquisa = (FloatingActionButton) findViewById(R.id.btPesquisarCliente);
+        btPesquisa.setOnClickListener(this);
 
         etNome = (EditText) findViewById(R.id.etNome);
         etTelefone = (EditText) findViewById(R.id.etTelefone);
@@ -63,7 +68,7 @@ public class ClienteActivity extends PrincipalActivity implements View.OnClickLi
                 finish();
                 break;
 
-            case R.id.btPesquisaClientes:
+            case R.id.btPesquisarCliente:
                 iniciarActivity(new Intent(this, PesquisaClienteActivity.class));
                 break;
 

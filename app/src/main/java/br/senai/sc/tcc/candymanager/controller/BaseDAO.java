@@ -80,13 +80,18 @@ public abstract class BaseDAO<T extends BaseModel> implements BaseColumns {
 
     protected abstract ContentValues contentValues(T t);
 
-    public void gravar(T t) {
+    public long gravar(T t) {
         if (t != null) {
             if (t.getId() == null)
-                insert(t);
-            else if (t.getId() != null)
-                update(t);
+                return insert(t);
+            else if (t.getId() != null) {
+                boolean sucesso = update(t);
+                if (sucesso) {
+                    return 1;
+                }
+            }
         }
+        return 0;
     }
 
     public long insert(T t) {
@@ -127,6 +132,7 @@ public abstract class BaseDAO<T extends BaseModel> implements BaseColumns {
         boolean resultadoAlteracao = false;
 
         try {
+            open();
             String where = _ID + "=?";
 
             String[] args = new String[]{String.valueOf(t.getId())};
@@ -138,6 +144,8 @@ public abstract class BaseDAO<T extends BaseModel> implements BaseColumns {
 
         } catch (Exception e) {
             Log.e("Erro: ", e.toString());
+        } finally {
+            close();
         }
         return resultadoAlteracao;
     }

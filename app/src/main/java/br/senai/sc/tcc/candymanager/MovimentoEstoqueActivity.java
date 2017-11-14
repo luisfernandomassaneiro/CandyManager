@@ -76,7 +76,7 @@ public class MovimentoEstoqueActivity extends AppCompatActivity implements View.
     public List<Produto> getProdutos() {
         if(produtos == null || produtos.size() == 0) {
             ProdutoDAO dao = new ProdutoDAO(this);
-            setProdutos(dao.listProdutos());
+            setProdutos(dao.listaAtivos());
         }
 
         return produtos;
