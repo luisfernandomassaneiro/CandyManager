@@ -18,8 +18,12 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
         //setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.mipmap.ic_launcher);
-        setTitle(R.string.principal_titulo);
+        alteraTitulo();
         inicializar();
+    }
+
+    public void alteraTitulo() {
+        setTitle(R.string.geral_titulo);
     }
 
     @Override

@@ -15,4 +15,8 @@ public class Configuracao extends BaseModel {
     public void setEntraTelaPesquisa(int entraTelaPesquisa) {
         this.entraTelaPesquisa = entraTelaPesquisa;
     }
+
+    public boolean isEntrarTelaPesquisa() {
+        return this.entraTelaPesquisa == 1;
+    }
 }

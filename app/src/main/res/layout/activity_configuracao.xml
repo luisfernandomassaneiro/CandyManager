@@ -7,22 +7,25 @@
     tools:context="br.senai.sc.tcc.candymanager.ConfiguracaoActivity">
 
     <TextView
-        android:id="@+id/tvMovimentoEstoqueProduto"
+        android:id="@+id/tvEntrarPequisa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_20dp"
-        android:text="@string/movimentoEstoque.produto" />
+        android:text="@string/configuracoes.entrarPesquisa" />
 
 
 
     <android.support.v7.widget.SwitchCompat
+        android:id="@+id/scEntrarPesquisa"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:layout_marginTop="@dimen/layout_margin_20dp"/>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/multiple_actions_configuracao"
