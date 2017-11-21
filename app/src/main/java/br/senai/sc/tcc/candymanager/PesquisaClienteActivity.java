@@ -33,13 +33,13 @@ public class PesquisaClienteActivity extends PrincipalActivity implements View.O
         setContentView(R.layout.activity_pesquisa_cliente);
         inicializar();
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu_activity_pesquisa,menu);
         return true;
-    }
+    }*/
 
     private void inicializar() {
         FloatingActionButton btPesquisar = (FloatingActionButton) findViewById(R.id.btPesquisarClientes);
@@ -69,7 +69,7 @@ public class PesquisaClienteActivity extends PrincipalActivity implements View.O
         }
     }
 
-    @Override
+  /*  @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         boolean retorno = true;
@@ -81,7 +81,7 @@ public class PesquisaClienteActivity extends PrincipalActivity implements View.O
                     retorno = false;
         }
         return retorno;
-    }
+    }*/
 
     public List<Cliente> getlClientes() {
         return lClientes;

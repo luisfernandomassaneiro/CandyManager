@@ -3,7 +3,10 @@ package br.senai.sc.tcc.candymanager;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
+
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -34,6 +37,8 @@ public class ConfiguracaoActivity extends PrincipalActivity implements View.OnCl
 
     private void inicializar() {
         entrarPesquisa = (SwitchCompat) findViewById(R.id.scEntrarPesquisa);
+        FloatingActionButton btPesquisar = (FloatingActionButton) findViewById(R.id.btSalvarConfiguracao);
+        btPesquisar.setOnClickListener(this);
     }
 
     @Override

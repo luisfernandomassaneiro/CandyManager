@@ -24,6 +24,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(MetadadosHelper.TabelaMovimentoEstoque.getCreateEntry());
         db.execSQL(MetadadosHelper.TabelaPedido.getCreateEntry());
         db.execSQL(MetadadosHelper.TabelaPedidoItem.getCreateEntry());
+        db.execSQL(MetadadosHelper.TabelaConfiguracao.getCreateEntry());
         MetadadosHelper.getCreatesTables();
     }
 
@@ -36,6 +37,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onOpen(SQLiteDatabase db) {
         super.onOpen(db);
+        db.execSQL(MetadadosHelper.getDropTables());
+        db.execSQL(MetadadosHelper.getCreatesTables());
         if(!db.isReadOnly()) {
             db.execSQL("PRAGMA foreign_keys=ON;");
         }

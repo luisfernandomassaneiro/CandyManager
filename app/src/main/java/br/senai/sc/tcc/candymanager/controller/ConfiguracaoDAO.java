@@ -23,7 +23,7 @@ public class ConfiguracaoDAO extends BaseDAO{
 
     @Override
     protected String[] getColunasTab() {
-        String[] CONFIGURACAO_COLUNAS_TAB_CONFIGURACAO = new String[] {_ID, CFI_ENTRAPESQUISA};
+        String[] CONFIGURACAO_COLUNAS_TAB_CONFIGURACAO = new String[] {_ID, CFI_ENTRAPESQUISA, ATIVO};
         return CONFIGURACAO_COLUNAS_TAB_CONFIGURACAO;
     }
 
