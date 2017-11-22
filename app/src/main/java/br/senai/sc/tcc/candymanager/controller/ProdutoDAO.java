@@ -72,4 +72,31 @@ public class ProdutoDAO extends BaseDAO{
         return PRO_DESCRICAO;
     }
 
+    public List<Produto> listaProdutosPelaDescricao(String descricao){
+        Cursor cursor = null;
+        List<Produto> listaProdutos = new ArrayList<>();
+
+        try {
+            open();
+            String[] args = new String[] {descricao};
+            cursor = getBanco().query(getTabela(), getColunasTab(), "DESCRICAO LIKE ?", args, null, null, getOrderBy(), null);
+            if (cursor.getCount() > 0) {
+                while(cursor.moveToNext()){
+                    listaProdutos.add((Produto) getClassePopulada(cursor));
+                }
+            }
+        } catch (Exception e) {
+            Log.e("Erro: ", e.getMessage());
+        }
+        finally{
+            if (cursor != null) {
+                if (!cursor.isClosed()) {
+                    cursor.close();
+                }
+            }
+            close();
+        }
+        return listaProdutos;
+    }
+
 }

@@ -63,9 +63,11 @@ public class ClienteActivity extends PrincipalActivity implements View.OnClickLi
                 cliente.setTelefone(etTelefone.getText().toString());
                 cliente.setEmail(etEmail.getText().toString());
                 cliente.setAtivo(cbClienteAtivo.isChecked() ? 1 : 0);
-                dao.gravar(cliente);
+                long id = dao.gravar(cliente);
+                if(cliente.getId() == null && id > 0)
+                    cliente.setId(id);
+
                 Toast.makeText(this, R.string.geral_salvoComSucesso, Toast.LENGTH_SHORT).show();
-                finish();
                 break;
 
             case R.id.btPesquisarCliente:

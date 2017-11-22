@@ -23,7 +23,8 @@
         <activity android:name=".MovimentoEstoqueActivity" />
         <activity android:name=".PedidoActivity" />
         <activity android:name=".PesquisaClienteActivity" />
-        <activity android:name=".ConfiguracaoActivity"></activity>
+        <activity android:name=".ConfiguracaoActivity" />
+        <activity android:name=".PesquisaProdutoActivity"></activity>
     </application>
 
 </manifest>

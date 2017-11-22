@@ -65,4 +65,12 @@ public class Produto extends BaseModel{
     public String toString() {
         return descricao;
     }
+
+    public String getValorCompraAux() {
+        return valorCompra != null ? valorCompra.toString() : null;
+    }
+
+    public String getValorVendaAux() {
+        return valorVenda != null ? valorVenda.toString() : null;
+    }
 }

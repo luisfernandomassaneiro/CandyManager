@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "br.senai.sc.tcc.sistema.candymanager"
+        applicationId "br.senai.sc.tcc.candymanager"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
@@ -29,6 +29,5 @@ dependencies {
     compile 'com.getbase:floatingactionbutton:1.10.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'org.apache.commons:commons-lang3:3.4'
-    compile 'com.android.support.constraint:constraint-layout:+'
     testCompile 'junit:junit:4.12'
 }

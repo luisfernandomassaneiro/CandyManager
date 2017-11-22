@@ -4,25 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.senai.sc.tcc.candymanager.PesquisaClienteActivity">
+    tools:context="br.senai.sc.tcc.candymanager.MovimentoEstoqueActivity">
 
     <TextView
-        android:id="@+id/tvPesquisaClienteNome"
+        android:id="@+id/tvPesquisaProdutoDescricao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_20dp"
-        android:text="@string/cliente.nome" />
+        android:text="@string/produto.descricao" />
 
     <EditText
-        android:id="@+id/etPesquisaClienteNome"
+        android:id="@+id/etPesquisaProdutoDescricao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvPesquisaClienteNome"
+        android:layout_below="@+id/tvPesquisaProdutoDescricao"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginRight="@dimen/layout_margin_10dp"
         android:ems="10"
@@ -31,12 +31,12 @@
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tlPesquisaCliente"
-        android:layout_below="@+id/etPesquisaClienteNome"
+        android:id="@+id/tlPesquisaProduto"
+        android:layout_below="@+id/etPesquisaProdutoDescricao"
         android:stretchColumns="1">
         <TableRow >
             <TextView
-                android:text="@string/cliente.nome"
+                android:text="@string/produto.descricao"
                 android:gravity="left"
                 android:padding="4dip"
                 />
@@ -44,10 +44,10 @@
     </TableLayout>
 
     <ListView
-        android:id="@+id/lvClientes"
+        android:id="@+id/lvProdutos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tlPesquisaCliente"/>
+        android:layout_below="@id/tlPesquisaProduto"/>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/multiple_actions_produto"
@@ -65,7 +65,7 @@
         android:layout_marginEnd="@dimen/fab_margin">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btNovoCliente"
+            android:id="@+id/btNovoProduto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
@@ -74,7 +74,7 @@
             fab:fab_colorPressed="@color/white_pressed" /> />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btPesquisarClientes"
+            android:id="@+id/btPesquisarProduto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"

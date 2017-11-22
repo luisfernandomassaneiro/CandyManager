@@ -20,6 +20,10 @@ public class BaseModel implements BaseColumns, Serializable {
         this.id = id;
     }
 
+    public void setId(long id) {
+        this.id = Long.valueOf(id).intValue();
+    }
+
     public int getAtivo() {
         return ativo;
     }

@@ -103,7 +103,7 @@ public abstract class BaseDAO<T extends BaseModel> implements BaseColumns {
         return 0;
     }
 
-    public long insert(T t) {
+    private long insert(T t) {
         long id = 0;
         try {
             open();
@@ -118,7 +118,7 @@ public abstract class BaseDAO<T extends BaseModel> implements BaseColumns {
         return id;
     }
 
-    public boolean delete(String _ID) {
+    private boolean delete(String _ID) {
 
         boolean resultadoExclusao = false;
 
@@ -137,7 +137,7 @@ public abstract class BaseDAO<T extends BaseModel> implements BaseColumns {
         return resultadoExclusao;
     }
 
-    public boolean update(T t) {
+    private boolean update(T t) {
         boolean resultadoAlteracao = false;
 
         try {
