@@ -47,6 +47,15 @@ public abstract class BaseDAO<T extends BaseModel> implements BaseColumns {
         }
     }
 
+    public T recuperaPrimeiroRegistroAtivo() {
+        T t = null;
+        List<T> lista = listaAtivos();
+        if(lista.size() > 0)
+            t = lista.get(0);
+
+        return t;
+    }
+
     public List<T> listaAtivos() {
         Cursor cursor = null;
         lista.clear();

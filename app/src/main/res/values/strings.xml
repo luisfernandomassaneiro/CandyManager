@@ -44,4 +44,5 @@
     <string name="geral.pesquisar">Pesquisar</string>
     <string name="menu.configuracoes">Configurações</string>
     <string name="configuracoes.entrarPesquisa">Abrir a tela na pesquisa</string>
+    <string name="geral.novo">Novo</string>
 </resources>

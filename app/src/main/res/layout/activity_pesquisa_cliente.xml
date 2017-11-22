@@ -65,6 +65,15 @@
         android:layout_marginEnd="@dimen/fab_margin">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btNovoCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_icon="@drawable/ic_add_black_24dp"
+            fab:fab_title="@string/geral.novo"
+            fab:fab_colorPressed="@color/white_pressed" /> />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/btPesquisarClientes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

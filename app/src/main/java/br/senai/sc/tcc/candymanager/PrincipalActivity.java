@@ -12,7 +12,12 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 
+import br.senai.sc.tcc.candymanager.controller.ConfiguracaoDAO;
+import br.senai.sc.tcc.candymanager.model.Configuracao;
+
 public class PrincipalActivity extends AppCompatActivity implements View.OnClickListener {
+
+    Configuracao configuracao = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +26,14 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
         //setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.mipmap.ic_launcher);
         alteraTitulo();
         inicializar();
+        if(configuracao == null)
+            carregaConfiguracao();
+
+    }
+
+    private void carregaConfiguracao() {
+        ConfiguracaoDAO dao = new ConfiguracaoDAO(this);
+        configuracao = (Configuracao) dao.recuperaPrimeiroRegistroAtivo();
     }
 
     public void alteraTitulo() {
@@ -43,20 +56,23 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
+        Class classeIniciar = null;
+        boolean entrarTelaPesquisa = configuracao != null ? configuracao.isEntrarTelaPesquisa() : false;
         switch (v.getId()) {
             case R.id.btClientes:
-                iniciarActivity(new Intent(this, ClienteActivity.class));
+                classeIniciar = entrarTelaPesquisa ? PesquisaClienteActivity.class : ClienteActivity.class;
                 break;
             case R.id.btVendas:
-                iniciarActivity(new Intent(this, PedidoActivity.class));
+                classeIniciar = PedidoActivity.class;
                 break;
             case R.id.btProdutos:
-                iniciarActivity(new Intent(this, ProdutoActivity.class));
+                classeIniciar = ProdutoActivity.class;
                 break;
             case R.id.btRelatorios:
-                iniciarActivity(new Intent(this, MovimentoEstoqueActivity.class));
+                classeIniciar = ProdutoActivity.class;
                 break;
         }
+        iniciarActivity(new Intent(this, classeIniciar));
     }
 
     public void iniciarActivity(Intent intent){

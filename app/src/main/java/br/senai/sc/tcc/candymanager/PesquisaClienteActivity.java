@@ -1,6 +1,7 @@
 package br.senai.sc.tcc.candymanager;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,7 +46,11 @@ public class PesquisaClienteActivity extends PrincipalActivity implements View.O
         FloatingActionButton btPesquisar = (FloatingActionButton) findViewById(R.id.btPesquisarClientes);
         btPesquisar.setOnClickListener(this);
 
+        FloatingActionButton btNovo = (FloatingActionButton) findViewById(R.id.btNovoCliente);
+        btNovo.setOnClickListener(this);
+
         etNomeCliente = (EditText) findViewById(R.id.etPesquisaClienteNome);
+        lClientes.clear();
         pesquisaClienteAdapter = new PesquisaAdapter(this ,getlClientes());
         lvClientes = (ListView) findViewById(R.id.lvClientes);
         lvClientes.setAdapter(pesquisaClienteAdapter);
@@ -65,6 +70,10 @@ public class PesquisaClienteActivity extends PrincipalActivity implements View.O
                     setlClientes(dao.listaAtivos());
 
                 pesquisaClienteAdapter.atualizaLista(getlClientes());
+                break;
+
+            case R.id.btNovoCliente:
+                iniciarActivity(new Intent(this, ClienteActivity.class));
                 break;
         }
     }
