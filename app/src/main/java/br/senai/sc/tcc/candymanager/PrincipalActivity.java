@@ -66,7 +66,7 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
                 classeIniciar = PedidoActivity.class;
                 break;
             case R.id.btProdutos:
-                classeIniciar = ProdutoActivity.class;
+                classeIniciar = entrarTelaPesquisa ? PesquisaProdutoActivity.class : ProdutoActivity.class;
                 break;
             case R.id.btMovimentoEstoque:
                 classeIniciar = MovimentoEstoqueActivity.class;

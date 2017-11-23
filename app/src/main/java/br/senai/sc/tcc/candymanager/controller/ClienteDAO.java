@@ -75,8 +75,8 @@ public class ClienteDAO extends BaseDAO{
 
         try {
             open();
-            String[] args = new String[] {nome};
-            cursor = getBanco().query(TB_CLIENTE, getColunasTab(), "NOME LIKE ?", args, null, null, CLI_NOME, null);
+            String[] args = new String[] {nome+"%"};
+            cursor = getBanco().query(TB_CLIENTE, getColunasTab(), CLI_NOME + " LIKE ?", args, null, null, CLI_NOME, null);
             if (cursor.getCount() > 0) {
                 while(cursor.moveToNext()){
                     listaClientes.add((Cliente) getClassePopulada(cursor));

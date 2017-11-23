@@ -2,7 +2,6 @@ package br.senai.sc.tcc.candymanager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -46,7 +45,7 @@ public class ProdutoActivity extends PrincipalActivity implements View.OnClickLi
         FloatingActionButton btSalvar = (FloatingActionButton) findViewById(R.id.btSalvarProduto);
         btSalvar.setOnClickListener(this);
 
-        FloatingActionButton btNovo = (FloatingActionButton) findViewById(R.id.btNovoProduto);
+        FloatingActionButton btNovo = (FloatingActionButton) findViewById(R.id.btInserirNovoProduto);
         btNovo.setOnClickListener(this);
 
         FloatingActionButton btPesquisar = (FloatingActionButton) findViewById(R.id.btPesquisarProduto);
@@ -80,7 +79,7 @@ public class ProdutoActivity extends PrincipalActivity implements View.OnClickLi
                 iniciarActivity(new Intent(this, PesquisaProdutoActivity.class));
                 break;
 
-            case R.id.btNovoProduto:
+            case R.id.btInserirNovoProduto:
                 limpar();
                 break;
         }
