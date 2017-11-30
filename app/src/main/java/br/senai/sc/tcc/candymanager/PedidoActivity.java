@@ -188,6 +188,7 @@ public class PedidoActivity extends AppCompatActivity implements View.OnClickLis
         movimentoEstoque.setProduto(produtoSelecionado);
         movimentoEstoque.setTipoMovimentacao(TipoMovimentacao.SAIDA);
         movimentoEstoque.setQuantidade(quantidade);
+        movimentoEstoque.setPedidoItem(pedidoItem);
         MovimentoEstoqueHelper.getInstance().atualizaEstoque(this, movimentoEstoque);
 
         atualizaLista();

@@ -57,7 +57,7 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         Class classeIniciar = null;
-        boolean entrarTelaPesquisa = configuracao != null ? configuracao.isEntrarTelaPesquisa() : false;
+        boolean entrarTelaPesquisa = verificaConfiguracao();
         switch (v.getId()) {
             case R.id.btClientes:
                 classeIniciar = entrarTelaPesquisa ? PesquisaClienteActivity.class : ClienteActivity.class;
@@ -73,6 +73,11 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
                 break;
         }
         iniciarActivity(new Intent(this, classeIniciar));
+    }
+
+    private boolean verificaConfiguracao() {
+        carregaConfiguracao();
+        return configuracao != null ? configuracao.isEntrarTelaPesquisa() : false;
     }
 
     public void iniciarActivity(Intent intent){

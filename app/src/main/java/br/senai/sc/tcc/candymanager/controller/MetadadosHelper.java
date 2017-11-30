@@ -76,6 +76,7 @@ public static class TabelaMovimentoEstoque implements BaseColumns {
         public static String MOV_QTNDE = "MOV_QTNDE";
         public static String MOV_TIPO = "MOV_TIPO";
         public static String MOV_PROID = "MOV_PROID";
+        public static String MOV_PITID = "MOV_PITID";
 
         public static String getCreateEntry(){
             StringBuilder sb = new StringBuilder();
@@ -85,8 +86,11 @@ public static class TabelaMovimentoEstoque implements BaseColumns {
             sb.append(MOV_QTNDE).append(" INTEGER NOT NULL, ");
             sb.append(MOV_TIPO).append(" VARCHAR(10) NOT NULL, ");
             sb.append(MOV_PROID).append(" INTEGER NOT NULL ");
+            sb.append(MOV_PITID).append(" INTEGER NULL ");
             sb.append(", FOREIGN KEY (").append(MOV_PROID).append(") REFERENCES ").append(TabelaProduto.TB_PRODUTO).append("(")
                     .append(TabelaProduto._ID).append(") ON DELETE CASCADE");
+            sb.append(", FOREIGN KEY (").append(MOV_PITID).append(") REFERENCES ").append(TabelaPedidoItem.TB_PEDIDO_ITEM).append("(")
+                    .append(TabelaPedidoItem._ID).append(") ON DELETE CASCADE");
             sb.append(")");
             return sb.toString();
         }
