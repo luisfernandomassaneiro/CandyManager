@@ -13,6 +13,7 @@ public class MovimentoEstoque extends BaseModel {
     private Date dataMovimento = new Date();
     private Produto produto;
     private Integer quantidade;
+    private PedidoItem pedidoItem;
 
     public TipoMovimentacao getTipoMovimentacao() {
         return tipoMovimentacao;
@@ -44,5 +45,13 @@ public class MovimentoEstoque extends BaseModel {
 
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public PedidoItem getPedidoItem() {
+        return pedidoItem;
+    }
+
+    public void setPedidoItem(PedidoItem pedidoItem) {
+        this.pedidoItem = pedidoItem;
     }
 }

@@ -37,14 +37,14 @@ public class ConfiguracaoActivity extends PrincipalActivity implements View.OnCl
 
     private void inicializar() {
         entrarPesquisa = (SwitchCompat) findViewById(R.id.scEntrarPesquisa);
-        FloatingActionButton btPesquisar = (FloatingActionButton) findViewById(R.id.btSalvarConfiguracao);
-        btPesquisar.setOnClickListener(this);
+        entrarPesquisa.setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btSalvarConfiguracao:
+            case R.id.scEntrarPesquisa:
                 ConfiguracaoDAO dao = new ConfiguracaoDAO(this);
                 configuracao.setEntraTelaPesquisa(entrarPesquisa.isChecked() ? 1 : 0);
                 dao.gravar(configuracao);

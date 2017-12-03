@@ -1,7 +1,6 @@
 package br.senai.sc.tcc.candymanager;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,11 +13,8 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.senai.sc.tcc.candymanager.PrincipalActivity;
 import br.senai.sc.tcc.candymanager.adapters.PesquisaAdapter;
-import br.senai.sc.tcc.candymanager.controller.ClienteDAO;
 import br.senai.sc.tcc.candymanager.controller.ProdutoDAO;
-import br.senai.sc.tcc.candymanager.model.Cliente;
 import br.senai.sc.tcc.candymanager.model.Produto;
 
 public class PesquisaProdutoActivity extends PrincipalActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
@@ -36,16 +32,16 @@ public class PesquisaProdutoActivity extends PrincipalActivity implements View.O
     }
 
     private void inicializar() {
-        FloatingActionButton btPesquisar = (FloatingActionButton) findViewById(R.id.btPesquisarClientes);
+        FloatingActionButton btPesquisar = (FloatingActionButton) findViewById(R.id.btRealizarPesquisaProduto);
         btPesquisar.setOnClickListener(this);
 
-        FloatingActionButton btNovo = (FloatingActionButton) findViewById(R.id.btNovoProduto);
+        FloatingActionButton btNovo = (FloatingActionButton) findViewById(R.id.btInserirNovoProduto);
         btNovo.setOnClickListener(this);
 
-        etDescricaoProduto = (EditText) findViewById(R.id.etPesquisaClienteNome);
+        etDescricaoProduto = (EditText) findViewById(R.id.etPesquisaProdutoDescricao);
         lProdutos.clear();
         pesquisaProdutoAdapter = new PesquisaAdapter(this ,getlProdutos());
-        lvProdutos = (ListView) findViewById(R.id.lvClientes);
+        lvProdutos = (ListView) findViewById(R.id.lvProdutos);
         lvProdutos.setAdapter(pesquisaProdutoAdapter);
         lvProdutos.setOnItemClickListener(this);
         lvProdutos.setOnItemLongClickListener(this);
@@ -54,7 +50,7 @@ public class PesquisaProdutoActivity extends PrincipalActivity implements View.O
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btPesquisarProduto:
+            case R.id.btRealizarPesquisaProduto:
                 ProdutoDAO dao = new ProdutoDAO(this);
                 String descricao = etDescricaoProduto.getText().toString();
                 if(descricao != null && !descricao.isEmpty())
@@ -65,8 +61,8 @@ public class PesquisaProdutoActivity extends PrincipalActivity implements View.O
                 pesquisaProdutoAdapter.atualizaLista(getlProdutos());
                 break;
 
-            case R.id.btNovoProduto:
-                iniciarActivity(new Intent(this, ClienteActivity.class));
+            case R.id.btInserirNovoProduto:
+                iniciarActivity(new Intent(this, ProdutoActivity.class));
                 break;
         }
     }

@@ -78,8 +78,8 @@ public class ProdutoDAO extends BaseDAO{
 
         try {
             open();
-            String[] args = new String[] {descricao};
-            cursor = getBanco().query(getTabela(), getColunasTab(), "DESCRICAO LIKE ?", args, null, null, getOrderBy(), null);
+            String[] args = new String[] {descricao+"%"};
+            cursor = getBanco().query(getTabela(), getColunasTab(), PRO_DESCRICAO + " LIKE ?", args, null, null, getOrderBy(), null);
             if (cursor.getCount() > 0) {
                 while(cursor.moveToNext()){
                     listaProdutos.add((Produto) getClassePopulada(cursor));
