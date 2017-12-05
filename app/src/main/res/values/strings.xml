@@ -28,10 +28,12 @@
     <string name="movimentoEstoque.quantidade">Quantidade</string>
     <string name="movimentoEstoque.entrada">Entrada</string>
     <string name="movimentoEstoque.saida">Saída</string>
+    <string name="movimentoEstoque.registroInserido">Movimentação realizada com sucesso</string>
     <string name="pedido.cliente">Cliente</string>
     <string name="pedido.produto">Produto</string>
     <string name="pedido.quantidade">Quantidade</string>
     <string name="pedido.manterAberto">Manter em aberto</string>
+    <string name="pedido.novoPedido">Novo</string>
     <string name="pedido.adicionarProduto">Adicionar produto</string>
     <string name="pedido.finalizar">Finalizar</string>
     <string name="pedido.clienteProdutoQuantidadeObrigatorio">Para adicionar um produto, é obrigatório informar o cliente, produto e a quantidade desejada</string>

@@ -85,7 +85,7 @@ public static class TabelaMovimentoEstoque implements BaseColumns {
             sb.append(MOV_DATA).append(" INTEGER NOT NULL, ");
             sb.append(MOV_QTNDE).append(" INTEGER NOT NULL, ");
             sb.append(MOV_TIPO).append(" VARCHAR(10) NOT NULL, ");
-            sb.append(MOV_PROID).append(" INTEGER NOT NULL ");
+            sb.append(MOV_PROID).append(" INTEGER NOT NULL, ");
             sb.append(MOV_PITID).append(" INTEGER NULL ");
             sb.append(", FOREIGN KEY (").append(MOV_PROID).append(") REFERENCES ").append(TabelaProduto.TB_PRODUTO).append("(")
                     .append(TabelaProduto._ID).append(") ON DELETE CASCADE");

@@ -56,6 +56,7 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
         ((Button) findViewById(R.id.btVendas)).setOnClickListener(this);
         ((Button) findViewById(R.id.btProdutos)).setOnClickListener(this);
         ((Button) findViewById(R.id.btMovimentoEstoque)).setOnClickListener(this);
+        ((Button) findViewById(R.id.btRelatorios)).setOnClickListener(this);
     }
 
     @Override
@@ -74,6 +75,10 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.btMovimentoEstoque:
                 classeIniciar = MovimentoEstoqueActivity.class;
+                break;
+
+            case R.id.btRelatorios:
+                classeIniciar = MainActivity.class;
                 break;
         }
         iniciarActivity(new Intent(this, classeIniciar));

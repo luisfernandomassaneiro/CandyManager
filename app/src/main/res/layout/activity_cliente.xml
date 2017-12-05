@@ -48,7 +48,7 @@
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginRight="@dimen/layout_margin_10dp"
         android:ems="10"
-        android:inputType="phone" />
+        android:inputType="textPhonetic" />
 
     <TextView
         android:id="@+id/tvEmail"
@@ -104,6 +104,15 @@
             fab:fab_colorNormal="@color/white"
             fab:fab_icon="@drawable/ic_search_black_24dp"
             fab:fab_title="@string/geral.pesquisar"
+            fab:fab_colorPressed="@color/white_pressed" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btInserirNovoCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_icon="@drawable/ic_add_black_24dp"
+            fab:fab_title="@string/geral.novo"
             fab:fab_colorPressed="@color/white_pressed" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton

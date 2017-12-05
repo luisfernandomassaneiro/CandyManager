@@ -101,7 +101,7 @@
         />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/multiple_actions_produto"
+        android:id="@+id/multiple_actions_pedido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -140,6 +140,15 @@
             fab:fab_colorNormal="@color/white"
             fab:fab_title="@string/pedido.finalizar"
             fab:fab_icon="@drawable/ic_check_black"
+            fab:fab_colorPressed="@color/white_pressed" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btNovoPedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_title="@string/pedido.novoPedido"
+            fab:fab_icon="@drawable/ic_lock_open_black_24dp"
             fab:fab_colorPressed="@color/white_pressed" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>

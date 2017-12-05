@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import br.senai.sc.tcc.candymanager.controller.ClienteDAO;
 import br.senai.sc.tcc.candymanager.model.Cliente;
@@ -18,12 +19,13 @@ public class ClienteActivity extends PrincipalActivity implements View.OnClickLi
     EditText etNome, etTelefone, etEmail;
     CheckBox cbClienteAtivo;
     Cliente cliente = new Cliente();
-
+    FloatingActionsMenu botaoFlutuante;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cliente);
         inicializar();
+        limpar();
         editar();
     }
 
@@ -42,12 +44,10 @@ public class ClienteActivity extends PrincipalActivity implements View.OnClickLi
     }
 
     private void inicializar(){
-        FloatingActionButton btSalvar = (FloatingActionButton) findViewById(R.id.btSalvarCliente);
-        btSalvar.setOnClickListener(this);
-
-        FloatingActionButton btPesquisa = (FloatingActionButton) findViewById(R.id.btPesquisarCliente);
-        btPesquisa.setOnClickListener(this);
-
+        ((FloatingActionButton) findViewById(R.id.btSalvarCliente)).setOnClickListener(this);
+        ((FloatingActionButton) findViewById(R.id.btPesquisarCliente)).setOnClickListener(this);
+        ((FloatingActionButton) findViewById(R.id.btInserirNovoCliente)).setOnClickListener(this);
+        botaoFlutuante = (FloatingActionsMenu) findViewById(R.id.multiple_actions_pessoa);
         etNome = (EditText) findViewById(R.id.etNome);
         etTelefone = (EditText) findViewById(R.id.etTelefone);
         etEmail =  (EditText) findViewById(R.id.etEmail);
@@ -74,6 +74,18 @@ public class ClienteActivity extends PrincipalActivity implements View.OnClickLi
                 iniciarActivity(new Intent(this, PesquisaClienteActivity.class));
                 break;
 
+            case R.id.btInserirNovoCliente:
+                limpar();
+                break;
         }
+
+        botaoFlutuante.collapse();
+    }
+
+    private void limpar() {
+        cliente = new Cliente();
+        etNome.setText(null);
+        etTelefone.setText(null);
+        etEmail.setText(null);
     }
 }

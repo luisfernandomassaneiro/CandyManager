@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,8 @@ public class PedidoActivity extends PrincipalActivity implements View.OnClickLis
     RecyclerView recyclerView;
     PedidoItemAdapter pedidoItemAdapter;
     RecyclerView.LayoutManager layout;
+    AutoCompleteTextView textViewProduto; AutoCompleteTextView textViewCliente;
+    FloatingActionsMenu botaoFlutuante;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +57,11 @@ public class PedidoActivity extends PrincipalActivity implements View.OnClickLis
     }
 
     private void inicializar() {
-        FloatingActionButton btAdicionarProdutoLista = (FloatingActionButton) findViewById(R.id.btAdicionarProdutoLista);
-        btAdicionarProdutoLista.setOnClickListener(this);
-
-        FloatingActionButton btManterPedidoAberto = (FloatingActionButton) findViewById(R.id.btManterPedidoAberto);
-        btManterPedidoAberto.setOnClickListener(this);
-
-        FloatingActionButton btFinalizarPedido = (FloatingActionButton) findViewById(R.id.btFinalizarPedido);
-        btFinalizarPedido.setOnClickListener(this);
-
+        ((FloatingActionButton) findViewById(R.id.btAdicionarProdutoLista)).setOnClickListener(this);
+        ((FloatingActionButton) findViewById(R.id.btManterPedidoAberto)).setOnClickListener(this);
+        ((FloatingActionButton) findViewById(R.id.btFinalizarPedido)).setOnClickListener(this);
+        ((FloatingActionButton) findViewById(R.id.btNovoPedido)).setOnClickListener(this);
+        botaoFlutuante = (FloatingActionsMenu) findViewById(R.id.multiple_actions_pedido);
         etQuantidade = (EditText) findViewById(R.id.etPedidoQuantidade);
         inicializaRecyclerView();
         inicializarAutoCompleteCliente();
@@ -72,8 +71,7 @@ public class PedidoActivity extends PrincipalActivity implements View.OnClickLis
     private void inicializarAutoCompleteProduto() {
         ArrayAdapter<Produto> adapterProduto = new ArrayAdapter<Produto>(this,
                 android.R.layout.simple_dropdown_item_1line, getProdutos());
-        AutoCompleteTextView textViewProduto = (AutoCompleteTextView)
-                findViewById(R.id.acPedidoProduto);
+        textViewProduto = (AutoCompleteTextView) findViewById(R.id.acPedidoProduto);
         textViewProduto.setThreshold(1);
         textViewProduto.setAdapter(adapterProduto);
         textViewProduto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -86,8 +84,7 @@ public class PedidoActivity extends PrincipalActivity implements View.OnClickLis
     private void inicializarAutoCompleteCliente() {
         ArrayAdapter<Cliente> adapterCliente = new ArrayAdapter<Cliente>(this,
                 android.R.layout.simple_dropdown_item_1line, getClientes());
-        AutoCompleteTextView textViewCliente = (AutoCompleteTextView)
-                findViewById(R.id.acPedidoCliente);
+        textViewCliente = (AutoCompleteTextView) findViewById(R.id.acPedidoCliente);
         textViewCliente.setThreshold(1);
         textViewCliente.setAdapter(adapterCliente);
         textViewCliente.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -119,15 +116,25 @@ public class PedidoActivity extends PrincipalActivity implements View.OnClickLis
             case R.id.btManterPedidoAberto:
                 manterPedidoAberto();
                 break;
+
+            case R.id.btNovoPedido:
+                limpar();
+                break;
         }
+
+        botaoFlutuante.collapse();
     }
 
     public void limpar() {
-        finish();
         produtoSelecionado = null;
         pedidoAtual = null;
         clienteSelecionado = null;
-        onRestart();
+        etQuantidade.setText(null);
+        setClientes(new ArrayList<Cliente>());
+        setProdutos(new ArrayList<Produto>());
+        setlPedidoItem(new ArrayList<PedidoItem>());
+        textViewCliente.setText(null);
+        textViewProduto.setText(null);
     }
 
     private void manterPedidoAberto() {
@@ -135,6 +142,7 @@ public class PedidoActivity extends PrincipalActivity implements View.OnClickLis
             Toast.makeText(this, R.string.pedido_pedidoNaoSelecionado, Toast.LENGTH_SHORT).show();
             return;
         }
+
         PedidoDAO dao = new PedidoDAO(this);
         pedidoAtual.setPedidoFinalizado(0);
         dao.gravar(pedidoAtual);
@@ -256,5 +264,9 @@ public class PedidoActivity extends PrincipalActivity implements View.OnClickLis
 
     public void setClientes(List<Cliente> lClientes) {
         this.lClientes = lClientes;
+    }
+
+    public void setlPedidoItem(List<PedidoItem> lPedidoItem) {
+        this.lPedidoItem = lPedidoItem;
     }
 }

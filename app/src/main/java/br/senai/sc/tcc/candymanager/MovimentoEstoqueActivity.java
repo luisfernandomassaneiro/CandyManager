@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class MovimentoEstoqueActivity extends PrincipalActivity implements View.
     EditText etQuantidade;
     AutoCompleteTextView textView;
     Produto produtoSelecionado;
+    FloatingActionsMenu botaoFlutuante;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +40,9 @@ public class MovimentoEstoqueActivity extends PrincipalActivity implements View.
     }
 
     private void inicializar() {
-        FloatingActionButton btSalvar = (FloatingActionButton) findViewById(R.id.btSalvarMovimentoEstoque);
-        btSalvar.setOnClickListener(this);
-
+        ((FloatingActionButton) findViewById(R.id.btSalvarMovimentoEstoque)).setOnClickListener(this);
+        botaoFlutuante = (FloatingActionsMenu) findViewById(R.id.multiple_actions_movimento_estoque);
         etQuantidade = (EditText) findViewById(R.id.etMovimentoEstoqueQuantidade);
-
         ArrayAdapter<Produto> adapter = new ArrayAdapter<Produto>(this,
                 android.R.layout.simple_dropdown_item_1line, getProdutos());
         textView = (AutoCompleteTextView)
@@ -57,10 +57,7 @@ public class MovimentoEstoqueActivity extends PrincipalActivity implements View.
     }
 
     public void onRadioButtonClicked(View view) {
-        // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
-
-        // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.rbEntrada:
                 if (checked)
@@ -96,10 +93,17 @@ public class MovimentoEstoqueActivity extends PrincipalActivity implements View.
                 movimentoEstoque.setQuantidade(Integer.valueOf(etQuantidade.getText().toString()));
                 movimentoEstoque.setTipoMovimentacao(ehEntrada ? TipoMovimentacao.ENTRADA : TipoMovimentacao.SAIDA);
                 helper.atualizaEstoque(this, movimentoEstoque);
-                Toast.makeText(this, R.string.geral_salvoComSucesso, Toast.LENGTH_SHORT).show();
-                finish();
+                Toast.makeText(this, R.string.movimentoEstoque_registroInserido, Toast.LENGTH_SHORT).show();
+                limpar();
                 break;
         }
+
+        botaoFlutuante.collapse();
+    }
+
+    public void limpar() {
+        etQuantidade.setText(null);
+        textView.setText(null);
     }
 
 }

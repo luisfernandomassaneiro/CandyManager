@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import br.senai.sc.tcc.candymanager.controller.ProdutoDAO;
 import br.senai.sc.tcc.candymanager.model.Produto;
@@ -16,6 +17,7 @@ public class ProdutoActivity extends PrincipalActivity implements View.OnClickLi
 
     EditText etCodigo, etDescricao, etValorCompra, etValorVenda;
     CheckBox cbProdutoAtivo;
+    FloatingActionsMenu botaoFlutuante;
     Produto produto = new Produto();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +44,10 @@ public class ProdutoActivity extends PrincipalActivity implements View.OnClickLi
     }
 
     private void inicializar() {
-        FloatingActionButton btSalvar = (FloatingActionButton) findViewById(R.id.btSalvarProduto);
-        btSalvar.setOnClickListener(this);
-
-        FloatingActionButton btNovo = (FloatingActionButton) findViewById(R.id.btInserirNovoProduto);
-        btNovo.setOnClickListener(this);
-
-        FloatingActionButton btPesquisar = (FloatingActionButton) findViewById(R.id.btPesquisarProduto);
-        btPesquisar.setOnClickListener(this);
-
+        ((FloatingActionButton) findViewById(R.id.btSalvarProduto)).setOnClickListener(this);
+        ((FloatingActionButton) findViewById(R.id.btInserirNovoProduto)).setOnClickListener(this);
+        ((FloatingActionButton) findViewById(R.id.btPesquisarProduto)).setOnClickListener(this);
+        botaoFlutuante = (FloatingActionsMenu) findViewById(R.id.multiple_actions_produto);
         etCodigo = (EditText) findViewById(R.id.etCodigo);
         etDescricao = (EditText) findViewById(R.id.etDescricao);
         etValorCompra =  (EditText) findViewById(R.id.etValorCompra);
@@ -83,6 +80,8 @@ public class ProdutoActivity extends PrincipalActivity implements View.OnClickLi
                 limpar();
                 break;
         }
+
+        botaoFlutuante.collapse();
     }
 
     private void limpar() {
