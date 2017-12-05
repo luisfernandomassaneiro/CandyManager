@@ -1,6 +1,7 @@
 package br.senai.sc.tcc.candymanager;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,6 +30,9 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
         if(configuracao == null)
             carregaConfiguracao();
 
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setHomeAsUpIndicator(R.drawable.ic_home_black_24dp);
     }
 
     private void carregaConfiguracao() {
@@ -99,10 +103,14 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
         switch (item.getItemId()) {
             case R.id.menu_configuracoes:
                 iniciarActivity(new Intent(this, ConfiguracaoActivity.class));
-                return true;
-
+                break;
+            case android.R.id.home:
+                iniciarActivity(new Intent(this, PrincipalActivity.class));
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
+
+        return true;
     }
 }

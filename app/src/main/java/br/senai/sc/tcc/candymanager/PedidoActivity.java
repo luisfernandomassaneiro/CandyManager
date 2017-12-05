@@ -33,7 +33,7 @@ import br.senai.sc.tcc.candymanager.model.Produto;
  * Created by luis.massaneiro on 26/06/2017.
  */
 
-public class PedidoActivity extends AppCompatActivity implements View.OnClickListener {
+public class PedidoActivity extends PrincipalActivity implements View.OnClickListener {
 
     Pedido pedidoAtual;
     Cliente clienteSelecionado;
