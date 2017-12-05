@@ -22,7 +22,7 @@ import br.senai.sc.tcc.candymanager.helper.MovimentoEstoqueHelper;
 import br.senai.sc.tcc.candymanager.model.MovimentoEstoque;
 import br.senai.sc.tcc.candymanager.model.Produto;
 
-public class MovimentoEstoqueActivity extends AppCompatActivity implements View.OnClickListener {
+public class MovimentoEstoqueActivity extends PrincipalActivity implements View.OnClickListener {
 
     private List<Produto> produtos = new ArrayList<>();
     boolean ehEntrada = true;
