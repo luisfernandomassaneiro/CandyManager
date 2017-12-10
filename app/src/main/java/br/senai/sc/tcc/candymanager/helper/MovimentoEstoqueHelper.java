@@ -2,7 +2,6 @@ package br.senai.sc.tcc.candymanager.helper;
 
 import android.content.Context;
 
-import br.senai.sc.tcc.candymanager.MovimentoEstoqueActivity;
 import br.senai.sc.tcc.candymanager.controller.MovimentoEstoqueDAO;
 import br.senai.sc.tcc.candymanager.controller.ProdutoDAO;
 import br.senai.sc.tcc.candymanager.model.MovimentoEstoque;

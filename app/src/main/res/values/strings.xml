@@ -44,7 +44,14 @@
     <string name="base.ativo">Ativo</string>
     <string name="geral.salvar">Salvar</string>
     <string name="geral.pesquisar">Pesquisar</string>
+    <string name="geral.limpar">Limpar</string>
     <string name="menu.configuracoes">Configurações</string>
     <string name="configuracoes.entrarPesquisa">Abrir a tela na pesquisa</string>
     <string name="geral.novo">Novo</string>
+    <string name="relatorio.relatorio">Relatório</string>
+    <string name="relatorio.filtros">Filtros:</string>
+    <string name="relatorio.dataInicial">Data inicial</string>
+    <string name="relatorio.dataFinal">Data final</string>
+    <string name="relatorio.cliente">Cliente</string>
+    <string name="relatorio.produto">Produto</string>
 </resources>

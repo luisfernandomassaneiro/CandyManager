@@ -1,12 +1,8 @@
-package br.senai.sc.tcc.candymanager;
+package br.senai.sc.tcc.candymanager.activity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -17,6 +13,7 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.senai.sc.tcc.candymanager.R;
 import br.senai.sc.tcc.candymanager.adapters.PesquisaAdapter;
 import br.senai.sc.tcc.candymanager.controller.ClienteDAO;
 import br.senai.sc.tcc.candymanager.model.Cliente;

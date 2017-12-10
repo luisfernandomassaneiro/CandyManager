@@ -1,4 +1,4 @@
-package br.senai.sc.tcc.candymanager;
+package br.senai.sc.tcc.candymanager.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,13 +6,14 @@ import android.os.Bundle;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
-import android.app.Activity;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
-import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
+
+import br.senai.sc.tcc.candymanager.R;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

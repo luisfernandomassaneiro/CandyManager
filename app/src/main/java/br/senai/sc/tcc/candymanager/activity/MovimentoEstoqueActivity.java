@@ -1,6 +1,5 @@
-package br.senai.sc.tcc.candymanager;
+package br.senai.sc.tcc.candymanager.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,7 +15,7 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.senai.sc.tcc.candymanager.controller.MovimentoEstoqueDAO;
+import br.senai.sc.tcc.candymanager.R;
 import br.senai.sc.tcc.candymanager.controller.ProdutoDAO;
 import br.senai.sc.tcc.candymanager.enums.TipoMovimentacao;
 import br.senai.sc.tcc.candymanager.helper.MovimentoEstoqueHelper;

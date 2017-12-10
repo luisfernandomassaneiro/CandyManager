@@ -1,4 +1,4 @@
-package br.senai.sc.tcc.candymanager;
+package br.senai.sc.tcc.candymanager.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
+import br.senai.sc.tcc.candymanager.R;
 import br.senai.sc.tcc.candymanager.controller.ProdutoDAO;
 import br.senai.sc.tcc.candymanager.model.Produto;
 

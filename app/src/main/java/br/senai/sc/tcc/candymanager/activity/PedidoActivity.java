@@ -1,7 +1,6 @@
-package br.senai.sc.tcc.candymanager;
+package br.senai.sc.tcc.candymanager.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,6 +16,7 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.senai.sc.tcc.candymanager.R;
 import br.senai.sc.tcc.candymanager.adapters.PedidoItemAdapter;
 import br.senai.sc.tcc.candymanager.controller.ClienteDAO;
 import br.senai.sc.tcc.candymanager.controller.PedidoDAO;

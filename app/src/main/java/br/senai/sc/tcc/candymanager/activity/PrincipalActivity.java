@@ -1,4 +1,4 @@
-package br.senai.sc.tcc.candymanager;
+package br.senai.sc.tcc.candymanager.activity;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 
+import br.senai.sc.tcc.candymanager.R;
 import br.senai.sc.tcc.candymanager.controller.ConfiguracaoDAO;
 import br.senai.sc.tcc.candymanager.model.Configuracao;
 
@@ -78,7 +79,7 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
                 break;
 
             case R.id.btRelatorios:
-                classeIniciar = MainActivity.class;
+                classeIniciar = RelatorioActivity.class;
                 break;
         }
         iniciarActivity(new Intent(this, classeIniciar));

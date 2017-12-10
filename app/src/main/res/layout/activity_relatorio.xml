@@ -4,104 +4,161 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.senai.sc.tcc.candymanager.activity.PedidoActivity">
+    tools:context="br.senai.sc.tcc.candymanager.activity.RelatorioActivity">
 
     <TextView
-        android:id="@+id/tvPedidoCliente"
+        android:id="@+id/tvRelatorio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_10dp"
-        android:text="@string/pedido.cliente" />
+        android:text="@string/relatorio.relatorio" />
 
-    <AutoCompleteTextView
-        android:id="@+id/acPedidoCliente"
+    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvPedidoCliente"
-        android:layout_marginTop="@dimen/layout_margin_20dp"
+        android:layout_below="@id/tvRelatorio"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="@dimen/layout_margin_10dp"
-        android:layout_marginRight="@dimen/layout_margin_10dp"
-        />
+        android:id="@+id/spRelatorios"></Spinner>
 
     <TextView
-        android:id="@+id/tvPedidoProduto"
+        android:id="@+id/tvFiltros"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/acPedidoCliente"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/layout_margin_10dp"
-        android:layout_marginTop="@dimen/layout_margin_10dp"
-        android:text="@string/pedido.produto" />
-
-    <AutoCompleteTextView
-        android:id="@+id/acPedidoProduto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvPedidoProduto"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginRight="@dimen/layout_margin_10dp"
-        />
+        android:layout_below="@+id/spRelatorios"
+        android:text="@string/relatorio.filtros" />
 
     <TextView
-        android:id="@+id/tvPedidoQuantidade"
+        android:id="@+id/tvDataInicial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/acPedidoProduto"
-        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginTop="@dimen/layout_margin_20dp"
-        android:text="@string/pedido.quantidade" />
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:layout_below="@+id/tvFiltros"
+        android:text="@string/relatorio.dataInicial" />
 
     <EditText
-        android:id="@+id/etPedidoQuantidade"
+        android:id="@+id/etDataInicial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvDataInicial"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvPedidoQuantidade"
+        android:layout_alignParentLeft="true"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginRight="@dimen/layout_margin_10dp"
-        android:ems="10"
-        android:inputType="number" />
+        android:inputType="date"
+        ></EditText>
+
+    <TextView
+        android:id="@+id/tvDataFinal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:layout_below="@+id/etDataInicial"
+        android:text="@string/relatorio.dataFinal" />
+
+    <EditText
+        android:id="@+id/etDataFinal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvDataFinal"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:inputType="date"
+        ></EditText>
+
+    <TextView
+        android:id="@+id/tvRelatorioCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:layout_below="@+id/etDataFinal"
+        android:text="@string/relatorio.cliente" />
+
+    <AutoCompleteTextView
+        android:id="@+id/acRelatorioCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvRelatorioCliente"
+        android:layout_marginTop="@dimen/layout_margin_10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        />
+
+    <TextView
+        android:id="@+id/tvRelatorioProduto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etDataFinal"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:text="@string/relatorio.produto" />
+
+    <AutoCompleteTextView
+        android:id="@+id/acRelatorioProduto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvRelatorioProduto"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
+        android:layout_marginTop="@dimen/layout_margin_10dp"
+        />
 
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/pedidoTabela"
-        android:layout_below="@+id/etPedidoQuantidade"
+        android:id="@+id/relatorioTabela"
+        android:layout_below="@+id/acRelatorioProduto"
         android:stretchColumns="1">
         <TableRow >
             <TextView
-                android:text="@string/pedido.produto"
+                android:id="@+id/tvCabecalhoPrimeiraColuna"
                 android:gravity="left"
                 android:padding="4dip"
                 />
             <TextView
-                android:text="@string/pedido.quantidade"
+                android:id="@+id/tvCabecalhoSegundaColuna"
                 android:gravity="right"
                 android:padding="4dip" />
         </TableRow>
     </TableLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvPedidoItem"
+        android:id="@+id/rvResultadoRelatorio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginRight="@dimen/layout_margin_10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/pedidoTabela"
+        android:layout_below="@+id/relatorioTabela"
         />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/multiple_actions_pedido"
+        android:id="@+id/multiple_actions_relatorio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -116,39 +173,21 @@
         android:layout_marginEnd="@dimen/fab_margin">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btAdicionarProdutoLista"
+            android:id="@+id/btLimparRelatorio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
-            fab:fab_title="@string/pedido.adicionarProduto"
-            fab:fab_icon="@drawable/ic_add_black_24dp"
+            fab:fab_icon="@drawable/ic_search_black_24dp"
+            fab:fab_title="@string/geral.pesquisar"
             fab:fab_colorPressed="@color/white_pressed" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btManterPedidoAberto"
+            android:id="@+id/btPesquisarRelatorio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
-            fab:fab_title="@string/pedido.manterAberto"
-            fab:fab_icon="@drawable/ic_lock_open_black_24dp"
-            fab:fab_colorPressed="@color/white_pressed" />
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btFinalizarPedido"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_title="@string/pedido.finalizar"
-            fab:fab_icon="@drawable/ic_check_black"
-            fab:fab_colorPressed="@color/white_pressed" />
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btNovoPedido"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_title="@string/pedido.novoPedido"
-            fab:fab_icon="@drawable/ic_lock_open_black_24dp"
+            fab:fab_icon="@drawable/ic_search_black_24dp"
+            fab:fab_title="@string/geral.pesquisar"
             fab:fab_colorPressed="@color/white_pressed" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>

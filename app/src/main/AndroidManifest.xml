@@ -9,22 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PrincipalActivity">
+        <activity android:name=".activity.PrincipalActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ClienteActivity" />
-        <activity android:name=".ListarPessoaActivity" />
-        <activity android:name=".ProdutoActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".MovimentoEstoqueActivity" />
-        <activity android:name=".PedidoActivity" />
-        <activity android:name=".PesquisaClienteActivity" />
-        <activity android:name=".ConfiguracaoActivity" />
-        <activity android:name=".PesquisaProdutoActivity"></activity>
+        <activity android:name=".activity.ClienteActivity" />
+        <activity android:name=".activity.ListarPessoaActivity" />
+        <activity android:name=".activity.ProdutoActivity" />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.MovimentoEstoqueActivity" />
+        <activity android:name=".activity.PedidoActivity" />
+        <activity android:name=".activity.PesquisaClienteActivity" />
+        <activity android:name=".activity.ConfiguracaoActivity" />
+        <activity android:name=".activity.PesquisaProdutoActivity" />
+        <activity android:name=".activity.RelatorioActivity"></activity>
     </application>
 
 </manifest>
