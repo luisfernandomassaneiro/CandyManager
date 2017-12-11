@@ -135,6 +135,7 @@ public class PedidoActivity extends PrincipalActivity implements View.OnClickLis
         setlPedidoItem(new ArrayList<PedidoItem>());
         textViewCliente.setText(null);
         textViewProduto.setText(null);
+        atualizaLista();
     }
 
     private void manterPedidoAberto() {

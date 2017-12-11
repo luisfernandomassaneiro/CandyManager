@@ -77,7 +77,7 @@
         android:layout_below="@+id/etValorCompra"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginTop="@dimen/layout_margin_20dp"
-        android:text="@string/produto.valorCompra" />
+        android:text="@string/produto.valorVenda" />
 
     <EditText
         android:id="@+id/etValorVenda"

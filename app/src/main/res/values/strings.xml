@@ -54,4 +54,5 @@
     <string name="relatorio.dataFinal">Data final</string>
     <string name="relatorio.cliente">Cliente</string>
     <string name="relatorio.produto">Produto</string>
+    <string name="relatorio.valorDevido">Valor devido</string>
 </resources>
