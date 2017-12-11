@@ -21,6 +21,7 @@ import java.util.List;
 import br.senai.sc.tcc.candymanager.R;
 import br.senai.sc.tcc.candymanager.adapters.RelatorioAdapter;
 import br.senai.sc.tcc.candymanager.controller.ClienteDAO;
+import br.senai.sc.tcc.candymanager.controller.PedidoDAO;
 import br.senai.sc.tcc.candymanager.controller.ProdutoDAO;
 import br.senai.sc.tcc.candymanager.dto.ResultadoRelatorioDTO;
 import br.senai.sc.tcc.candymanager.enums.RelatoriosDisponiveis;
@@ -64,7 +65,7 @@ public class RelatorioActivity extends PrincipalActivity implements View.OnClick
         MascaraUtil mascaraDataInicial = new MascaraUtil("##/##/####", etDataInicial);
         etDataInicial.addTextChangedListener(mascaraDataInicial);
         etDataFinal = (EditText) findViewById(R.id.etDataFinal);
-        MascaraUtil mascaraDataFinal = new MascaraUtil("##/##/####", etDataInicial);
+        MascaraUtil mascaraDataFinal = new MascaraUtil("##/##/####", etDataFinal);
         etDataFinal.addTextChangedListener(mascaraDataFinal);
         tvFiltros = (TextView) findViewById(R.id.tvFiltros);
         tvDataInicial = (TextView) findViewById(R.id.tvDataInicial);
@@ -172,7 +173,9 @@ public class RelatorioActivity extends PrincipalActivity implements View.OnClick
                 Integer clienteID = clienteSelecionado != null ? clienteSelecionado.getId() : null;
                 setlResultadoRelatorio(dao.recuperaClientesInadimplentes(dataInicial, dataFinal, clienteID));
             } else if(RelatoriosDisponiveis.PROJECAO_VENDAS.equals(relatorioSelecionado)) {
-
+                PedidoDAO dao = new PedidoDAO(this);
+                Integer produtoID = produtoSelecionado != null ? produtoSelecionado.getId() : null;
+                setlResultadoRelatorio(dao.recuperaProjecaoVendas(dataInicial, dataFinal, produtoID));
             }
 
             if(getlResultadoRelatorio() == null || getlResultadoRelatorio().size() <= 0) {

@@ -169,13 +169,11 @@ public class PedidoActivity extends PrincipalActivity implements View.OnClickLis
             Toast.makeText(this, R.string.pedido_clienteProdutoQuantidadeObrigatorio, Toast.LENGTH_SHORT).show();
             return;
         }
-
         Integer quantidade = Integer.valueOf(etQuantidade.getText().toString());
         if(produtoSelecionado.getQuantidadeAtual() < quantidade) {
             Toast.makeText(this, R.string.pedido_indisponivelEstoque, Toast.LENGTH_SHORT).show();
             return;
         }
-
         PedidoItemDAO dao = new PedidoItemDAO(this);
         PedidoItem pedidoItem = verificaProdutoNaLista();
         if(pedidoItem == null) {
@@ -192,14 +190,12 @@ public class PedidoActivity extends PrincipalActivity implements View.OnClickLis
             pedidoItem.setQuantidade(pedidoItem.getQuantidade() + quantidade);
             dao.gravar(pedidoItem);
         }
-
         MovimentoEstoque movimentoEstoque = new MovimentoEstoque();
         movimentoEstoque.setProduto(produtoSelecionado);
         movimentoEstoque.setTipoMovimentacao(TipoMovimentacao.SAIDA);
         movimentoEstoque.setQuantidade(quantidade);
         movimentoEstoque.setPedidoItem(pedidoItem);
         MovimentoEstoqueHelper.getInstance().atualizaEstoque(this, movimentoEstoque);
-
         atualizaLista();
     }
 

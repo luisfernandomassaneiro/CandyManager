@@ -5,9 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import br.senai.sc.tcc.candymanager.dto.ResultadoRelatorioDTO;
 import br.senai.sc.tcc.candymanager.model.BaseModel;
 import br.senai.sc.tcc.candymanager.model.Cliente;
 import br.senai.sc.tcc.candymanager.model.Pedido;
@@ -141,5 +145,56 @@ public class PedidoDAO extends BaseDAO{
             close();
         }
         return pedido;
+    }
+
+    public List<ResultadoRelatorioDTO> recuperaProjecaoVendas(String dataInicial, String dataFinal, Integer produtoID) {
+        Cursor cursor = null;
+        List<ResultadoRelatorioDTO> lClientesInadimplentes = new ArrayList<>();
+
+        try {
+            open();
+            StringBuilder sql = new StringBuilder();
+            sql.append("SELECT ");
+            sql.append(" PRO._ID, PRO.PRO_DESCRICAO, SUM(PIT.PIT_VALORVENDA) AS 'VALORTOTAL' ");
+            sql.append(" FROM TB_PEDIDO PED ");
+            sql.append(" INNER JOIN TB_PEDIDO_ITEM PIT ON (PED._ID = PIT.PIT_PEDID)");
+            sql.append(" INNER JOIN TB_PRODUTO PRO ON (PRO._ID = PIT.PIT_PROID)");
+            sql.append(" WHERE PED.PED_FINALIZADO=0 ");
+            if (produtoID != null) {
+                sql.append("AND PRO._ID=").append(String.valueOf(produtoID));
+            }
+            if(StringUtils.isNotBlank(dataInicial)) {
+                sql.append("AND PED.PED_DATA >= '").append(dataInicial).append("'");
+            }
+            if(StringUtils.isNotBlank(dataInicial)) {
+                sql.append("AND PED.PED_DATA <= '").append(dataFinal).append("'");
+            }
+            sql.append(" GROUP BY PRO._ID, PRO.PRO_DESCRICAO ");
+            sql.append(" ORDER BY PRO_DESCRICAO ");
+            String[] args = new String[]{};
+            cursor = getBanco().rawQuery(sql.toString(), args);
+
+            if (cursor.getCount() > 0) {
+                ResultadoRelatorioDTO resultado = new ResultadoRelatorioDTO();
+                while(cursor.moveToNext()){
+                    resultado = new ResultadoRelatorioDTO();
+                    resultado.setValorPrimeiraColuna(cursor.getString(cursor.getColumnIndex("CLI_NOME")));
+                    resultado.setValorSegundaColuna("R$ ".concat(String.valueOf(cursor.getDouble(cursor.getColumnIndex("VALORTOTAL")))));
+
+                    lClientesInadimplentes.add(resultado);
+                }
+            }
+        } catch (Exception e) {
+            Log.e("Erro: ", e.getMessage());
+        }
+        finally{
+            if (cursor != null) {
+                if (!cursor.isClosed()) {
+                    cursor.close();
+                }
+            }
+            close();
+        }
+        return lClientesInadimplentes;
     }
 }

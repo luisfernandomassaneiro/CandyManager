@@ -107,9 +107,10 @@ public class ClienteDAO extends BaseDAO{
             open();
             StringBuilder sql = new StringBuilder();
             sql.append("SELECT ");
-            sql.append(" CLI.CLI_NOME, SUM(PED.PED_VALORTOTAL) AS 'VALORTOTAL' ");
+            sql.append(" CLI._ID, CLI.CLI_NOME, SUM(PIT.PIT_VALORVENDA) AS 'VALORTOTAL' ");
             sql.append(" FROM TB_PEDIDO PED ");
             sql.append(" INNER JOIN TB_CLIENTE CLI ON (CLI._ID = PED.PED_CLIID)");
+            sql.append(" INNER JOIN TB_PEDIDO_ITEM PIT ON (PED._ID = PIT.PIT_PEDID)");
             sql.append(" WHERE PED.PED_FINALIZADO=0 ");
             if (clienteID != null) {
                 sql.append("AND CLI._ID=").append(String.valueOf(clienteID));
@@ -120,6 +121,7 @@ public class ClienteDAO extends BaseDAO{
             if(StringUtils.isNotBlank(dataInicial)) {
                 sql.append("AND PED.PED_DATA <= '").append(dataFinal).append("'");
             }
+            sql.append(" GROUP BY CLI._ID, CLI.CLI_NOME ");
             sql.append(" ORDER BY VALORTOTAL, CLI_NOME ");
             String[] args = new String[]{};
             cursor = getBanco().rawQuery(sql.toString(), args);
@@ -127,6 +129,7 @@ public class ClienteDAO extends BaseDAO{
             if (cursor.getCount() > 0) {
                 ResultadoRelatorioDTO resultado = new ResultadoRelatorioDTO();
                 while(cursor.moveToNext()){
+                    resultado = new ResultadoRelatorioDTO();
                     resultado.setValorPrimeiraColuna(cursor.getString(cursor.getColumnIndex("CLI_NOME")));
                     resultado.setValorSegundaColuna("R$ ".concat(String.valueOf(cursor.getDouble(cursor.getColumnIndex("VALORTOTAL")))));
 
