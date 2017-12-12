@@ -4,11 +4,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +19,7 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.senai.sc.tcc.candymanager.R;
@@ -27,7 +31,7 @@ import br.senai.sc.tcc.candymanager.dto.ResultadoRelatorioDTO;
 import br.senai.sc.tcc.candymanager.enums.RelatoriosDisponiveis;
 import br.senai.sc.tcc.candymanager.model.Cliente;
 import br.senai.sc.tcc.candymanager.model.Produto;
-import br.senai.sc.tcc.candymanager.util.MascaraUtil;
+import br.senai.sc.tcc.candymanager.util.FormatterUtil;
 
 public class RelatorioActivity extends PrincipalActivity implements View.OnClickListener {
 
@@ -41,6 +45,7 @@ public class RelatorioActivity extends PrincipalActivity implements View.OnClick
     TextView tvCabecalhoPrimeiraColuna; TextView tvCabecalhoSegundaColuna;
     Spinner spRelatorios;
     AutoCompleteTextView acRelatorioProduto; AutoCompleteTextView acRelatorioCliente;
+    TableLayout relatorioTabela;
 
     RecyclerView recyclerView;
     RelatorioAdapter relatorioAdapter;
@@ -62,10 +67,10 @@ public class RelatorioActivity extends PrincipalActivity implements View.OnClick
         ((FloatingActionButton) findViewById(R.id.btLimparRelatorio)).setOnClickListener(this);
         botaoFlutuante = (FloatingActionsMenu) findViewById(R.id.multiple_actions_relatorio);
         etDataInicial = (EditText) findViewById(R.id.etDataInicial);
-        MascaraUtil mascaraDataInicial = new MascaraUtil("##/##/####", etDataInicial);
+        FormatterUtil mascaraDataInicial = new FormatterUtil("##/##/####", etDataInicial);
         etDataInicial.addTextChangedListener(mascaraDataInicial);
         etDataFinal = (EditText) findViewById(R.id.etDataFinal);
-        MascaraUtil mascaraDataFinal = new MascaraUtil("##/##/####", etDataFinal);
+        FormatterUtil mascaraDataFinal = new FormatterUtil("##/##/####", etDataFinal);
         etDataFinal.addTextChangedListener(mascaraDataFinal);
         tvFiltros = (TextView) findViewById(R.id.tvFiltros);
         tvDataInicial = (TextView) findViewById(R.id.tvDataInicial);
@@ -95,6 +100,7 @@ public class RelatorioActivity extends PrincipalActivity implements View.OnClick
 
         inicializarAutoCompleteCliente();
         inicializarAutoCompleteProduto();
+        relatorioTabela = (TableLayout) findViewById(R.id.relatorioTabela);
     }
 
     private void limpar() {
@@ -135,24 +141,35 @@ public class RelatorioActivity extends PrincipalActivity implements View.OnClick
         if(relatorioSelecionado != null) {
             limpar();
             tvFiltros.setVisibility(View.VISIBLE);
-            tvDataInicial.setVisibility(View.VISIBLE);
-            etDataInicial.setVisibility(View.VISIBLE);
-            tvDataFinal.setVisibility(View.VISIBLE);
-            etDataFinal.setVisibility(View.VISIBLE);
+
             tvCabecalhoPrimeiraColuna.setVisibility(View.VISIBLE);
             tvCabecalhoSegundaColuna.setVisibility(View.VISIBLE);
             if(RelatoriosDisponiveis.INADIMPLENCIA.equals(relatorioSelecionado)) {
+                tvDataInicial.setVisibility(View.VISIBLE);
+                etDataInicial.setVisibility(View.VISIBLE);
+                tvDataFinal.setVisibility(View.VISIBLE);
+                etDataFinal.setVisibility(View.VISIBLE);
                 tvRelatorioCliente.setVisibility(View.VISIBLE);
                 acRelatorioCliente.setVisibility(View.VISIBLE);
                 tvRelatorioProduto.setVisibility(View.INVISIBLE);
                 acRelatorioProduto.setVisibility(View.INVISIBLE);
+                RelativeLayout.LayoutParams params= new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.addRule(RelativeLayout.BELOW, R.id.acRelatorioCliente);
+                relatorioTabela.setLayoutParams(params);
                 tvCabecalhoPrimeiraColuna.setText(R.string.cliente_nome);
                 tvCabecalhoSegundaColuna.setText(R.string.relatorio_valorDevido);
             } else if(RelatoriosDisponiveis.PROJECAO_VENDAS.equals(relatorioSelecionado)) {
+                tvDataInicial.setVisibility(View.INVISIBLE);
+                etDataInicial.setVisibility(View.INVISIBLE);
+                tvDataFinal.setVisibility(View.INVISIBLE);
+                etDataFinal.setVisibility(View.INVISIBLE);
                 tvRelatorioCliente.setVisibility(View.INVISIBLE);
                 acRelatorioCliente.setVisibility(View.INVISIBLE);
                 tvRelatorioProduto.setVisibility(View.VISIBLE);
                 acRelatorioProduto.setVisibility(View.VISIBLE);
+                RelativeLayout.LayoutParams params= new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.addRule(RelativeLayout.BELOW, R.id.acRelatorioProduto);
+                relatorioTabela.setLayoutParams(params);
                 tvCabecalhoPrimeiraColuna.setText(R.string.produto_descricao);
                 tvCabecalhoSegundaColuna.setText(R.string.pedido_quantidade);
             } else {
@@ -167,7 +184,11 @@ public class RelatorioActivity extends PrincipalActivity implements View.OnClick
             Toast.makeText(this, "É necessário selecionar um relatório antes de pesquisar", Toast.LENGTH_SHORT).show();
         } else {
             String dataInicial = etDataInicial.getText().toString();
+            Date dataAux = FormatterUtil.parseData(dataInicial, "dd/MM/yyyy");
+            dataInicial = FormatterUtil.formataData(dataAux);
             String dataFinal = etDataFinal.getText().toString();
+            dataAux = FormatterUtil.parseData(dataFinal, "dd/MM/yyyy");
+            dataFinal = FormatterUtil.formataData(dataAux);
             if(RelatoriosDisponiveis.INADIMPLENCIA.equals(relatorioSelecionado)) {
                 ClienteDAO dao = new ClienteDAO(this);
                 Integer clienteID = clienteSelecionado != null ? clienteSelecionado.getId() : null;
@@ -175,7 +196,7 @@ public class RelatorioActivity extends PrincipalActivity implements View.OnClick
             } else if(RelatoriosDisponiveis.PROJECAO_VENDAS.equals(relatorioSelecionado)) {
                 PedidoDAO dao = new PedidoDAO(this);
                 Integer produtoID = produtoSelecionado != null ? produtoSelecionado.getId() : null;
-                setlResultadoRelatorio(dao.recuperaProjecaoVendas(dataInicial, dataFinal, produtoID));
+                setlResultadoRelatorio(dao.recuperaProjecaoVendas(produtoID));
             }
 
             if(getlResultadoRelatorio() == null || getlResultadoRelatorio().size() <= 0) {

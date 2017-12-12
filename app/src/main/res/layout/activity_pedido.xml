@@ -73,6 +73,7 @@
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:focusableInTouchMode="false"
         android:id="@+id/pedidoTabela"
         android:layout_below="@+id/etPedidoQuantidade"
         android:stretchColumns="1">

@@ -52,7 +52,7 @@
         android:layout_below="@id/tlPesquisaProduto"/>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/multiple_actions_produto"
+        android:id="@+id/multiple_actions_pesquisa_produto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

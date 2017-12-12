@@ -46,7 +46,7 @@ public class PedidoActivity extends PrincipalActivity implements View.OnClickLis
     RecyclerView recyclerView;
     PedidoItemAdapter pedidoItemAdapter;
     RecyclerView.LayoutManager layout;
-    AutoCompleteTextView textViewProduto; AutoCompleteTextView textViewCliente;
+    AutoCompleteTextView acProduto; AutoCompleteTextView acCliente;
     FloatingActionsMenu botaoFlutuante;
 
     @Override
@@ -71,10 +71,10 @@ public class PedidoActivity extends PrincipalActivity implements View.OnClickLis
     private void inicializarAutoCompleteProduto() {
         ArrayAdapter<Produto> adapterProduto = new ArrayAdapter<Produto>(this,
                 android.R.layout.simple_dropdown_item_1line, getProdutos());
-        textViewProduto = (AutoCompleteTextView) findViewById(R.id.acPedidoProduto);
-        textViewProduto.setThreshold(1);
-        textViewProduto.setAdapter(adapterProduto);
-        textViewProduto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        acProduto = (AutoCompleteTextView) findViewById(R.id.acPedidoProduto);
+        acProduto.setThreshold(1);
+        acProduto.setAdapter(adapterProduto);
+        acProduto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long rowId) {
                 produtoSelecionado = (Produto) parent.getItemAtPosition(position);
             }
@@ -84,10 +84,10 @@ public class PedidoActivity extends PrincipalActivity implements View.OnClickLis
     private void inicializarAutoCompleteCliente() {
         ArrayAdapter<Cliente> adapterCliente = new ArrayAdapter<Cliente>(this,
                 android.R.layout.simple_dropdown_item_1line, getClientes());
-        textViewCliente = (AutoCompleteTextView) findViewById(R.id.acPedidoCliente);
-        textViewCliente.setThreshold(1);
-        textViewCliente.setAdapter(adapterCliente);
-        textViewCliente.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        acCliente = (AutoCompleteTextView) findViewById(R.id.acPedidoCliente);
+        acCliente.setThreshold(1);
+        acCliente.setAdapter(adapterCliente);
+        acCliente.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long rowId) {
                 clienteSelecionado = (Cliente) parent.getItemAtPosition(position);
                 atualizaListaPedidoItem();
@@ -133,8 +133,8 @@ public class PedidoActivity extends PrincipalActivity implements View.OnClickLis
         setClientes(new ArrayList<Cliente>());
         setProdutos(new ArrayList<Produto>());
         setlPedidoItem(new ArrayList<PedidoItem>());
-        textViewCliente.setText(null);
-        textViewProduto.setText(null);
+        acCliente.setText(null);
+        acProduto.setText(null);
         atualizaLista();
     }
 
@@ -197,6 +197,10 @@ public class PedidoActivity extends PrincipalActivity implements View.OnClickLis
         movimentoEstoque.setPedidoItem(pedidoItem);
         MovimentoEstoqueHelper.getInstance().atualizaEstoque(this, movimentoEstoque);
         atualizaLista();
+        produtoSelecionado = null;
+        acProduto.setText(null);
+        etQuantidade.setText(null);
+        botaoFlutuante.collapse();
     }
 
     private PedidoItem verificaProdutoNaLista() {

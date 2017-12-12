@@ -10,8 +10,11 @@ import android.widget.Toast;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
+import org.apache.commons.lang3.StringUtils;
+
 import br.senai.sc.tcc.candymanager.R;
 import br.senai.sc.tcc.candymanager.controller.ProdutoDAO;
+import br.senai.sc.tcc.candymanager.model.MovimentoEstoque;
 import br.senai.sc.tcc.candymanager.model.Produto;
 
 public class ProdutoActivity extends PrincipalActivity implements View.OnClickListener {
@@ -48,6 +51,7 @@ public class ProdutoActivity extends PrincipalActivity implements View.OnClickLi
         ((FloatingActionButton) findViewById(R.id.btSalvarProduto)).setOnClickListener(this);
         ((FloatingActionButton) findViewById(R.id.btInserirNovoProduto)).setOnClickListener(this);
         ((FloatingActionButton) findViewById(R.id.btPesquisarProduto)).setOnClickListener(this);
+        ((FloatingActionButton) findViewById(R.id.btMovimentarEstoqueProduto)).setOnClickListener(this);
         botaoFlutuante = (FloatingActionsMenu) findViewById(R.id.multiple_actions_produto);
         etCodigo = (EditText) findViewById(R.id.etCodigo);
         etDescricao = (EditText) findViewById(R.id.etDescricao);
@@ -80,6 +84,16 @@ public class ProdutoActivity extends PrincipalActivity implements View.OnClickLi
             case R.id.btInserirNovoProduto:
                 limpar();
                 break;
+
+            case R.id.btMovimentarEstoqueProduto:
+                if(produto == null || produto.getId() == null) {
+                    Toast.makeText(this, R.string.produto_produtoNaoInformado, Toast.LENGTH_SHORT).show();
+                    break;
+                } else {
+                    iniciarActivityPassandoParametros(produto, "produto", MovimentoEstoqueActivity.class);
+                    break;
+                }
+
         }
 
         botaoFlutuante.collapse();

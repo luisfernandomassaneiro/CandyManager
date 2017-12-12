@@ -14,6 +14,7 @@ import java.util.List;
 import br.senai.sc.tcc.candymanager.dto.ResultadoRelatorioDTO;
 import br.senai.sc.tcc.candymanager.model.BaseModel;
 import br.senai.sc.tcc.candymanager.model.Cliente;
+import br.senai.sc.tcc.candymanager.util.FormatterUtil;
 
 /**
  * Created by MASSANEIRO on 24/05/2017.
@@ -113,13 +114,13 @@ public class ClienteDAO extends BaseDAO{
             sql.append(" INNER JOIN TB_PEDIDO_ITEM PIT ON (PED._ID = PIT.PIT_PEDID)");
             sql.append(" WHERE PED.PED_FINALIZADO=0 ");
             if (clienteID != null) {
-                sql.append("AND CLI._ID=").append(String.valueOf(clienteID));
+                sql.append(" AND CLI._ID=").append(String.valueOf(clienteID));
             }
             if(StringUtils.isNotBlank(dataInicial)) {
-                sql.append("AND PED.PED_DATA >= '").append(dataInicial).append("'");
+                sql.append(" AND PED.PED_DATA >= '").append(dataInicial).append("'");
             }
             if(StringUtils.isNotBlank(dataInicial)) {
-                sql.append("AND PED.PED_DATA <= '").append(dataFinal).append("'");
+                sql.append(" AND PED.PED_DATA <= '").append(dataFinal).append("'");
             }
             sql.append(" GROUP BY CLI._ID, CLI.CLI_NOME ");
             sql.append(" ORDER BY VALORTOTAL, CLI_NOME ");
@@ -131,7 +132,7 @@ public class ClienteDAO extends BaseDAO{
                 while(cursor.moveToNext()){
                     resultado = new ResultadoRelatorioDTO();
                     resultado.setValorPrimeiraColuna(cursor.getString(cursor.getColumnIndex("CLI_NOME")));
-                    resultado.setValorSegundaColuna("R$ ".concat(String.valueOf(cursor.getDouble(cursor.getColumnIndex("VALORTOTAL")))));
+                    resultado.setValorSegundaColuna(FormatterUtil.formatoDinheiro(cursor.getDouble(cursor.getColumnIndex("VALORTOTAL"))));
 
                     lClientesInadimplentes.add(resultado);
                 }

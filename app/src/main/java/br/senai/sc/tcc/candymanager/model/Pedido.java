@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import br.senai.sc.tcc.candymanager.util.FormatterUtil;
+
 /**
  * Created by luis.massaneiro on 23/06/2017.
  */
@@ -43,6 +45,10 @@ public class Pedido extends BaseModel {
 
     public Date getData() {
         return data;
+    }
+
+    public String getDataString() {
+        return FormatterUtil.formataData(getData());
     }
 
     public void setData(Date data) {

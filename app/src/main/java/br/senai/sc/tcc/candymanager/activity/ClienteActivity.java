@@ -13,7 +13,7 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import br.senai.sc.tcc.candymanager.R;
 import br.senai.sc.tcc.candymanager.controller.ClienteDAO;
 import br.senai.sc.tcc.candymanager.model.Cliente;
-import br.senai.sc.tcc.candymanager.util.MascaraUtil;
+import br.senai.sc.tcc.candymanager.util.FormatterUtil;
 
 public class ClienteActivity extends PrincipalActivity implements View.OnClickListener {
 
@@ -51,7 +51,7 @@ public class ClienteActivity extends PrincipalActivity implements View.OnClickLi
         botaoFlutuante = (FloatingActionsMenu) findViewById(R.id.multiple_actions_pessoa);
         etNome = (EditText) findViewById(R.id.etNome);
         etTelefone = (EditText) findViewById(R.id.etTelefone);
-        MascaraUtil mascaraTelefone = new MascaraUtil("(##) # ####-####", etTelefone);
+        FormatterUtil mascaraTelefone = new FormatterUtil("(##) # ####-####", etTelefone);
         etTelefone.addTextChangedListener(mascaraTelefone);
         etEmail =  (EditText) findViewById(R.id.etEmail);
         cbClienteAtivo = (CheckBox) findViewById(R.id.cbPessoaAtiva);

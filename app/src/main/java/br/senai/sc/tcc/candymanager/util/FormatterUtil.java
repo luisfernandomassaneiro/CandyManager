@@ -4,6 +4,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,14 +17,16 @@ import java.util.Set;
  * Created by MASSANEIRO on 10/12/2017.
  */
 
-public class MascaraUtil implements TextWatcher {
+public class FormatterUtil implements TextWatcher {
     private String sMascara;
     private EditText edtText;
     private Set<String> simboloMascara = new HashSet<>();
     private boolean bAtualizando;
     private String sTextoSemMascara = "";
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+    private static DecimalFormat df = new DecimalFormat("R$ #,##0.00");
 
-    public MascaraUtil(String sMascara, EditText edtText)
+    public FormatterUtil(String sMascara, EditText edtText)
     {
         this.sMascara = sMascara;
         this.edtText = edtText;
@@ -102,5 +110,34 @@ public class MascaraUtil implements TextWatcher {
             i++;
         }
         return sTextoMascarado;
+    }
+
+    public static String formataData(Date data) {
+        return data != null ? sdf.format(data) : null;
+    }
+
+    public static Date parseData(String data, String formato) {
+        if(StringUtils.isNotBlank(formato)) {
+            try {
+                SimpleDateFormat sdfAux = new SimpleDateFormat(formato);
+                return sdfAux.parse(data);
+            } catch (Exception e) {
+                return null;
+            }
+        } else {
+            return parseData(data);
+        }
+    }
+
+    public static Date parseData(String data) {
+        try {
+            return sdf.parse(data);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static String formatoDinheiro(Double valor) {
+        return valor != null ? df.format(valor) : null;
     }
 }

@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class PesquisaClienteActivity extends PrincipalActivity implements View.O
     ListView lvClientes;
     PesquisaAdapter pesquisaClienteAdapter;
     private List<Cliente> lClientes = new ArrayList<>();
-
+    FloatingActionsMenu botaoFlutuante;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,8 @@ public class PesquisaClienteActivity extends PrincipalActivity implements View.O
 
         FloatingActionButton btNovo = (FloatingActionButton) findViewById(R.id.btNovoCliente);
         btNovo.setOnClickListener(this);
+
+        botaoFlutuante = (FloatingActionsMenu) findViewById(R.id.multiple_actions_pesquisa_cliente);
 
         etNomeCliente = (EditText) findViewById(R.id.etPesquisaClienteNome);
         lClientes.clear();
@@ -73,21 +76,9 @@ public class PesquisaClienteActivity extends PrincipalActivity implements View.O
                 iniciarActivity(new Intent(this, ClienteActivity.class));
                 break;
         }
+
+        botaoFlutuante.collapse();
     }
-
-  /*  @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-        boolean retorno = true;
-
-        switch (item.getItemId()){
-            case R.id.configuracoes:
-                Toast.makeText(this, "Testandoooo",Toast.LENGTH_LONG).show();
-                default:
-                    retorno = false;
-        }
-        return retorno;
-    }*/
 
     public List<Cliente> getlClientes() {
         return lClientes;

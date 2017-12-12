@@ -22,6 +22,8 @@
         android:layout_below="@id/tvRelatorio"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/layout_margin_10dp"
+        android:layout_marginRight="@dimen/layout_margin_10dp"
         android:id="@+id/spRelatorios"></Spinner>
 
     <TextView
@@ -30,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
+        android:layout_marginTop="@dimen/layout_margin_20dp"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginRight="@dimen/layout_margin_10dp"
         android:layout_below="@+id/spRelatorios"
@@ -109,8 +112,9 @@
         android:id="@+id/tvRelatorioProduto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etDataFinal"
+        android:layout_below="@id/tvFiltros"
         android:layout_alignParentLeft="true"
+        android:layout_marginTop="@dimen/layout_margin_20dp"
         android:layout_marginLeft="@dimen/layout_margin_10dp"
         android:layout_marginRight="@dimen/layout_margin_10dp"
         android:text="@string/relatorio.produto" />
@@ -131,17 +135,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/relatorioTabela"
-        android:layout_below="@+id/acRelatorioProduto"
+        android:layout_below="@+id/acRelatorioCliente"
         android:stretchColumns="1">
         <TableRow >
             <TextView
                 android:id="@+id/tvCabecalhoPrimeiraColuna"
                 android:gravity="left"
+                android:layout_marginLeft="@dimen/layout_margin_10dp"
                 android:padding="4dip"
                 />
             <TextView
                 android:id="@+id/tvCabecalhoSegundaColuna"
                 android:gravity="right"
+                android:layout_marginRight="@dimen/layout_margin_10dp"
                 android:padding="4dip" />
         </TableRow>
     </TableLayout>
@@ -177,7 +183,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
-            fab:fab_icon="@drawable/ic_search_black_24dp"
+            fab:fab_icon="@drawable/ic_lixeira"
             fab:fab_title="@string/geral.limpar"
             fab:fab_colorPressed="@color/white_pressed" />
 

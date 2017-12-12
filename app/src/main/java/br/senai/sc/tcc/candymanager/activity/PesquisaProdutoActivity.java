@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class PesquisaProdutoActivity extends PrincipalActivity implements View.O
     ListView lvProdutos;
     PesquisaAdapter pesquisaProdutoAdapter;
     private List<Produto> lProdutos = new ArrayList<>();
-
+    FloatingActionsMenu botaoFlutuante;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,12 +34,9 @@ public class PesquisaProdutoActivity extends PrincipalActivity implements View.O
     }
 
     private void inicializar() {
-        FloatingActionButton btPesquisar = (FloatingActionButton) findViewById(R.id.btRealizarPesquisaProduto);
-        btPesquisar.setOnClickListener(this);
-
-        FloatingActionButton btNovo = (FloatingActionButton) findViewById(R.id.btInserirNovoProduto);
-        btNovo.setOnClickListener(this);
-
+        ((FloatingActionButton) findViewById(R.id.btRealizarPesquisaProduto)).setOnClickListener(this);
+        ((FloatingActionButton) findViewById(R.id.btInserirNovoProduto)).setOnClickListener(this);
+        botaoFlutuante = (FloatingActionsMenu) findViewById(R.id.multiple_actions_pesquisa_produto);
         etDescricaoProduto = (EditText) findViewById(R.id.etPesquisaProdutoDescricao);
         lProdutos.clear();
         pesquisaProdutoAdapter = new PesquisaAdapter(this ,getlProdutos());
@@ -66,6 +64,8 @@ public class PesquisaProdutoActivity extends PrincipalActivity implements View.O
                 iniciarActivity(new Intent(this, ProdutoActivity.class));
                 break;
         }
+
+        botaoFlutuante.collapse();
     }
 
     public List<Produto> getlProdutos() {

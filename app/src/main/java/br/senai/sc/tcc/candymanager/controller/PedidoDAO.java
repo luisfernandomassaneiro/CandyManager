@@ -5,10 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import br.senai.sc.tcc.candymanager.dto.ResultadoRelatorioDTO;
@@ -17,6 +15,7 @@ import br.senai.sc.tcc.candymanager.model.Cliente;
 import br.senai.sc.tcc.candymanager.model.Pedido;
 import br.senai.sc.tcc.candymanager.model.PedidoItem;
 import br.senai.sc.tcc.candymanager.model.Produto;
+import br.senai.sc.tcc.candymanager.util.FormatterUtil;
 
 /**
  * Created by MASSANEIRO on 24/05/2017.
@@ -57,7 +56,7 @@ public class PedidoDAO extends BaseDAO{
         Pedido pedido = (Pedido) baseModel;
         values.put(_ID, pedido.getId());
         values.put(PED_CLIID, pedido.getCliente().getId());
-        values.put(PED_DATA, pedido.getData().getTime());
+        values.put(PED_DATA, pedido.getDataString());
         values.put(PED_FINALIZADO, pedido.getPedidoFinalizado());
         values.put(PED_VALORPAGO, pedido.getValorPago());
         values.put(PED_VALORLUCRO, pedido.getValorLucro());
@@ -108,7 +107,7 @@ public class PedidoDAO extends BaseDAO{
                         pedido = new Pedido();
                         pedido.setId(cursor.getInt(cursor.getColumnIndex("PEDIDO_ID")));
                         pedido.setCliente(cliente);
-                        pedido.setData(new Date(cursor.getInt(cursor.getColumnIndex("PED_DATA"))));
+                        pedido.setData(FormatterUtil.parseData(cursor.getString(cursor.getColumnIndex("PED_DATA"))));
                         pedido.setPedidoFinalizado(cursor.getInt(cursor.getColumnIndex("PED_FINALIZADO")));
                         pedido.setValorLucro(cursor.getDouble(cursor.getColumnIndex("PED_VALORLUCRO")));
                         pedido.setValorPago(cursor.getDouble(cursor.getColumnIndex("PED_VALORPAGO")));
@@ -147,27 +146,25 @@ public class PedidoDAO extends BaseDAO{
         return pedido;
     }
 
-    public List<ResultadoRelatorioDTO> recuperaProjecaoVendas(String dataInicial, String dataFinal, Integer produtoID) {
+    public List<ResultadoRelatorioDTO> recuperaProjecaoVendas(Integer produtoID) {
         Cursor cursor = null;
-        List<ResultadoRelatorioDTO> lClientesInadimplentes = new ArrayList<>();
+        List<ResultadoRelatorioDTO> lProdutos = new ArrayList<>();
 
         try {
             open();
             StringBuilder sql = new StringBuilder();
             sql.append("SELECT ");
-            sql.append(" PRO._ID, PRO.PRO_DESCRICAO, SUM(PIT.PIT_VALORVENDA) AS 'VALORTOTAL' ");
+            sql.append(" PRO._ID, PRO.PRO_DESCRICAO, SUM(PIT_QNTDE) / 4 AS 'QUANTIDADE' ");
             sql.append(" FROM TB_PEDIDO PED ");
             sql.append(" INNER JOIN TB_PEDIDO_ITEM PIT ON (PED._ID = PIT.PIT_PEDID)");
             sql.append(" INNER JOIN TB_PRODUTO PRO ON (PRO._ID = PIT.PIT_PROID)");
-            sql.append(" WHERE PED.PED_FINALIZADO=0 ");
+
+            Calendar data = Calendar.getInstance();
+            data.add(Calendar.MONTH, -2);
+            String dataDoisMesesAtras = FormatterUtil.formataData(data.getTime());
+            sql.append(" WHERE PED_DATA >= ").append(dataDoisMesesAtras);
             if (produtoID != null) {
-                sql.append("AND PRO._ID=").append(String.valueOf(produtoID));
-            }
-            if(StringUtils.isNotBlank(dataInicial)) {
-                sql.append("AND PED.PED_DATA >= '").append(dataInicial).append("'");
-            }
-            if(StringUtils.isNotBlank(dataInicial)) {
-                sql.append("AND PED.PED_DATA <= '").append(dataFinal).append("'");
+                sql.append(" AND PRO._ID=").append(String.valueOf(produtoID));
             }
             sql.append(" GROUP BY PRO._ID, PRO.PRO_DESCRICAO ");
             sql.append(" ORDER BY PRO_DESCRICAO ");
@@ -178,10 +175,10 @@ public class PedidoDAO extends BaseDAO{
                 ResultadoRelatorioDTO resultado = new ResultadoRelatorioDTO();
                 while(cursor.moveToNext()){
                     resultado = new ResultadoRelatorioDTO();
-                    resultado.setValorPrimeiraColuna(cursor.getString(cursor.getColumnIndex("CLI_NOME")));
-                    resultado.setValorSegundaColuna("R$ ".concat(String.valueOf(cursor.getDouble(cursor.getColumnIndex("VALORTOTAL")))));
+                    resultado.setValorPrimeiraColuna(cursor.getString(cursor.getColumnIndex("PRO_DESCRICAO")));
+                    resultado.setValorSegundaColuna(String.valueOf(cursor.getString(cursor.getColumnIndex("QUANTIDADE"))));
 
-                    lClientesInadimplentes.add(resultado);
+                    lProdutos.add(resultado);
                 }
             }
         } catch (Exception e) {
@@ -195,6 +192,6 @@ public class PedidoDAO extends BaseDAO{
             }
             close();
         }
-        return lClientesInadimplentes;
+        return lProdutos;
     }
 }

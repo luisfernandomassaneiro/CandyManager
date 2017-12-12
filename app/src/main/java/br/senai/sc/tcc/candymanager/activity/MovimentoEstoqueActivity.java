@@ -1,5 +1,6 @@
 package br.senai.sc.tcc.candymanager.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,7 +28,7 @@ public class MovimentoEstoqueActivity extends PrincipalActivity implements View.
     private List<Produto> produtos = new ArrayList<>();
     boolean ehEntrada = true;
     EditText etQuantidade;
-    AutoCompleteTextView textView;
+    AutoCompleteTextView acProduto;
     Produto produtoSelecionado;
     FloatingActionsMenu botaoFlutuante;
 
@@ -36,6 +37,18 @@ public class MovimentoEstoqueActivity extends PrincipalActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movimento_estoque);
         inicializar();
+        editar();
+    }
+
+    private void editar() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if(bundle != null) {
+            produtoSelecionado = (Produto) bundle.get("produto");
+            if (produtoSelecionado != null) {
+                acProduto.setText(produtoSelecionado.getDescricao());
+            }
+        }
     }
 
     private void inicializar() {
@@ -44,11 +57,11 @@ public class MovimentoEstoqueActivity extends PrincipalActivity implements View.
         etQuantidade = (EditText) findViewById(R.id.etMovimentoEstoqueQuantidade);
         ArrayAdapter<Produto> adapter = new ArrayAdapter<Produto>(this,
                 android.R.layout.simple_dropdown_item_1line, getProdutos());
-        textView = (AutoCompleteTextView)
+        acProduto = (AutoCompleteTextView)
                 findViewById(R.id.acMovimentoEstoqueProduto);
-        textView.setThreshold(1);
-        textView.setAdapter(adapter);
-        textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        acProduto.setThreshold(1);
+        acProduto.setAdapter(adapter);
+        acProduto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long rowId) {
                 produtoSelecionado = (Produto) parent.getItemAtPosition(position);
             }
@@ -102,7 +115,7 @@ public class MovimentoEstoqueActivity extends PrincipalActivity implements View.
 
     public void limpar() {
         etQuantidade.setText(null);
-        textView.setText(null);
+        acProduto.setText(null);
     }
 
 }

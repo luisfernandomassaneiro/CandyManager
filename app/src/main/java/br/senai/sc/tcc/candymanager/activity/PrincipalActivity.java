@@ -15,6 +15,7 @@ import java.io.Serializable;
 
 import br.senai.sc.tcc.candymanager.R;
 import br.senai.sc.tcc.candymanager.controller.ConfiguracaoDAO;
+import br.senai.sc.tcc.candymanager.controller.MetadadosHelper;
 import br.senai.sc.tcc.candymanager.model.Configuracao;
 
 public class PrincipalActivity extends AppCompatActivity implements View.OnClickListener {
@@ -26,6 +27,7 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
         //setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.mipmap.ic_launcher);
+        MetadadosHelper.getCreatesTables();
         alteraTitulo();
         inicializar();
         if(configuracao == null)

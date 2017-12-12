@@ -118,6 +118,15 @@
         android:layout_marginEnd="@dimen/fab_margin">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btMovimentarEstoqueProduto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_icon="@drawable/ic_movimento_estoque"
+            fab:fab_title="@string/produto.movimentarEstoque"
+            fab:fab_colorPressed="@color/white_pressed" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/btPesquisarProduto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
